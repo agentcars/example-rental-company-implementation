@@ -17,7 +17,6 @@ class AceResponseMatrix
         $result = [];
         foreach ($responses as $key => $response) {
             if (isset($response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail)) {
-                //$result[$key] = 'aaa';
                 foreach ($response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail as $reservationRate) {
                     $isAvailable = true;
                     $coreLogic = [];
@@ -31,7 +30,7 @@ class AceResponseMatrix
                         }
                     }
                     if (!$isAvailable) {
-                        $result[$key] = '';
+                        $result[] = '';
                         break;
                     }
                     foreach ($reservationRate->VehAvailCore->Vehicle->attributes() as $attribute => $value) {
@@ -127,7 +126,7 @@ class AceResponseMatrix
                         }
                     }
                     if (!in_array($RateQualifier, $rates)) {
-                        $result[$key] = '';
+                        $result[] = '';
                         break;
                     }
                     foreach ($reservationRate->VehAvailCore->Fees->Fee as $VehicleCharge) {
@@ -163,7 +162,7 @@ class AceResponseMatrix
                     $coreLogic['ccrc'] = base64_encode($coreLogic['companyCode']);
                     $coreLogic['isLocal'] = 0;
                     //result
-                    $result[$key] = $coreLogic;
+                    $result[] = $coreLogic;
                 }
             }
         }
