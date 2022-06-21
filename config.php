@@ -24,6 +24,8 @@ return [
                     'extraPatterns' => [
                         'POST get-matrix' => 'get-matrix',
                         'OPTIONS get-matrix' => 'options',
+                        'POST get-selection' => 'get-selection',
+                        'OPTIONS get-selection' => 'options',
                     ]
                 ],
             ],

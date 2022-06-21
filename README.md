@@ -1,92 +1,465 @@
 # Example rental company implementation
 
 
+## Get Matrix
 
-## Getting started
+Returns all the available rates of the company according to the parameters sent
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### URL
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- http://localhost/example-rental-company-implementation/web/companies/get-matrix
 
-## Add your files
+### Request Parameters
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Method POST
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/germandev/example-rental-company-implementation.git
-git branch -M main
-git push -uf origin main
+{
+  "rates": [
+    {
+      "id": "1",
+      "qualifier": "RC",
+      "code": "RGZNET",
+      "company_id": "34",
+      "rate_type_id": "1",
+      "payment_option": "1",
+      "destination_coverage": null,
+      "airport_id": "9999",
+      "country_id": "254",
+      "status": "1",
+      "rate_term_id": "1",
+      "entry_rate_type_id": "12",
+      "commission_type_id": "2",
+      "commission": "25",
+      "franchise_id": null,
+      "currency": null,
+      "location_list": null,
+      "source_coverage": "1",
+      "dynamic_rate": null,
+      "dummy_iata": "",
+      "type_rental_cover": null,
+      "sites": "[\"all\"]",
+      "rateName": "Just Car",
+      "companyCode": "AC",
+      "companyName": "ACE",
+      "companyCid": "",
+      "companyIata": "12345678",
+      "orders": "0",
+      "inclusions": "[1, 2]",
+      "rateRqmaps": [],
+      "rateInclusions": [],
+      "rateType": "just_car",
+      "discountCodes": []
+    },
+    {
+      "id": "2",
+      "qualifier": "RC",
+      "code": "RGZNET",
+      "company_id": "34",
+      "rate_type_id": "3",
+      "payment_option": "1",
+      "destination_coverage": null,
+      "airport_id": "9999",
+      "country_id": "254",
+      "status": "1",
+      "rate_term_id": "1",
+      "entry_rate_type_id": "12",
+      "commission_type_id": "2",
+      "commission": "25",
+      "franchise_id": null,
+      "currency": null,
+      "location_list": null,
+      "source_coverage": "1",
+      "dynamic_rate": null,
+      "dummy_iata": "",
+      "type_rental_cover": null,
+      "sites": "[\"all\"]",
+      "rateName": "Full Protection",
+      "companyCode": "AC",
+      "companyName": "ACE",
+      "companyCid": "",
+      "companyIata": "12345678",
+      "orders": "2",
+      "inclusions": "[\"1\", \"2\", \"3\", \"4\", \"5\"]",
+      "rateRqmaps": [],
+      "rateInclusions": [],
+      "rateType": "full_protection",
+      "discountCodes": []
+    }
+  ],
+  "credentials": {
+    "url": URL,
+    "id": ID,
+    "host": HOST
+  },
+  "getDataModel": {
+    "pickUpLocation": "MIAT01",
+    "pickUpAddress": "NA",
+    "dropOffLocation": "MIAT01",
+    "dropOffAddress": "NA",
+    "pickUpDate": "2022-07-18",
+    "dropOffDate": "2022-07-25",
+    "pickUpHour": "1200",
+    "dropOffHour": "1200",
+    "cdCode": "NA",
+    "pcCode": "NA",
+    "country": "US",
+    "sippCode": null,
+    "source": "CO",
+    "rateType": "best",
+    "lat": "NA",
+    "lng": "NA",
+    "latDropOff": "NA",
+    "lngDropOff": "NA"
+  },
+  "environment": "Test"
+}
 ```
 
-## Integrate with your tools
+### Response
 
-- [ ] [Set up project integrations](https://gitlab.com/germandev/example-rental-company-implementation/-/settings/integrations)
+```
+[
+    {
+        "companyName": "Ace",
+        "companyCode": "AC",
+        "rateType": "1",
+        "air": "Yes",
+        "trans": "Automatic",
+        "passengers": "5",
+        "bags": "2",
+        "sippCode": "CCAR",
+        "doors": "4",
+        "img": "https://www.acerentacar.com/CarPics/Nissan Versa.png",
+        "carModel": "Nissan Versa",
+        "km_included": "Unlimited Miles",
+        "payment_option": "1",
+        "netCommission": "25",
+        "currency": "USD",
+        "realBase": "263.69",
+        "realTax": 144.54000000000002,
+        "rateAmount": "408.23",
+        "taxNotIncluded": 0,
+        "ccrc": "QUM=",
+        "isLocal": 0
+    },
+    {
+        "companyName": "Ace",
+        "companyCode": "AC",
+        "rateType": "1",
+        "air": "Yes",
+        "trans": "Automatic",
+        "passengers": "4",
+        "bags": "2",
+        "sippCode": "ECAR",
+        "doors": "4",
+        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+        "carModel": "Toyota Yaris",
+        "km_included": "Unlimited Miles",
+        "payment_option": "1",
+        "netCommission": "25",
+        "currency": "USD",
+        "realBase": "266.63",
+        "realTax": 145.20999999999998,
+        "rateAmount": "411.84",
+        "taxNotIncluded": 0,
+        "ccrc": "QUM=",
+        "isLocal": 0
+    },
+    ...
+    {
+        "companyName": "Ace",
+        "companyCode": "AC",
+        "rateType": "3",
+        "air": "Yes",
+        "trans": "Automatic",
+        "passengers": "5",
+        "bags": "2",
+        "sippCode": "CCAR",
+        "doors": "4",
+        "img": "https://www.acerentacar.com/CarPics/Nissan Versa.png",
+        "carModel": "Nissan Versa",
+        "km_included": "Unlimited Miles",
+        "payment_option": "1",
+        "netCommission": "25",
+        "currency": "USD",
+        "realBase": "736.40",
+        "realTax": 254.05000000000007,
+        "rateAmount": "990.45",
+        "taxNotIncluded": 0,
+        "ccrc": "QUM=",
+        "isLocal": 0
+    },
+    {
+        "companyName": "Ace",
+        "companyCode": "AC",
+        "rateType": "3",
+        "air": "Yes",
+        "trans": "Automatic",
+        "passengers": "4",
+        "bags": "2",
+        "sippCode": "ECAR",
+        "doors": "4",
+        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+        "carModel": "Toyota Yaris",
+        "km_included": "Unlimited Miles",
+        "payment_option": "1",
+        "netCommission": "25",
+        "currency": "USD",
+        "realBase": "736.40",
+        "realTax": 254.05000000000007,
+        "rateAmount": "990.45",
+        "taxNotIncluded": 0,
+        "ccrc": "QUM=",
+        "isLocal": 0
+    },
+]
+```
 
-## Collaborate with your team
+## Get Selection
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Returns all the available rates of the company with the SIPP code according to the parameters sent
 
-## Test and Deploy
+### URL
 
-Use the built-in continuous integration in GitLab.
+- http://localhost/example-rental-company-implementation/web/companies/get-selection
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Request Parameters
 
-***
+Method POST
 
-# Editing this README
+```
+{
+  "rates": [
+    {
+      "id": "1",
+      "qualifier": "RC",
+      "code": "RGZNET",
+      "company_id": "34",
+      "rate_type_id": "1",
+      "payment_option": "1",
+      "destination_coverage": null,
+      "airport_id": "9999",
+      "country_id": "254",
+      "status": "1",
+      "rate_term_id": "1",
+      "entry_rate_type_id": "12",
+      "commission_type_id": "2",
+      "commission": "25",
+      "franchise_id": null,
+      "currency": null,
+      "location_list": null,
+      "source_coverage": "1",
+      "dynamic_rate": null,
+      "dummy_iata": "",
+      "type_rental_cover": null,
+      "sites": "[\"all\"]",
+      "rateName": "Just Car",
+      "companyCode": "AC",
+      "companyName": "ACE",
+      "companyCid": "",
+      "companyIata": "12345678",
+      "orders": "0",
+      "inclusions": "[1, 2]",
+      "rateRqmaps": [],
+      "rateInclusions": [],
+      "rateType": "just_car",
+      "discountCodes": []
+    },
+    {
+      "id": "2",
+      "qualifier": "RC",
+      "code": "RGZNET",
+      "company_id": "34",
+      "rate_type_id": "3",
+      "payment_option": "1",
+      "destination_coverage": null,
+      "airport_id": "9999",
+      "country_id": "254",
+      "status": "1",
+      "rate_term_id": "1",
+      "entry_rate_type_id": "12",
+      "commission_type_id": "2",
+      "commission": "25",
+      "franchise_id": null,
+      "currency": null,
+      "location_list": null,
+      "source_coverage": "1",
+      "dynamic_rate": null,
+      "dummy_iata": "",
+      "type_rental_cover": null,
+      "sites": "[\"all\"]",
+      "rateName": "Full Protection",
+      "companyCode": "AC",
+      "companyName": "ACE",
+      "companyCid": "",
+      "companyIata": "12345678",
+      "orders": "2",
+      "inclusions": "[\"1\", \"2\", \"3\", \"4\", \"5\"]",
+      "rateRqmaps": [],
+      "rateInclusions": [],
+      "rateType": "full_protection",
+      "discountCodes": []
+    }
+  ],
+  "credentials": {
+    "url": URL,
+    "id": ID,
+    "host": HOST
+  },
+  "getDataModel": {
+    "pickUpLocation": "MIAT01",
+    "pickUpAddress": "NA",
+    "dropOffLocation": "MIAT01",
+    "dropOffAddress": "NA",
+    "pickUpDate": "2022-07-18",
+    "dropOffDate": "2022-07-25",
+    "pickUpHour": "1200",
+    "dropOffHour": "1200",
+    "cdCode": "NA",
+    "pcCode": "NA",
+    "country": "US",
+    "source": "CO",
+    "rateType": "best",
+    "lat": "NA",
+    "lng": "NA",
+    "latDropOff": "NA",
+    "lngDropOff": "NA",
+    "sippCode": "ECAR",
+    "companyCode": "AC",
+    "ccrc": "QUM="
+  },
+  "environment": "Test"
+}
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### Response
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+```
+{
+    "1": {
+        "companyName": "Ace",
+        "companyCode": "AC",
+        "rateType": 1,
+        "getDataModel": {
+            "pickUpLocation": "MIAT01",
+            "pickUpAddress": "NA",
+            "dropOffLocation": "MIAT01",
+            "dropOffAddress": "NA",
+            "pickUpDate": "2022-07-18",
+            "dropOffDate": "2022-07-25",
+            "pickUpHour": "1200",
+            "dropOffHour": "1200",
+            "cdCode": "NA",
+            "pcCode": "NA",
+            "country": "US",
+            "source": "CO",
+            "rateType": "best",
+            "lat": "NA",
+            "lng": "NA",
+            "latDropOff": "NA",
+            "lngDropOff": "NA",
+            "sippCode": "ECAR",
+            "companyCode": "AC",
+            "ccrc": "QUM="
+        },
+        "sippCode": "ECAR",
+        "rateIdentifier": "RGZNET",
+        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+        "category": "Others",
+        "carModel": "Toyota Yaris",
+        "doors": "2-4",
+        "passengers": "4",
+        "bags": "2",
+        "trans": "Automatic",
+        "air": "Yes",
+        "payment_option": "1",
+        "km_included": "Mile",
+        "currency": "USD",
+        "realBase": "266.63",
+        "realTax": 145.20999999999998,
+        "rateAmount": "411.84",
+        "taxNotIncluded": 0,
+        "carInfo": {
+            "ECAR": {
+                "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+                "carModel": "Toyota Yaris",
+                "sippCode": "ECAR",
+                "km_included": "Mile",
+                "companyName": "Ace",
+                "doors": "2-4",
+                "passengers": "4",
+                "bags": "2",
+                "air_conditioner": "Yes",
+                "transmission": "Automatic",
+                "categoryName": "Others",
+                "companyCode": "AC",
+                "shuttleInfo": ""
+            }
+        },
+        "auxAddRateInformation": true
+    },
+    "3": {
+        "companyName": "Ace",
+        "companyCode": "AC",
+        "rateType": 3,
+        "getDataModel": {
+            "pickUpLocation": "MIAT01",
+            "pickUpAddress": "NA",
+            "dropOffLocation": "MIAT01",
+            "dropOffAddress": "NA",
+            "pickUpDate": "2022-07-18",
+            "dropOffDate": "2022-07-25",
+            "pickUpHour": "1200",
+            "dropOffHour": "1200",
+            "cdCode": "NA",
+            "pcCode": "NA",
+            "country": "US",
+            "source": "CO",
+            "rateType": "best",
+            "lat": "NA",
+            "lng": "NA",
+            "latDropOff": "NA",
+            "lngDropOff": "NA",
+            "sippCode": "ECAR",
+            "companyCode": "AC",
+            "ccrc": "QUM="
+        },
+        "sippCode": "ECAR",
+        "rateIdentifier": "RGZNET",
+        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+        "category": "Others",
+        "carModel": "Toyota Yaris",
+        "doors": "2-4",
+        "passengers": "4",
+        "bags": "2",
+        "trans": "Automatic",
+        "air": "Yes",
+        "payment_option": "1",
+        "km_included": "Mile",
+        "currency": "USD",
+        "realBase": "736.40",
+        "realTax": 254.05000000000007,
+        "rateAmount": "990.45",
+        "taxNotIncluded": 0,
+        "carInfo": {
+            "ECAR": {
+                "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+                "carModel": "Toyota Yaris",
+                "sippCode": "ECAR",
+                "km_included": "Mile",
+                "companyName": "Ace",
+                "doors": "2-4",
+                "passengers": "4",
+                "bags": "2",
+                "air_conditioner": "Yes",
+                "transmission": "Automatic",
+                "categoryName": "Others",
+                "companyCode": "AC",
+                "shuttleInfo": ""
+            }
+        },
+        "auxAddRateInformation": true
+    }
+}
+```

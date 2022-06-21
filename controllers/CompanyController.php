@@ -4,6 +4,7 @@ namespace micro\controllers;
 
 use micro\components\Ace\Ace;
 use micro\components\Ace\AceResponseMatrix;
+use micro\components\Ace\AceResponseSelection;
 use yii\filters\ContentNegotiator;
 use yii\rest\ActiveController;
 use yii\web\HttpException;
@@ -63,12 +64,21 @@ class CompanyController extends ActiveController
      */
     public function actionGetMatrix()
     {
-        //\Yii::$app->response->format = Response::FORMAT_RAW;
         if (!\Yii::$app->request->post()) {
             throw new HttpException(500, 'Parameters not found');
         }
         $postParams = \Yii::$app->request->post();
         $responses = Ace::getMatrixResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment']);
         return AceResponseMatrix::processResponse($responses, $postParams['rates'], $postParams['getDataModel']);
+    }
+
+    public function actionGetSelection()
+    {
+        if (!\Yii::$app->request->post()) {
+            throw new HttpException(500, 'Parameters not found');
+        }
+        $postParams = \Yii::$app->request->post();
+        $responses = Ace::getSelectionResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment']);
+        return AceResponseSelection::processResponse($responses, $postParams['rates'], $postParams['getDataModel']);
     }
 }

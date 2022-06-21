@@ -2,9 +2,10 @@
 
 namespace micro\components\Ace;
 
-class AceResponseMatrix
+final class AceResponseMatrix
 {
     /**
+     * Process Response
      * @param $responses
      * @param $ratesArr
      * @param $getDataModel
@@ -15,7 +16,7 @@ class AceResponseMatrix
         $companyName = 'Ace';
         $companyCode = 'AC';
         $result = [];
-        foreach ($responses as $key => $response) {
+        foreach ($responses as $response) {
             if (isset($response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail)) {
                 foreach ($response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail as $reservationRate) {
                     $isAvailable = true;
