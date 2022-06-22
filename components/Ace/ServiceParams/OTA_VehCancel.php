@@ -1,10 +1,8 @@
 <?php
 
-namespace common\components\Ace\ServiceParams;
+namespace micro\components\Ace\ServiceParams;
 
-use common\components\OTA\OTAConexion;
-use common\models\EntryRateType;
-use common\models\Reservation;
+use micro\components\OTA\OTAConexion;
 
 /**
  * Class OTA_VehCancel
@@ -22,12 +20,13 @@ class OTA_VehCancel
     }
 
     /**
-     * @param $model Reservation
+     * @param $lastName
+     * @param $confirmationCode
      * @param $ID
      * @param $Type
      * @return string
      */
-    public function getParameters($model, $ID, $Type, $namespaceSoap, $xsi, $xmlns, $version, $Target)
+    public function getParameters($lastName, $confirmationCode, $ID, $Type, $namespaceSoap, $xsi, $xmlns, $version, $Target)
     {
         $OTAConexion = new OTAConexion();
         $OTAConexion->setID($ID);
@@ -37,8 +36,8 @@ class OTA_VehCancel
         $OTAConexion->setXsi($xsi);
         $OTAConexion->setXmlns($xmlns);
         $OTAConexion->setNamespaceSoap($namespaceSoap);
-        $OTAConexion->setEntryRateType(EntryRateType::ACE_NAME);
-        return $OTAConexion->OTA_VehCancel($model);
+        $OTAConexion->setEntryRateType('Ace');
+        return $OTAConexion->OTA_VehCancel($lastName, $confirmationCode);
     }
 
     public function getServiceName()

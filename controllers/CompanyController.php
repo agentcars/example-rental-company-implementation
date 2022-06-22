@@ -127,4 +127,20 @@ class CompanyController extends ActiveController
         }
         return $response;
     }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionCancel()
+    {
+        if (!\Yii::$app->request->post()) {
+            throw new HttpException(500, 'Parameters not found');
+        }
+        $postParams = \Yii::$app->request->post();
+        $response = Ace::getCancelResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment']);
+        if (empty($response)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        return $response;
+    }
 }

@@ -104,4 +104,27 @@ class Ace
         }
         return $response;
     }
+
+    /**
+     * Get Cancel Result
+     * @param $lastName
+     * @param $confirmationCode
+     * @param $credentials
+     * @param $environment
+     * @return array|mixed
+     */
+    public static function getCancelResult($lastName, $confirmationCode, $credentials, $environment)
+    {
+        $response = [];
+        $aceConexion = new AceConexion();
+        $aceConexion->setCredentials($credentials['url'], $credentials['id'], $credentials['host'], $environment);
+        $request = $aceConexion->OTA_VehCancel($lastName, $confirmationCode);
+        $options['ppdAC'] = $aceConexion->getOptions('VehCancel');
+        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], false, false, $options);
+        foreach ($responses as $resp) {
+            $response = $resp;
+            break;
+        }
+        return $response;
+    }
 }

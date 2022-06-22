@@ -527,14 +527,15 @@ class OTAConexion extends Component
     /**
      * Cancels a reservation created through the OTA service.
      *
-     * @param $model
+     * @param $lastName
+     * @param $confirmationCode
      * @param bool $envelope
      * @return mixed
      */
-    public function OTA_VehCancel($model, $envelope = true)
+    public function OTA_VehCancel($lastName, $confirmationCode, $envelope = true)
     {
         $object = new ServiceParams\OTA_VehCancel();
-        return $object->getParameters($model, $this, $envelope);
+        return $object->getParameters($lastName, $confirmationCode, $this, $envelope);
     }
 
     /**

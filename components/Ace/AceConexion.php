@@ -92,7 +92,8 @@ class AceConexion extends Component
 
     /**
      * Returns general information about a reservation that was created through the OTA service.
-     * @param $model
+     * @param $lastName
+     * @param $confirmationCode
      * @return array
      */
     public function OTA_VehRetRes($lastName, $confirmationCode)
@@ -105,12 +106,13 @@ class AceConexion extends Component
 
     /**
      * Cancels a reservation created through the OTA service.
-     * @param $model
+     * @param $lastName
+     * @param $confirmationCode
      * @return array
      */
-    public function OTA_VehCancel($model){
+    public function OTA_VehCancel($lastName, $confirmationCode){
         $object = new ServiceParams\OTA_VehCancel();
-        $request['ppdAC'] = $object->getParameters($model, $this->ID, $this->Type, $this->namespaceSoap, $this->xsi, $this->xmlns, $this->version, $this->Target);
+        $request['ppdAC'] = $object->getParameters($lastName, $confirmationCode, $this->ID, $this->Type, $this->namespaceSoap, $this->xsi, $this->xmlns, $this->version, $this->Target);
         $url['ppdAC'] = $this->url;
         return $this->getService($object->getServiceName(), $request, $url);
     }
