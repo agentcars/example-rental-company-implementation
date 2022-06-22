@@ -504,10 +504,10 @@ class OTAConexion extends Component
      * @param bool $envelope
      * @return string
      */
-    public function OTA_VehRes($model, $envelope = true)
+    public function OTA_VehRes($reservation, $envelope = true)
     {
         $object = new ServiceParams\OTA_VehRes();
-        return $object->getParameters($model, $this, $envelope);
+        return $object->getParameters($reservation, $this, $envelope);
     }
 
     /**

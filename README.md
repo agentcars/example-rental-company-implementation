@@ -491,3 +491,134 @@ Method POST
     "type": "yii\\web\\HttpException"
 }
 ```
+
+## Confirmation
+
+Returns information of the confirmation
+
+### URL
+
+- http://localhost/example-rental-company-implementation/web/companies/confirmation
+
+### Request Parameters
+
+Method POST
+
+```
+{
+  "credentials": {
+    "url": URL,
+    "id": ID,
+    "host": HOST
+  },
+  "reservation": {
+    "first_name": "Name",
+    "last_name": "Test",
+    "email": "nametest@gmail.com",
+    "location_pickup": "MIAT01",
+    "location_dropoff": "MIAT01",
+    "pickup_date": "2022-07-18",
+    "dropoff_date": "2022-07-25",
+    "pickup_hour": "1200",
+    "dropoff_hour": "1200",
+    "additionals": {
+      "cbs": {
+        "value": 0
+      },
+      "csi": {
+        "value": 0
+      },
+      "cst": {
+        "value": 0
+      },
+      "dvd": {
+        "value": 0
+      },
+      "gps": {
+        "value": "0"
+      },
+      "pax": {
+        "value": "4"
+      },
+      "sky": {
+        "value": "0"
+      },
+      "bags": {
+        "value": "2"
+      },
+      "doors": {
+        "value": "2-4"
+      },
+      "rateInfo": {
+        "id": "1",
+        "name": "Just Car",
+        "alias": "Just Car",
+        "order": "0",
+        "inclusions": {
+          "mileage": {
+            "icon": "icon icon-unlimited-miles",
+            "alias": "Mileage",
+            "limit": "Unlimited Miles",
+            "description": "Includes these kilometers/miles."
+          },
+          "surcharges": {
+            "icon": "icon icon-tax",
+            "alias": "Tax",
+            "description": "Includes all the mandatory taxes and surcharges to make your trip easier."
+          }
+        },
+        "description": "Basic Rate with Mandatory Taxes and Fees"
+      },
+      "satelite": {
+        "value": 0
+      },
+      "air_conditioner": {
+        "value": "Yes"
+      }
+    },
+    "additional_information": {
+      "cid": "",
+      "hash": "12345678901234567890123456789012",
+      "Amount": "409.17",
+      "is_net": 1,
+      "source": "CO",
+      "uniqid": "9876543210987",
+      "referrer": "http://localhost/cars-yii2/frontend/web/es/site/reservation/?companyCode=AC&sippCode=ECAR&pickUpLocation=MIA&dropOffLocation=MIA&pickUpDate=2022-07-18&dropOffDate=2022-07-25&pickUpHour=1200&dropOffHour=1200&ccrc=QUM%3D&rateType=1&pickUpAddress=NA&dropOffAddress=NA&country=US&source=CO&cdCode=NA&pcCode=NA&tp=1",
+      "session_id": "19734651937857946132851973",
+      "ReferenceID": "69138842466",
+      "shuttleInfo": "On Terminal",
+      "CurrencyCode": "USD",
+      "ReferenceType": "16",
+      "newRefundPolicy": true,
+      "shuttleDescription": [],
+      "destination_country": "US"
+    },
+    "rate_type_id": "1",
+    "sipp_code": "ECAR",
+    "company_code": "AC"
+  },
+  "environment": "Production"
+}
+```
+
+### Response success (status 200)
+
+```
+{
+    "rental_confirmation_code": "TESTCODE12991104",
+    "amount_confirmed": 409.17,
+    "currency_confirmed": "USD"
+}
+```
+
+### Response with error (status 500)
+
+```
+{
+    "name": "Internal Server Error",
+    "message": "Empty response",
+    "code": 0,
+    "status": 500,
+    "type": "yii\\web\\HttpException"
+}
+```

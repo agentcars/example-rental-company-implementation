@@ -1,11 +1,8 @@
 <?php
 
-namespace common\components\Ace\ServiceParams;
+namespace micro\components\Ace\ServiceParams;
 
-use common\components\OTA\OTAConexion;
-use common\models\EntryRateType;
-use common\models\LocationList;
-use common\models\Reservation;
+use micro\components\OTA\OTAConexion;
 
 /**
  * Class OTA_VehRes
@@ -23,7 +20,7 @@ class OTA_VehRes
     }
 
     /**
-     * @param Reservation $model
+     * @param $reservation
      * @param $ID
      * @param $Type
      * @param $namespaceSoap
@@ -33,7 +30,7 @@ class OTA_VehRes
      * @param $Target
      * @return string
      */
-    public function getParameters($model, $ID, $Type, $namespaceSoap, $xsi, $xmlns, $version, $Target)
+    public function getParameters($reservation, $ID, $Type, $namespaceSoap, $xsi, $xmlns, $version, $Target)
     {
         $OTAConexion = new OTAConexion();
         $OTAConexion->setID($ID);
@@ -43,15 +40,10 @@ class OTA_VehRes
         $OTAConexion->setXsi($xsi);
         $OTAConexion->setXmlns($xmlns);
         $OTAConexion->setNamespaceSoap($namespaceSoap);
-        $locations = LocationList::checkAndGetIATALocationsToOTA(
-            ['pickUpLocation' => $model->location_pickup, 'dropOffLocation' => $model->location_dropoff],
-            'AC', true, true);
-        $OTAConexion->setPickUpLocation(!empty($locations['pickUpLocation']) ? $locations['pickUpLocation'] :
-            $model->location_pickup);
-        $OTAConexion->setReturnLocation(!empty($locations['dropOffLocation']) ? $locations['dropOffLocation'] :
-            $model->location_dropoff);
-        $OTAConexion->setEntryRateType(EntryRateType::ACE_NAME);
-        return $OTAConexion->OTA_VehRes($model);
+        $OTAConexion->setPickUpLocation($reservation['location_pickup']);
+        $OTAConexion->setReturnLocation($reservation['location_dropoff']);
+        $OTAConexion->setEntryRateType('Ace');
+        return $OTAConexion->OTA_VehRes($reservation);
     }
 
     public function getServiceName()

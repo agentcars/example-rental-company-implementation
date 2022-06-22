@@ -3,6 +3,7 @@
 namespace micro\controllers;
 
 use micro\components\Ace\Ace;
+use micro\components\Ace\AceResponseConfirmation;
 use micro\components\Ace\AceResponseMatrix;
 use micro\components\Ace\AceResponseSelection;
 use yii\filters\ContentNegotiator;
@@ -89,5 +90,25 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Empty response');
         }
         return AceResponseSelection::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionConfirmation()
+    {
+        if (!\Yii::$app->request->post()) {
+            throw new HttpException(500, 'Parameters not found');
+        }
+        $postParams = \Yii::$app->request->post();
+        $response = Ace::getConfirmationResult($postParams['reservation'], $postParams['credentials'], $postParams['environment']);
+        if (empty($response)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        $result = AceResponseConfirmation::processResponse($response);
+        if (isset($result['error'])) {
+            throw new HttpException(500, $result['error']);
+        }
+        return $result;
     }
 }

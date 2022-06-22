@@ -26,6 +26,8 @@ return [
                         'OPTIONS get-matrix' => 'options',
                         'POST get-selection' => 'get-selection',
                         'OPTIONS get-selection' => 'options',
+                        'POST confirmation' => 'confirmation',
+                        'OPTIONS confirmation' => 'options',
                     ]
                 ],
             ],

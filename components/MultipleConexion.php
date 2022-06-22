@@ -139,13 +139,6 @@ class MultipleConexion extends Component
         if ($debug) {
             self::printResponse($requests, $responses, $services);
         }
-        if($service === self::SERVICE_CONFIRMATION){
-            foreach ($requests as $type => $request) {
-                if (isset($responses[$type])) {
-                    ReservationSaveXML::saveConfirmationXML($request, $responses[$type]);
-                }
-            }
-        }
         $curly = null; //clean memory dont delete
         $c = null; //clean memory dont delete
         $pm = null; //clean memory dont delete
