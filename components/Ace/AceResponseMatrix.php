@@ -9,12 +9,12 @@ final class AceResponseMatrix
      * @param $responses
      * @param $ratesArr
      * @param $getDataModel
+     * @param $companyName
+     * @param $companyCode
      * @return array
      */
-    public static function processResponse($responses, $ratesArr, $getDataModel): array
+    public static function processResponse($responses, $ratesArr, $getDataModel, $companyName, $companyCode): array
     {
-        $companyName = 'Ace';
-        $companyCode = 'AC';
         $result = [];
         foreach ($responses as $response) {
             if (isset($response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail)) {

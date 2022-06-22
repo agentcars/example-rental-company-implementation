@@ -74,10 +74,7 @@ class AceConexion extends Component
         } else if ($index == 3 || $index == 2 || $index == 7) {
             $rateCategory = '12';
         }
-        //$request["ppdAC$index"] =
         return $object->getParameters($getDataModel, $rates, $this->ID, $this->Type, $this->namespaceSoap, $this->xsi, $this->xmlns, $this->version, $this->Target, $rateCategory);
-        //$url["ppdAC$index"] = $this->url;
-        //return $this->getService($object->getServiceName(), $request, $url);
     }
 
     /**

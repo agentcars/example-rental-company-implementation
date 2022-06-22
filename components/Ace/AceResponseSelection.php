@@ -9,13 +9,13 @@ final class AceResponseSelection
      * @param $responses
      * @param $ratesArr
      * @param $getDataModel
+     * @param $companyName
+     * @param $companyCode
      * @return array
      */
-    public static function processResponse($responses, $ratesArr, $getDataModel): array
+    public static function processResponse($responses, $ratesArr, $getDataModel, $companyName, $companyCode): array
     {
         $result = [];
-        $companyName = 'Ace';
-        $companyCode = 'AC';
         $coreLogic = [];
         $coreLogic['companyName'] = $companyName;
         $coreLogic['companyCode'] = $companyCode;

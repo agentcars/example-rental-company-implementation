@@ -69,9 +69,15 @@ class CompanyController extends ActiveController
         }
         $postParams = \Yii::$app->request->post();
         $responses = Ace::getMatrixResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment']);
-        return AceResponseMatrix::processResponse($responses, $postParams['rates'], $postParams['getDataModel']);
+        if (empty($responses)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        return AceResponseMatrix::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
     }
 
+    /**
+     * @throws HttpException
+     */
     public function actionGetSelection()
     {
         if (!\Yii::$app->request->post()) {
@@ -79,6 +85,9 @@ class CompanyController extends ActiveController
         }
         $postParams = \Yii::$app->request->post();
         $responses = Ace::getSelectionResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment']);
-        return AceResponseSelection::processResponse($responses, $postParams['rates'], $postParams['getDataModel']);
+        if (empty($responses)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        return AceResponseSelection::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
     }
 }

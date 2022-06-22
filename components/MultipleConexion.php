@@ -27,6 +27,7 @@ class MultipleConexion extends Component
      */
     public static function sendMultipleRequests($urls, $requests, $services, $service = self::SERVICE_SELECTION, $debug = false, $options = [], $secondIntent = false)
     {
+        $result = [];
         $curly = [];
         $responses = [];
         $pm = curl_multi_init();

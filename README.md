@@ -112,11 +112,13 @@ Method POST
     "latDropOff": "NA",
     "lngDropOff": "NA"
   },
+  "companyName": "Ace",
+  "companyCode": "AC",
   "environment": "Test"
 }
 ```
 
-### Response
+### Response success (status 200)
 
 ```
 [
@@ -214,6 +216,18 @@ Method POST
         "isLocal": 0
     },
 ]
+```
+
+### Response with error (status 500)
+
+```
+{
+    "name": "Internal Server Error",
+    "message": "Empty response",
+    "code": 0,
+    "status": 500,
+    "type": "yii\\web\\HttpException"
+}
 ```
 
 ## Get Selection
@@ -329,11 +343,13 @@ Method POST
     "companyCode": "AC",
     "ccrc": "QUM="
   },
+  "companyName": "Ace",
+  "companyCode": "AC",
   "environment": "Test"
 }
 ```
 
-### Response
+### Response success (status 200)
 
 ```
 {
@@ -461,5 +477,17 @@ Method POST
         },
         "auxAddRateInformation": true
     }
+}
+```
+
+### Response with error (status 500)
+
+```
+{
+    "name": "Internal Server Error",
+    "message": "Empty response",
+    "code": 0,
+    "status": 500,
+    "type": "yii\\web\\HttpException"
 }
 ```
