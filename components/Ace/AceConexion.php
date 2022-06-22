@@ -95,10 +95,10 @@ class AceConexion extends Component
      * @param $model
      * @return array
      */
-    public function OTA_VehRetRes($model)
+    public function OTA_VehRetRes($lastName, $confirmationCode)
     {
         $object = new ServiceParams\OTA_VehRetRes();
-        $request['ppdAC'] = $object->getParameters($model, $this->ID, $this->Type, $this->namespaceSoap, $this->xsi, $this->xmlns, $this->version, $this->Target);
+        $request['ppdAC'] = $object->getParameters($lastName, $confirmationCode, $this->ID, $this->Type, $this->namespaceSoap, $this->xsi, $this->xmlns, $this->version, $this->Target);
         $url['ppdAC'] = $this->url;
         return $this->getService($object->getServiceName(), $request, $url);
     }

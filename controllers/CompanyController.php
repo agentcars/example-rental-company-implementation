@@ -111,4 +111,20 @@ class CompanyController extends ActiveController
         }
         return $result;
     }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionMyReservation()
+    {
+        if (!\Yii::$app->request->post()) {
+            throw new HttpException(500, 'Parameters not found');
+        }
+        $postParams = \Yii::$app->request->post();
+        $response = Ace::getMyReservationResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment']);
+        if (empty($response)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        return $response;
+    }
 }

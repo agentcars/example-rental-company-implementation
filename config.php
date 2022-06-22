@@ -28,6 +28,8 @@ return [
                         'OPTIONS get-selection' => 'options',
                         'POST confirmation' => 'confirmation',
                         'OPTIONS confirmation' => 'options',
+                        'POST my-reservation' => 'my-reservation',
+                        'OPTIONS my-reservation' => 'options',
                     ]
                 ],
             ],

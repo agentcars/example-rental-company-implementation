@@ -597,7 +597,7 @@ Method POST
     "sipp_code": "ECAR",
     "company_code": "AC"
   },
-  "environment": "Production"
+  "environment": "Test"
 }
 ```
 
@@ -608,6 +608,334 @@ Method POST
     "rental_confirmation_code": "TESTCODE12991104",
     "amount_confirmed": 409.17,
     "currency_confirmed": "USD"
+}
+```
+
+### Response with error (status 500)
+
+```
+{
+    "name": "Internal Server Error",
+    "message": "Empty response",
+    "code": 0,
+    "status": 500,
+    "type": "yii\\web\\HttpException"
+}
+```
+
+## My Reservation
+
+Returns information of the reservation
+
+### URL
+
+- http://localhost/example-rental-company-implementation/web/companies/my-reservation
+
+### Request Parameters
+
+Method POST
+
+```
+{
+  "credentials": {
+    "url": URL,
+    "id": ID,
+    "host": HOST
+  },
+  "lastName": "Test",
+  "confirmationCode": "TESTCODE12991104",
+  "environment": "Production"
+}
+```
+
+### Response success (status 200)
+
+Response of the rental service
+
+```
+{
+    "soapBody": {
+        "OTA_VehRetResRS": {
+            "@attributes": {
+                "TimeStamp": "2022-06-22T13:56:31.3362548-04:00",
+                "Target": "Production",
+                "Version": "5.0"
+            },
+            "Success": {},
+            "VehRetResRSCore": {
+                "VehReservation": {
+                    "Customer": {
+                        "Primary": {
+                            "PersonName": {
+                                "GivenName": "Name",
+                                "Surname": "Test"
+                            },
+                            "Email": "nametest@gmail.com"
+                        }
+                    },
+                    "VehSegmentCore": {
+                        "ConfID": {
+                            "@attributes": {
+                                "Type": "14",
+                                "ID": "TESTCODE12991104"
+                            }
+                        },
+                        "Vendor": "ACE Rent A Car",
+                        "VehRentalCore": {
+                            "@attributes": {
+                                "PickUpDateTime": "2022-07-18T12:00:00",
+                                "ReturnDateTime": "2022-07-25T12:00:00"
+                            },
+                            "PickUpLocation": {
+                                "@attributes": {
+                                    "LocationCode": "MIAT01",
+                                    "CodeContext": "AC"
+                                }
+                            },
+                            "ReturnLocation": {
+                                "@attributes": {
+                                    "LocationCode": "MIAT01",
+                                    "CodeContext": "AC"
+                                }
+                            }
+                        },
+                        "Vehicle": {
+                            "@attributes": {
+                                "AirConditionInd": "true",
+                                "TransmissionType": "Automatic",
+                                "FuelType": "Unspecified",
+                                "DriveType": "Unspecified",
+                                "PassengerQuantity": "4",
+                                "BaggageQuantity": "2",
+                                "Code": "ECAR",
+                                "CodeContext": "SIPP"
+                            },
+                            "VehType": {
+                                "@attributes": {
+                                    "VehicleCategory": "1",
+                                    "DoorCount": "2-4"
+                                }
+                            },
+                            "VehClass": {
+                                "@attributes": {
+                                    "Size": "3"
+                                }
+                            },
+                            "VehMakeModel": {
+                                "@attributes": {
+                                    "Name": "Toyota Yaris"
+                                }
+                            },
+                            "PictureURL": "Toyota Yaris.png"
+                        },
+                        "RentalRate": {
+                            "RateDistance": {
+                                "@attributes": {
+                                    "Unlimited": "true",
+                                    "DistUnitName": "Mile",
+                                    "VehiclePeriodUnitName": "RentalPeriod"
+                                }
+                            },
+                            "VehicleCharges": {
+                                "VehicleCharge": {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "264.46",
+                                        "Description": "Daily Rate",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "1"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "37.78",
+                                            "UnitName": "Day",
+                                            "Quantity": "7"
+                                        }
+                                    }
+                                }
+                            },
+                            "RateQualifier": {
+                                "@attributes": {
+                                    "RateCategory": "16",
+                                    "PromotionCode": "RGZNET",
+                                    "RateQualifier": "NET2",
+                                    "RatePeriod": "Daily"
+                                }
+                            },
+                            "RateRestrictions": {
+                                "@attributes": {
+                                    "GuaranteeReqInd": "true"
+                                }
+                            }
+                        },
+                        "Fees": {
+                            "Fee": [
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "29.38",
+                                        "Description": "Airport Access Fee",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "6"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "264.46",
+                                            "Percentage": "11.11"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "35.70",
+                                        "Description": "CFC Fee",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "6"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "5.10",
+                                            "UnitName": "Day",
+                                            "Quantity": "7"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "14.00",
+                                        "Description": "Energy Recovery Fee",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "6"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "2.00",
+                                            "UnitName": "Day",
+                                            "Quantity": "7"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "10.58",
+                                        "Description": "Miami Privilege Fee",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "7"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "264.46",
+                                            "Percentage": "4.0"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "14.35",
+                                        "Description": "State Surcharge",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "6"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "2.05",
+                                            "UnitName": "Day",
+                                            "Quantity": "7"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "13.93",
+                                        "Description": "Vehicle Licensing Fee",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "6"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "1.99",
+                                            "UnitName": "Day",
+                                            "Quantity": "7"
+                                        }
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "CurrencyCode": "USD",
+                                        "Amount": "26.77",
+                                        "Description": "Sales Tax",
+                                        "IncludedInEstTotalInd": "true",
+                                        "Purpose": "7"
+                                    },
+                                    "Calculation": {
+                                        "@attributes": {
+                                            "UnitCharge": "382.40",
+                                            "Percentage": "7.0"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "TotalCharge": {
+                            "@attributes": {
+                                "RateTotalAmount": "264.46",
+                                "EstimatedTotalAmount": "409.17",
+                                "CurrencyCode": "USD"
+                            }
+                        }
+                    },
+                    "VehSegmentInfo": {
+                        "PaymentRules": {
+                            "PaymentRule": {
+                                "@attributes": {
+                                    "CurrencyCode": "USD",
+                                    "Amount": "409.17",
+                                    "RuleType": "2",
+                                    "PaymentType": "3"
+                                }
+                            }
+                        },
+                        "LocationDetails": {
+                            "@attributes": {
+                                "AtAirport": "true",
+                                "Code": "MIAT01",
+                                "Name": "Miami International Airport",
+                                "CodeContext": "AC",
+                                "AssocAirportLocList": "MIA"
+                            },
+                            "Address": {
+                                "StreetNmbr": "3900 NW 25th St",
+                                "CityName": "Miami",
+                                "PostalCode": "33142",
+                                "StateProv": "Florida",
+                                "CountryName": "United States"
+                            },
+                            "Telephone": [
+                                {
+                                    "@attributes": {
+                                        "PhoneTechType": "1",
+                                        "PhoneNumber": "786-656-4200",
+                                        "DefaultInd": "true"
+                                    }
+                                },
+                                {
+                                    "@attributes": {
+                                        "PhoneTechType": "3",
+                                        "PhoneNumber": "fax"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 ```
 

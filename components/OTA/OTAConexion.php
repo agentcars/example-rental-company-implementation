@@ -513,14 +513,15 @@ class OTAConexion extends Component
     /**
      * Returns general information about a reservation that was created through the OTA service
      *
-     * @param $model
+     * @param $lastName
+     * @param $confirmationCode
      * @param bool $envelope
      * @return mixed
      */
-    public function OTA_VehRetRes($model, $envelope = true)
+    public function OTA_VehRetRes($lastName, $confirmationCode, $envelope = true)
     {
         $object = new ServiceParams\OTA_VehRetRes();
-        return $object->getParameters($model, $this, $envelope);
+        return $object->getParameters($lastName, $confirmationCode, $this, $envelope);
     }
 
     /**

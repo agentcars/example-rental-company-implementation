@@ -71,10 +71,33 @@ class Ace
         $request = $aceConexion->OTA_VehRes($reservation);
         $options['ppdAC'] = $aceConexion->getOptions('VehRes');
         if (!empty($request)) {
-            $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CONFIRMATION, true, $options);
+            $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CONFIRMATION, false, $options);
         } else {
             $responses = [];
         }
+        foreach ($responses as $resp) {
+            $response = $resp;
+            break;
+        }
+        return $response;
+    }
+
+    /**
+     * Get My Reservation Result
+     * @param $lastName
+     * @param $confirmationCode
+     * @param $credentials
+     * @param $environment
+     * @return array|mixed
+     */
+    public static function getMyReservationResult($lastName, $confirmationCode, $credentials, $environment)
+    {
+        $response = [];
+        $aceConexion = new AceConexion();
+        $aceConexion->setCredentials($credentials['url'], $credentials['id'], $credentials['host'], $environment);
+        $request = $aceConexion->OTA_VehRetRes($lastName, $confirmationCode);
+        $options['ppdAC'] = $aceConexion->getOptions('VehRetRes');
+        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], false, false, $options);
         foreach ($responses as $resp) {
             $response = $resp;
             break;
