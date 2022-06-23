@@ -1277,6 +1277,179 @@ Response of the rental service
 }
 ```
 
+### Response with error (status 500)
+
+```
+{
+    "name": "Internal Server Error",
+    "message": "Empty response",
+    "code": 0,
+    "status": 500,
+    "type": "yii\\web\\HttpException"
+}
+```
+
+## Get Offices
+
+Returns Offices information
+
+### URL
+
+- http://localhost/example-rental-company-implementation/web/companies/get-offices
+
+### Request Parameters
+
+Method POST
+
+```
+{
+  "credentials": {
+    "url": URL,
+    "id": ID,
+    "host": HOST
+  },
+  "countryCode": "US",
+  "companyName": "Ace",
+  "companyCode": "AC",
+  "debug": false,
+  "environment": "Test"
+}
+```
+
+### Response success (status 200)
+
+```
+[
+    {
+        "office_code": "ABQT01",
+        "update_office": 1,
+        "company_name": "Ace",
+        "company_code": "AC",
+        "status": 1,
+        "address": "Albuquerque International Sunport, 3400 University Blvd SE, Albuquerque",
+        "lat": "",
+        "lng": "",
+        "zip_code": "87106",
+        "city_name": "Albuquerque",
+        "state": "NM",
+        "country_code": "US",
+        "franchise_code": "ABQT01",
+        "additional_information": {
+            "AtAirport": "true",
+            "Code": "ABQT01",
+            "Name": "Albuquerque International Sunport",
+            "CodeContext": "AC",
+            "AssocAirportLocList": "ABQ",
+            "phone": "505-437-5809",
+            "updateDate": "2022-06-23 16:06:46"
+        },
+        "schedule": {
+            "1": [
+                {
+                    "opening": "0700",
+                    "close": "2100"
+                }
+            ],
+            "2": [
+                {
+                    "opening": "0700",
+                    "close": "2100"
+                }
+            ],
+            "3": [
+                {
+                    "opening": "0700",
+                    "close": "2100"
+                }
+            ],
+            "4": [
+                {
+                    "opening": "0700",
+                    "close": "2100"
+                }
+            ],
+            "5": [
+                {
+                    "opening": "0700",
+                    "close": "2100"
+                }
+            ],
+            "6": [
+                {
+                    "opening": "0800",
+                    "close": "1800"
+                }
+            ],
+            "7": [
+                {
+                    "opening": "0800",
+                    "close": "1800"
+                }
+            ]
+        },
+        "shuttle_info": "2",
+        "iata": "ABQ"
+    },
+    ...
+    {
+        "office_code": "AGHC01",
+        "update_office": 1,
+        "company_name": "Ace",
+        "company_code": "AC",
+        "status": 1,
+        "address": "Ängelholm Hedin Bil, Midgårdsgatan 11, Angelholm",
+        "lat": "",
+        "lng": "",
+        "zip_code": "262 71",
+        "city_name": "Angelholm",
+        "state": "",
+        "country_code": "US",
+        "franchise_code": "AGHC01",
+        "additional_information": {
+            "AtAirport": "false",
+            "Code": "AGHC01",
+            "Name": "Ängelholm Hedin Bil",
+            "CodeContext": "AC",
+            "phone": "0046 0431-169 19",
+            "updateDate": "2022-06-23 16:06:46"
+        },
+        "schedule": {
+            "1": [
+                {
+                    "opening": "0800",
+                    "close": "1600"
+                }
+            ],
+            "2": [
+                {
+                    "opening": "0800",
+                    "close": "1600"
+                }
+            ],
+            "3": [
+                {
+                    "opening": "0800",
+                    "close": "1600"
+                }
+            ],
+            "4": [
+                {
+                    "opening": "0800",
+                    "close": "1600"
+                }
+            ],
+            "5": [
+                {
+                    "opening": "0800",
+                    "close": "1600"
+                }
+            ]
+        },
+        "shuttle_info": null,
+        "iata": null
+    }
+]
+```
 
 ### Response with error (status 500)
 

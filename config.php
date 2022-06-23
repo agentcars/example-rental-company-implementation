@@ -32,6 +32,8 @@ return [
                         'OPTIONS my-reservation' => 'options',
                         'POST cancel' => 'cancel',
                         'OPTIONS cancel' => 'options',
+                        'POST get-offices' => 'get-offices',
+                        'OPTIONS get-offices' => 'options',
                     ]
                 ],
             ],

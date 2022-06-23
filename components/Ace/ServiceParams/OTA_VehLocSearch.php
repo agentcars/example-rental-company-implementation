@@ -1,8 +1,8 @@
 <?php
-namespace common\components\Ace\ServiceParams;
 
-use common\components\OTA\OTAConexion;
-use common\models\EntryRateType;
+namespace micro\components\Ace\ServiceParams;
+
+use micro\components\OTA\OTAConexion;
 
 class OTA_VehLocSearch
 {
@@ -34,7 +34,7 @@ class OTA_VehLocSearch
         $OTAConexion->setXmlns($xmlns);
         $OTAConexion->setVersion($version);
         $OTAConexion->setTarget($Target);
-        $OTAConexion->setEntryRateType(EntryRateType::ACE_NAME);
+        $OTAConexion->setEntryRateType('Ace');
         return $OTAConexion->OTA_VehLocSearch('','');
     }
 

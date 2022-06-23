@@ -5,6 +5,7 @@ namespace micro\controllers;
 use micro\components\Ace\Ace;
 use micro\components\Ace\AceResponseConfirmation;
 use micro\components\Ace\AceResponseMatrix;
+use micro\components\Ace\AceResponseOffices;
 use micro\components\Ace\AceResponseSelection;
 use yii\filters\ContentNegotiator;
 use yii\rest\ActiveController;
@@ -155,5 +156,26 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Empty response');
         }
         return $response;
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionGetOffices()
+    {
+        if (!\Yii::$app->request->post()) {
+            throw new HttpException(500, 'Parameters not found');
+        }
+        $postParams = \Yii::$app->request->post();
+        $debug = $postParams['debug'] ?? false;
+        $response = Ace::getOfficesResult($postParams['countryCode'], $postParams['credentials'], $postParams['environment'], $debug);
+        if (empty($response)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        $result = AceResponseOffices::processResponse($response, $postParams['countryCode'], $postParams['companyName'], $postParams['companyCode']);
+        if (isset($result['error'])) {
+            throw new HttpException(500, $result['error']);
+        }
+        return $result;
     }
 }

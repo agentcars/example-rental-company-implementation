@@ -46,19 +46,6 @@ class AceConexion extends Component
     }
 
     /**
-     * OTA_VehLocDetail
-     * @param $locationCode
-     * @return array
-     */
-    public function OTA_VehLocDetail($locationCode)
-    {
-        $object = new ServiceParams\OTA_VehLocDetail();
-        $request['ppdAC'] =  $object->getParameters($locationCode, $this->ID, $this->Type, $this->namespaceSoap, $this->xsi, $this->xmlns, $this->version, $this->Target);
-        $url['ppdAC'] = $this->url;
-        return $this->getService($object->getServiceName(), $request, $url);
-    }
-
-    /**
      * This service gets information about available vehicles from a specified branch at the selected datetime.
      * @param $getDataModel
      * @param $rates

@@ -1,11 +1,8 @@
 <?php
 
-namespace common\components\OTA\ServiceParams;
+namespace micro\components\OTA\ServiceParams;
 
-use common\components\OTA\OTAConexion;
-use common\models\EntryRateType;
-use SimpleXMLElement;
-use yii\helpers\VarDumper;
+use micro\components\OTA\OTAConexion;
 
 /**
  * Class OTA_VehLocSearch
@@ -39,20 +36,7 @@ class OTA_VehLocSearch
         //Body
         $Body = $requestSoap->addChild('Body', null, $OTAConexion->getNamespaceSoap());
         //Service Name
-        switch ($entryRateType) {
-            case EntryRateType::LOCALIZA_NAME:
-                $ota = $Body->addChild($this->getServiceName(), null, 'http://tempuri.org/');
-                $otaRQ = $ota->addChild($this->getServiceName() . 'RQ');
-                break;
-            case EntryRateType::UNIDAS_NAME:
-                $OTA_VehAvailRate = $Body->addChild('OtaVehLocSearch', '', 'http://www.unidas.com.br/');
-                $otaRQ = $OTA_VehAvailRate->addChild('OTA_VehLocSearchRQ', '', 'http://www.opentravel.org/OTA/2003/05');
-                $otaRQ->addAttribute('Version', 0);
-                break;
-            default:
-                $otaRQ = $Body->addChild($this->getServiceName() . 'RQ', null, $OTAConexion->getXmlns());
-        }
-        //$otaRQ = new SimpleXMLElement('<' . $this->getServiceName() . 'RQ/>');
+        $otaRQ = $Body->addChild($this->getServiceName() . 'RQ', null, $OTAConexion->getXmlns());
         if (!empty($OTAConexion->getVersion())) {
             $otaRQ->addAttribute('Version', $OTAConexion->getVersion());
         }
@@ -65,25 +49,10 @@ class OTA_VehLocSearch
 
         //POS
         $OTAConexion->getPos($otaRQ);
-        switch ($entryRateType) {
-            case EntryRateType::UNIDAS_NAME:
-                break;
-            default:
-        }
         //VehLocSearchCriterion
         $VehLocSearchCriterion = $otaRQ->addChild('VehLocSearchCriterion');
-        if($entryRateType === EntryRateType::ACE_NAME) {
-            $Vendor = $otaRQ->addChild('Vendor');
-            $Vendor->addAttribute('Code', 'AC');
-        } else {
-            //Address
-            $Address = $VehLocSearchCriterion->addChild('Address');
-            //CityName
-            $Address->addChild('CityName', $cityName);
-            //CountryName
-            $Address->addChild('CountryName', $countryName);
-        }
-
+        $Vendor = $otaRQ->addChild('Vendor');
+        $Vendor->addAttribute('Code', 'AC');
         if (isset($requestSoap)) {
             $dom = dom_import_simplexml($requestSoap)->ownerDocument;
         } else {
