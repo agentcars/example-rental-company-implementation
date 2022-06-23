@@ -12,9 +12,10 @@ class Ace
      * @param $credentials
      * @param $getDataModel
      * @param $environment
+     * @param $debug
      * @return array
      */
-    public static function getMatrixResult($rates, $credentials, $getDataModel, $environment): array
+    public static function getMatrixResult($rates, $credentials, $getDataModel, $environment, $debug): array
     {
         $request = [];
         $urls = [];
@@ -28,7 +29,7 @@ class Ace
             $options[$rate['rate_type_id']] = $aceConexion->getOptions('VehAvailRate');
             $services[$rate['rate_type_id']] = 'VehAvailRate';
         }
-        return MultipleConexion::sendMultipleRequests($urls, $request, $services, MultipleConexion::SERVICE_MATRIX, false, $options);
+        return MultipleConexion::sendMultipleRequests($urls, $request, $services, MultipleConexion::SERVICE_MATRIX, $debug, $options);
     }
 
     /**
@@ -37,9 +38,10 @@ class Ace
      * @param $credentials
      * @param $getDataModel
      * @param $environment
+     * @param $debug
      * @return array
      */
-    public static function getSelectionResult($rates, $credentials, $getDataModel, $environment): array
+    public static function getSelectionResult($rates, $credentials, $getDataModel, $environment, $debug): array
     {
         $request = [];
         $urls = [];
@@ -53,7 +55,7 @@ class Ace
             $options[$rate['rate_type_id']] = $aceConexion->getOptions('VehAvailRate');
             $services[$rate['rate_type_id']] = 'VehAvailRate';
         }
-        return MultipleConexion::sendMultipleRequests($urls, $request, $services, MultipleConexion::SERVICE_MATRIX, false, $options);
+        return MultipleConexion::sendMultipleRequests($urls, $request, $services, MultipleConexion::SERVICE_SELECTION, $debug, $options);
     }
 
     /**
@@ -61,9 +63,10 @@ class Ace
      * @param $reservation
      * @param $credentials
      * @param $environment
+     * @param $debug
      * @return array|object
      */
-    public static function getConfirmationResult($reservation, $credentials, $environment)
+    public static function getConfirmationResult($reservation, $credentials, $environment, $debug)
     {
         $response = [];
         $aceConexion = new AceConexion();
@@ -71,7 +74,7 @@ class Ace
         $request = $aceConexion->OTA_VehRes($reservation);
         $options['ppdAC'] = $aceConexion->getOptions('VehRes');
         if (!empty($request)) {
-            $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CONFIRMATION, false, $options);
+            $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CONFIRMATION, $debug, $options);
         } else {
             $responses = [];
         }
@@ -88,16 +91,17 @@ class Ace
      * @param $confirmationCode
      * @param $credentials
      * @param $environment
+     * @param $debug
      * @return array|mixed
      */
-    public static function getMyReservationResult($lastName, $confirmationCode, $credentials, $environment)
+    public static function getMyReservationResult($lastName, $confirmationCode, $credentials, $environment, $debug)
     {
         $response = [];
         $aceConexion = new AceConexion();
         $aceConexion->setCredentials($credentials['url'], $credentials['id'], $credentials['host'], $environment);
         $request = $aceConexion->OTA_VehRetRes($lastName, $confirmationCode);
         $options['ppdAC'] = $aceConexion->getOptions('VehRetRes');
-        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], false, false, $options);
+        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], '', $debug, $options);
         foreach ($responses as $resp) {
             $response = $resp;
             break;
@@ -111,16 +115,17 @@ class Ace
      * @param $confirmationCode
      * @param $credentials
      * @param $environment
+     * @param $debug
      * @return array|mixed
      */
-    public static function getCancelResult($lastName, $confirmationCode, $credentials, $environment)
+    public static function getCancelResult($lastName, $confirmationCode, $credentials, $environment, $debug)
     {
         $response = [];
         $aceConexion = new AceConexion();
         $aceConexion->setCredentials($credentials['url'], $credentials['id'], $credentials['host'], $environment);
         $request = $aceConexion->OTA_VehCancel($lastName, $confirmationCode);
         $options['ppdAC'] = $aceConexion->getOptions('VehCancel');
-        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], false, false, $options);
+        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], '', $debug, $options);
         foreach ($responses as $resp) {
             $response = $resp;
             break;

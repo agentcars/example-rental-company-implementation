@@ -114,6 +114,7 @@ Method POST
   },
   "companyName": "Ace",
   "companyCode": "AC",
+  "debug": false,
   "environment": "Test"
 }
 ```
@@ -345,6 +346,7 @@ Method POST
   },
   "companyName": "Ace",
   "companyCode": "AC",
+  "debug": false,
   "environment": "Test"
 }
 ```
@@ -597,6 +599,7 @@ Method POST
     "sipp_code": "ECAR",
     "company_code": "AC"
   },
+  "debug": false,
   "environment": "Test"
 }
 ```
@@ -644,6 +647,7 @@ Method POST
   },
   "lastName": "Test",
   "confirmationCode": "TESTCODE12991104",
+  "debug": false,
   "environment": "Test"
 }
 ```
@@ -972,6 +976,7 @@ Method POST
   },
   "lastName": "Test",
   "confirmationCode": "TESTCODE12991104",
+  "debug": false,
   "environment": "Test"
 }
 ```

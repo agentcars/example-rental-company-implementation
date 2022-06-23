@@ -29,9 +29,11 @@ final class AceResponseSelection
             $rate_type_id = $codeResp;
             $payment_option = [];
             if (isset($response->soapBody->OTA_VehAvailRateRS->Errors->Error)) {
+                $result['error'] = $response->soapBody->OTA_VehAvailRateRS->Errors->Error;
                 break;
             }
             if(!isset($response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail)) {
+                $result['error'] = 'Not VehAvail';
                 break;
             }
             $reservationRate = $response->soapBody->OTA_VehAvailRateRS->VehAvailRSCore->VehVendorAvails->VehVendorAvail->VehAvails->VehAvail;
@@ -42,7 +44,8 @@ final class AceResponseSelection
                 }
             }
             if (!isset($reservationRate->VehAvailCore->RentalRate) || $Status !== 'Available') {
-                return [];
+                $result['error'] = 'Not Available';
+                break;
             }
             //Vehicle
             $VehicleAttr = [];

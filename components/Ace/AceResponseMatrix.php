@@ -31,7 +31,7 @@ final class AceResponseMatrix
                         }
                     }
                     if (!$isAvailable) {
-                        $result[] = '';
+                        $result['error'] = 'Not Available';
                         break;
                     }
                     foreach ($reservationRate->VehAvailCore->Vehicle->attributes() as $attribute => $value) {
@@ -127,7 +127,7 @@ final class AceResponseMatrix
                         }
                     }
                     if (!in_array($RateQualifier, $rates)) {
-                        $result[] = '';
+                        $result['error'] = 'Not Rate Qualifier in Rates';
                         break;
                     }
                     foreach ($reservationRate->VehAvailCore->Fees->Fee as $VehicleCharge) {
@@ -165,6 +165,8 @@ final class AceResponseMatrix
                     //result
                     $result[] = $coreLogic;
                 }
+            } else if (isset($response->soapBody->OTA_VehAvailRateRS->Errors->Error)) {
+                $result['error'] = $response->soapBody->OTA_VehAvailRateRS->Errors->Error;
             }
         }
         return $result;

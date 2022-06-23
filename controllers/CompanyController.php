@@ -69,11 +69,16 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Parameters not found');
         }
         $postParams = \Yii::$app->request->post();
-        $responses = Ace::getMatrixResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment']);
+        $debug = $postParams['debug'] ?? false;
+        $responses = Ace::getMatrixResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment'], $debug);
         if (empty($responses)) {
             throw new HttpException(500, 'Empty response');
         }
-        return AceResponseMatrix::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
+        $result = AceResponseMatrix::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
+        if (isset($result['error'])) {
+            throw new HttpException(500, $result['error']);
+        }
+        return $result;
     }
 
     /**
@@ -85,11 +90,16 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Parameters not found');
         }
         $postParams = \Yii::$app->request->post();
-        $responses = Ace::getSelectionResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment']);
+        $debug = $postParams['debug'] ?? false;
+        $responses = Ace::getSelectionResult($postParams['rates'], $postParams['credentials'], $postParams['getDataModel'], $postParams['environment'], $debug);
         if (empty($responses)) {
             throw new HttpException(500, 'Empty response');
         }
-        return AceResponseSelection::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
+        $result = AceResponseSelection::processResponse($responses, $postParams['rates'], $postParams['getDataModel'], $postParams['companyName'], $postParams['companyCode']);
+        if (isset($result['error'])) {
+            throw new HttpException(500, $result['error']);
+        }
+        return $result;
     }
 
     /**
@@ -101,7 +111,8 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Parameters not found');
         }
         $postParams = \Yii::$app->request->post();
-        $response = Ace::getConfirmationResult($postParams['reservation'], $postParams['credentials'], $postParams['environment']);
+        $debug = $postParams['debug'] ?? false;
+        $response = Ace::getConfirmationResult($postParams['reservation'], $postParams['credentials'], $postParams['environment'], $debug);
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }
@@ -121,7 +132,8 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Parameters not found');
         }
         $postParams = \Yii::$app->request->post();
-        $response = Ace::getMyReservationResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment']);
+        $debug = $postParams['debug'] ?? false;
+        $response = Ace::getMyReservationResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment'], $debug);
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }
@@ -137,7 +149,8 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Parameters not found');
         }
         $postParams = \Yii::$app->request->post();
-        $response = Ace::getCancelResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment']);
+        $debug = $postParams['debug'] ?? false;
+        $response = Ace::getCancelResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment'], $debug);
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }
