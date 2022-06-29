@@ -35,27 +35,32 @@ final class AceResponseMatrix
                         break;
                     }
                     foreach ($reservationRate->VehAvailCore->Vehicle->attributes() as $attribute => $value) {
-                        $value = (string)$value;
                         if ($attribute === 'AirConditionInd') {
+                            $value = (string)$value;
                             if ($value === 'true') {
                                 $coreLogic['air'] = 'Yes';
                             } else {
                                 $coreLogic['air'] = 'No';
                             }
                         } else if ($attribute === 'Code') {
+                            $value = (string)$value;
                             $coreLogic['sippCode'] = $value;
                         } else if ($attribute === 'PassengerQuantity') {
+                            $value = (int)$value;
                             $coreLogic['passengers'] = $value;
                         } else if ($attribute === 'BaggageQuantity') {
+                            $value = (int)$value;
                             $coreLogic['bags'] = $value;
                         } else if ($attribute === 'TransmissionType') {
+                            $value = (string)$value;
                             $coreLogic['trans'] = $value;
                         }
                     }
                     if (isset($reservationRate->VehAvailCore->Vehicle->VehType)) {
                         foreach ($reservationRate->VehAvailCore->Vehicle->VehType->attributes() as $attribute => $value) {
                             if ($attribute === 'DoorCount') {
-                                $coreLogic['doors'] = substr((string)$value, -1);
+                                $doors = substr((string)$value, -1);
+                                $coreLogic['doors'] = (int)$doors;
                             }
                         }
                     }
@@ -114,14 +119,9 @@ final class AceResponseMatrix
                         $rates[] = $w['code'];
                         if (!isset($payment_option[$w['code']]) || $payment_option[$w['code']] != $w['payment_option']) {
                             if (in_array($w['rate_type_id'], $rate_type_id)) {
-                                if ($coreLogic['rateType'] == 'best') {
-                                    $coreLogic['rateType'] = $w['rate_type_id'];
-                                }
+                                $coreLogic['rateType'] = (int)$w['rate_type_id'];
                                 if ($coreLogic['rateType'] == $w['rate_type_id']) {
-                                    $coreLogic['payment_option'] = $w['payment_option'];
-                                }
-                                if ((int)$w['commission_type_id'] === 2/*NET_COMMISSION*/) {
-                                    $coreLogic['netCommission'] = $w['commission'];
+                                    $coreLogic['payment_option'] = (int)$w['payment_option'];
                                 }
                             }
                         }
@@ -156,12 +156,11 @@ final class AceResponseMatrix
                         $TotalChargeAttr[$attribute] = (string)$value;
                     }
                     $coreLogic['currency'] = $TotalChargeAttr['CurrencyCode'] ?? '';
-                    $coreLogic['realBase'] = $TotalChargeAttr['RateTotalAmount'];
-                    $coreLogic['realTax'] = $TotalChargeAttr['EstimatedTotalAmount'] - $TotalChargeAttr['RateTotalAmount'];
-                    $coreLogic['rateAmount'] = $TotalChargeAttr['EstimatedTotalAmount'] ?? 0;
+                    $coreLogic['realBase'] = (float)$TotalChargeAttr['RateTotalAmount'];
+                    $coreLogic['realTax'] = (float)number_format($TotalChargeAttr['EstimatedTotalAmount'] - $TotalChargeAttr['RateTotalAmount'], 2, '.', '');
+                    $coreLogic['rateAmount'] = (float)($TotalChargeAttr['EstimatedTotalAmount'] ?? 0);
                     $coreLogic['taxNotIncluded'] = $taxNotIncluded;
                     $coreLogic['ccrc'] = base64_encode($coreLogic['companyCode']);
-                    $coreLogic['isLocal'] = 0;
                     //result
                     $result[] = $coreLogic;
                 }

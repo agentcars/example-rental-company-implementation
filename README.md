@@ -1,88 +1,39 @@
-# Example rental company implementation
+#Ejemplo de implementación de una rentadora de autos
 
+## Servicio Get Matrix
 
-## Get Matrix
-
-Returns all the available rates of the company according to the parameters sent
+Se encarga de regresar todos los carros disponibles de la rentadora
 
 ### URL
 
 - http://localhost/example-rental-company-implementation/web/companies/get-matrix
 
-### Request Parameters
+### Parámetros de envío
 
-Method POST
+Se envía un JSON vía `POST`
 
 ```
 {
   "rates": [
     {
-      "id": "1",
       "qualifier": "RC",
       "code": "RGZNET",
-      "company_id": "34",
       "rate_type_id": "1",
       "payment_option": "1",
-      "destination_coverage": null,
-      "airport_id": "9999",
-      "country_id": "254",
-      "status": "1",
-      "rate_term_id": "1",
-      "entry_rate_type_id": "12",
-      "commission_type_id": "2",
-      "commission": "25",
-      "franchise_id": null,
-      "currency": null,
-      "location_list": null,
-      "source_coverage": "1",
-      "dynamic_rate": null,
       "dummy_iata": "",
-      "type_rental_cover": null,
-      "sites": "[\"all\"]",
-      "rateName": "Just Car",
-      "companyCode": "AC",
-      "companyName": "ACE",
-      "companyCid": "",
       "companyIata": "12345678",
-      "orders": "0",
-      "inclusions": "[1, 2]",
       "rateRqmaps": [],
-      "rateInclusions": [],
       "rateType": "just_car",
       "discountCodes": []
     },
     {
-      "id": "2",
       "qualifier": "RC",
       "code": "RGZNET",
-      "company_id": "34",
       "rate_type_id": "3",
       "payment_option": "1",
-      "destination_coverage": null,
-      "airport_id": "9999",
-      "country_id": "254",
-      "status": "1",
-      "rate_term_id": "1",
-      "entry_rate_type_id": "12",
-      "commission_type_id": "2",
-      "commission": "25",
-      "franchise_id": null,
-      "currency": null,
-      "location_list": null,
-      "source_coverage": "1",
-      "dynamic_rate": null,
       "dummy_iata": "",
-      "type_rental_cover": null,
-      "sites": "[\"all\"]",
-      "rateName": "Full Protection",
-      "companyCode": "AC",
-      "companyName": "ACE",
-      "companyCid": "",
       "companyIata": "12345678",
-      "orders": "2",
-      "inclusions": "[\"1\", \"2\", \"3\", \"4\", \"5\"]",
       "rateRqmaps": [],
-      "rateInclusions": [],
       "rateType": "full_protection",
       "discountCodes": []
     }
@@ -119,6 +70,24 @@ Method POST
 }
 ```
 
+#### Explicación Parámetros de envío
+
+**1. Rates**
+
+Arreglo con las tarifas solicitadas, contiene los siguientes campos:
+
+|VARIABLE       |SIGNIFICADO                  |
+|---------------|-----------------------------|
+|qualifier      |Código con tipo el tipo de tarifa enviado, puede ser RC, IT, CD|
+|code           |Código de la tarifa|
+|rate_type_id   |Código del tipo de tarifa, usar best o ver sección Tarifas|
+|payment_option |Tipo de pago, 1: Prepago, 2: POD, 3: Ambas|
+|dummy_iata     |Dummy Iata|
+|companyIata    |Company Iata|
+|rateRqmaps     |Arreglo con Rqmaps, puede venir vacío|
+|rateType       |Nombre del tipo tarifa, ver seccion Tarifas|
+|discountCodes  |Arreglo con códigos de descuento, puede venir vacío|
+
 ### Response success (status 200)
 
 ```
@@ -126,95 +95,87 @@ Method POST
     {
         "companyName": "Ace",
         "companyCode": "AC",
-        "rateType": "1",
+        "rateType": 1,
         "air": "Yes",
         "trans": "Automatic",
-        "passengers": "5",
-        "bags": "2",
+        "passengers": 5,
+        "bags": 2,
         "sippCode": "CCAR",
-        "doors": "4",
+        "doors": 4,
         "img": "https://www.acerentacar.com/CarPics/Nissan Versa.png",
         "carModel": "Nissan Versa",
         "km_included": "Unlimited Miles",
-        "payment_option": "1",
-        "netCommission": "25",
+        "payment_option": 1,
         "currency": "USD",
-        "realBase": "263.69",
-        "realTax": 144.54000000000002,
-        "rateAmount": "408.23",
+        "realBase": 245.21,
+        "realTax": 140.25,
+        "rateAmount": 385.46,
         "taxNotIncluded": 0,
-        "ccrc": "QUM=",
-        "isLocal": 0
+        "ccrc": "QUM="
     },
     {
         "companyName": "Ace",
         "companyCode": "AC",
-        "rateType": "1",
+        "rateType": 1,
         "air": "Yes",
         "trans": "Automatic",
-        "passengers": "4",
-        "bags": "2",
+        "passengers": 4,
+        "bags": 2,
         "sippCode": "ECAR",
-        "doors": "4",
+        "doors": 4,
         "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
         "carModel": "Toyota Yaris",
         "km_included": "Unlimited Miles",
-        "payment_option": "1",
-        "netCommission": "25",
+        "payment_option": 1,
         "currency": "USD",
-        "realBase": "266.63",
-        "realTax": 145.20999999999998,
-        "rateAmount": "411.84",
+        "realBase": 253.96,
+        "realTax": 142.27,
+        "rateAmount": 396.23,
         "taxNotIncluded": 0,
-        "ccrc": "QUM=",
-        "isLocal": 0
+        "ccrc": "QUM="
     },
     ...
     {
         "companyName": "Ace",
         "companyCode": "AC",
-        "rateType": "3",
+        "rateType": 3,
         "air": "Yes",
         "trans": "Automatic",
-        "passengers": "5",
-        "bags": "2",
-        "sippCode": "CCAR",
-        "doors": "4",
-        "img": "https://www.acerentacar.com/CarPics/Nissan Versa.png",
-        "carModel": "Nissan Versa",
+        "passengers": 4,
+        "bags": 2,
+        "sippCode": "ECAR",
+        "doors": 4,
+        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+        "carModel": "Toyota Yaris",
         "km_included": "Unlimited Miles",
-        "payment_option": "1",
-        "netCommission": "25",
+        "payment_option": 1,
         "currency": "USD",
-        "realBase": "736.40",
-        "realTax": 254.05000000000007,
-        "rateAmount": "990.45",
+        "realBase": 624.4,
+        "realTax": 228.1,
+        "rateAmount": 852.5,
         "taxNotIncluded": 0,
-        "ccrc": "QUM=",
-        "isLocal": 0
+        "ccrc": "QUM="
     },
     {
         "companyName": "Ace",
         "companyCode": "AC",
-        "rateType": "3",
+        "rateType": 3,
         "air": "Yes",
         "trans": "Automatic",
-        "passengers": "4",
-        "bags": "2",
-        "sippCode": "ECAR",
-        "doors": "4",
-        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
-        "carModel": "Toyota Yaris",
+        "passengers": 5,
+        "bags": 2,
+        "sippCode": "CCAR",
+        "doors": 4,
+        "img": "https://www.acerentacar.com/CarPics/Nissan Versa.png",
+        "carModel": "Nissan Versa",
         "km_included": "Unlimited Miles",
-        "payment_option": "1",
-        "netCommission": "25",
+        "payment_option": 1,
         "currency": "USD",
-        "realBase": "736.40",
-        "realTax": 254.05000000000007,
-        "rateAmount": "990.45",
+        "realBase": 630,
+        "realTax": 229.39,
+        "rateAmount": 859.39,
         "taxNotIncluded": 0,
-        "ccrc": "QUM=",
-        "isLocal": 0
+        "ccrc": "QUM="
     },
 ]
 ```
@@ -247,72 +208,24 @@ Method POST
 {
   "rates": [
     {
-      "id": "1",
       "qualifier": "RC",
       "code": "RGZNET",
-      "company_id": "34",
       "rate_type_id": "1",
       "payment_option": "1",
-      "destination_coverage": null,
-      "airport_id": "9999",
-      "country_id": "254",
-      "status": "1",
-      "rate_term_id": "1",
-      "entry_rate_type_id": "12",
-      "commission_type_id": "2",
-      "commission": "25",
-      "franchise_id": null,
-      "currency": null,
-      "location_list": null,
-      "source_coverage": "1",
-      "dynamic_rate": null,
       "dummy_iata": "",
-      "type_rental_cover": null,
-      "sites": "[\"all\"]",
-      "rateName": "Just Car",
-      "companyCode": "AC",
-      "companyName": "ACE",
-      "companyCid": "",
       "companyIata": "12345678",
-      "orders": "0",
-      "inclusions": "[1, 2]",
       "rateRqmaps": [],
-      "rateInclusions": [],
       "rateType": "just_car",
       "discountCodes": []
     },
     {
-      "id": "2",
       "qualifier": "RC",
       "code": "RGZNET",
-      "company_id": "34",
       "rate_type_id": "3",
       "payment_option": "1",
-      "destination_coverage": null,
-      "airport_id": "9999",
-      "country_id": "254",
-      "status": "1",
-      "rate_term_id": "1",
-      "entry_rate_type_id": "12",
-      "commission_type_id": "2",
-      "commission": "25",
-      "franchise_id": null,
-      "currency": null,
-      "location_list": null,
-      "source_coverage": "1",
-      "dynamic_rate": null,
       "dummy_iata": "",
-      "type_rental_cover": null,
-      "sites": "[\"all\"]",
-      "rateName": "Full Protection",
-      "companyCode": "AC",
-      "companyName": "ACE",
-      "companyCid": "",
       "companyIata": "12345678",
-      "orders": "2",
-      "inclusions": "[\"1\", \"2\", \"3\", \"4\", \"5\"]",
       "rateRqmaps": [],
-      "rateInclusions": [],
       "rateType": "full_protection",
       "discountCodes": []
     }
@@ -386,17 +299,17 @@ Method POST
         "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
         "category": "Others",
         "carModel": "Toyota Yaris",
-        "doors": "2-4",
-        "passengers": "4",
-        "bags": "2",
+        "doors": 4,
+        "passengers": 4,
+        "bags": 2,
         "trans": "Automatic",
         "air": "Yes",
-        "payment_option": "1",
+        "payment_option": 1,
         "km_included": "Mile",
         "currency": "USD",
-        "realBase": "266.63",
-        "realTax": 145.20999999999998,
-        "rateAmount": "411.84",
+        "realBase": 253.96,
+        "realTax": 142.27,
+        "rateAmount": 396.23,
         "taxNotIncluded": 0,
         "carInfo": {
             "ECAR": {
@@ -405,9 +318,9 @@ Method POST
                 "sippCode": "ECAR",
                 "km_included": "Mile",
                 "companyName": "Ace",
-                "doors": "2-4",
-                "passengers": "4",
-                "bags": "2",
+                "doors": 4,
+                "passengers": 4,
+                "bags": 2,
                 "air_conditioner": "Yes",
                 "transmission": "Automatic",
                 "categoryName": "Others",
@@ -448,17 +361,17 @@ Method POST
         "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
         "category": "Others",
         "carModel": "Toyota Yaris",
-        "doors": "2-4",
-        "passengers": "4",
-        "bags": "2",
+        "doors": 4,
+        "passengers": 4,
+        "bags": 2,
         "trans": "Automatic",
         "air": "Yes",
-        "payment_option": "1",
+        "payment_option": 1,
         "km_included": "Mile",
         "currency": "USD",
-        "realBase": "736.40",
-        "realTax": 254.05000000000007,
-        "rateAmount": "990.45",
+        "realBase": 624.4,
+        "realTax": 228.1,
+        "rateAmount": 852.5,
         "taxNotIncluded": 0,
         "carInfo": {
             "ECAR": {
@@ -467,9 +380,9 @@ Method POST
                 "sippCode": "ECAR",
                 "km_included": "Mile",
                 "companyName": "Ace",
-                "doors": "2-4",
-                "passengers": "4",
-                "bags": "2",
+                "doors": 4,
+                "passengers": 4,
+                "bags": 2,
                 "air_conditioner": "Yes",
                 "transmission": "Automatic",
                 "categoryName": "Others",
@@ -549,7 +462,7 @@ Method POST
         "value": "2"
       },
       "doors": {
-        "value": "2-4"
+        "value": "4"
       },
       "rateInfo": {
         "id": "1",

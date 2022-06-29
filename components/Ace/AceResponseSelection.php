@@ -112,11 +112,12 @@ final class AceResponseSelection
             }
             foreach ($reservationRate->VehAvailCore->Vehicle->VehType->attributes() as $attribute => $value) {
                 if ($attribute === 'DoorCount') {
-                    $coreLogic['doors'] = (string)$value;
+                    $doors = substr((string)$value, -1);
+                    $coreLogic['doors'] = (int)$doors;
                 }
             }
-            $coreLogic['passengers'] = $VehicleAttr['PassengerQuantity'] ?? '';
-            $coreLogic['bags'] = $VehicleAttr['BaggageQuantity'] ?? '';
+            $coreLogic['passengers'] = (int)($VehicleAttr['PassengerQuantity'] ?? 0);
+            $coreLogic['bags'] = (int)($VehicleAttr['BaggageQuantity'] ?? 0);
             $coreLogic['trans'] = $VehicleAttr['TransmissionType'] ?? '';
             $coreLogic['air'] = isset($VehicleAttr['AirConditionInd']) && $VehicleAttr['AirConditionInd'] === 'true' ? 'Yes' : 'No';
 
@@ -130,7 +131,7 @@ final class AceResponseSelection
             foreach ($ratesArr as $j => $w) {
                 if (!isset($payment_option[$w['code']]) || $payment_option[$w['code']] != $w['payment_option']) {
                     if ($coreLogic['rateType'] == $w['rate_type_id']) {
-                        $coreLogic['payment_option'] = $w['payment_option'];
+                        $coreLogic['payment_option'] = (int)$w['payment_option'];
                         $payment_option[$w['code']] = $coreLogic['payment_option'];
                         break;
                     }
@@ -159,9 +160,9 @@ final class AceResponseSelection
                 $coreLogic['km_included'] = $km_included;
             }
             $coreLogic['currency'] = $TotalChargeAttr['CurrencyCode'] ?? 'USD';
-            $coreLogic['realBase'] = $TotalChargeAttr['RateTotalAmount'];
-            $coreLogic['realTax'] = $TotalChargeAttr['EstimatedTotalAmount'] - $TotalChargeAttr['RateTotalAmount'];
-            $coreLogic['rateAmount'] = $TotalChargeAttr['EstimatedTotalAmount'] ?? 0;
+            $coreLogic['realBase'] = (float)$TotalChargeAttr['RateTotalAmount'];
+            $coreLogic['realTax'] = (float)number_format($TotalChargeAttr['EstimatedTotalAmount'] - $TotalChargeAttr['RateTotalAmount'], 2, '.', '');
+            $coreLogic['rateAmount'] = (float)($TotalChargeAttr['EstimatedTotalAmount'] ?? 0);
             $coreLogic['taxNotIncluded'] = $taxNotIncluded;
             $coreLogic['carInfo'] = [
                 $coreLogic['sippCode'] => [

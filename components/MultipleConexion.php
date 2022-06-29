@@ -33,7 +33,6 @@ class MultipleConexion extends Component
         $pm = curl_multi_init();
         foreach ($urls as $id => $d) {
             if (!isset($requests[$id])) {
-//                Yii::error('indice multirequest no valido ' . $id, 'error_response_multiple_conexion');
                 continue;
             }
 
@@ -78,17 +77,14 @@ class MultipleConexion extends Component
             curl_multi_select($pm);
         } while ($running > 0);
         $emptyResponse = '';
-        $errorResponse = '';
         foreach ($curly as $id => $c) {
             try {
                 ini_set('memory_limit', '320M');
                 $var = [];
-                if($service === self::SERVICE_MATRIX) {
+                if ($service === self::SERVICE_MATRIX) {
                     $var[$id] = simplexml_load_string(preg_replace('/(<\/?)(\w+):([^>]*>)/', '$1$2$3', curl_multi_getcontent($c)), 'SimpleXMLElement', LIBXML_COMPACT | LIBXML_NOENT | LIBXML_NOCDATA | LIBXML_NOBLANKS);
 
-                    if (isset($var[$id]->soapBody->soapFault) || isset($var[$id]->Body->Fault)) {
-                        $errorResponse .= ' ' . $id . ' ' . json_encode($var[$id]);
-                    } else {
+                    if (!isset($var[$id]->soapBody->soapFault) && !isset($var[$id]->Body->Fault)) {
                         /**
                          * Se envia aca, ya que al asignar a una variable todas las respuestas y luego procesar, colapsaba por memoria,
                          * al estar aca, cada respuesta se procesa y el resultado es de mucho menor tamano que lo anterior
@@ -113,25 +109,16 @@ class MultipleConexion extends Component
                 }
                 //if empty response
                 if (empty($var[$id])) {
-                    $emptyResponse .= $id.'-';
+                    $emptyResponse .= $id . '-';
                 }
                 $var = null;
             } catch (Exception $e) {
                 self::printResponse($requests, $responses, $services);
-                if ($secondIntent && isset($var[$id])) {
-                    $usu = isset(Yii::$app->user->id) ? ' userid: '.Yii::$app->user->id.' ' : '';
-                    $errorResponse .=' '.$id.' ' .$usu. json_encode($var[$id]);
-                }
-                if($service !== self::SERVICE_MATRIX) {
+                if ($service !== self::SERVICE_MATRIX) {
                     $result[$id] = ['error' => $e->getMessage()];
                 }
             }
             curl_multi_remove_handle($pm, $c);
-        }
-
-        if(isset($result['sessions'])){
-            AmadeusConexion::releaseSessions($result['sessions']); //Todo move this to a queue?
-            unset($result['sessions']);
         }
 
         curl_multi_close($pm);
@@ -142,12 +129,7 @@ class MultipleConexion extends Component
         $curly = null; //clean memory dont delete
         $c = null; //clean memory dont delete
         $pm = null; //clean memory dont delete
-        $requests = null; //clean memory dont delete
         $responses = null; //clean memory dont delete
-        $services = null; //clean memory dont delete
-        $urls = null; //clean memory dont delete
-        $response = null; //clean memory dont delete
-        $sippCodes = null; //clean memory dont delete
         return $result;
     }
 
