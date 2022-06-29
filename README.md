@@ -76,17 +76,17 @@ Se envía un JSON vía `POST`
 
 Arreglo con las tarifas solicitadas, contiene los siguientes campos:
 
-|VARIABLE       |SIGNIFICADO                                                        |
-|---------------|-------------------------------------------------------------------|
-|qualifier      |Código con tipo el tipo de tarifa enviado, puede ser RC, IT, CD    |
-|code           |Código de la tarifa                                                |
-|rate_type_id   |Código del tipo de tarifa, usar best o ver sección [Tarifas](#get-selection)         |
-|payment_option |Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                         |
-|dummy_iata     |Dummy Iata                                                         |
-|companyIata    |Company Iata                                                       |
-|rateRqmaps     |Arreglo con Rqmaps, puede venir vacío                              |
-|rateType       |Nombre del tipo tarifa, ver seccion Tarifas                        |
-|discountCodes  |Arreglo con códigos de descuento, puede venir vacío                |
+|VARIABLE       |SIGNIFICADO                                                                                |
+|---------------|-------------------------------------------------------------------------------------------|
+|qualifier      |Código con tipo el tipo de tarifa enviado, puede ser RC, IT, CD                            |
+|code           |Código de la tarifa                                                                        |
+|rate_type_id   |Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"    |
+|payment_option |Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                                 |
+|dummy_iata     |Dummy Iata                                                                                 |
+|companyIata    |Company Iata                                                                               |
+|rateRqmaps     |Arreglo con Rqmaps, puede venir vacío                                                      |
+|rateType       |Nombre del tipo tarifa, ver seccion ver sección [Tarifas](#tarifas) columna "NOMBRE"       |
+|discountCodes  |Arreglo con códigos de descuento, puede venir vacío                                        |
 
 ### Response success (status 200)
 
@@ -1375,3 +1375,15 @@ Method POST
     "type": "yii\\web\\HttpException"
 }
 ```
+
+## Tarifas
+|TARIFA|NOMBRE                 |DESCRIPCIÓN                                                                                                                                                                                                         |
+|------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  1   | just_car              | Sólo Carro, Tarifa Básica con Kilometraje Ilimitado, Impuestos y Sobrecargos Obligatorios                                                                                                                          |
+|  2   | basic_protection      | Protección Básica, Proteccion de Colision o Perdida (CDW/LDW) sin Franquicia, Kilometraje Ilimitado, Impuestos y Sobrecargos Obligatorios                                                                          |
+|  3   | full_protection       | Protección Total, Proteccion de Colision o Perdida (CDW/LDW) sin Franquicia, Daños a Terceros, Un Conductor Adicional, Kilometraje Ilimitado, Impuestos y Sobrecargos Obligatorios                                 |
+|  4   | full_protection_+_gps | Protección Total + GPS, GPS, Proteccion de Colision o Perdida (CDW/LDW) sin Franquicia, Daños a Terceros, Un Conductor Adicional, Kilometraje Ilimitado, Impuestos y Sobrecargos Obligatorios                      |
+|  5   | full_protection_+_gas | Protección Total + Gas, Un Tanque de Combustible, Kilometraje Ilimitado, Proteccion de Colision o Perdida (CDW/LDW) Sin Franquicia, Daños a Terceros, Un Conductor Adicional, Impuestos y Sobrecargos Obligatorios |
+|  6   | all_inclusive         | Todo Incluido, GPS, Un Tanque de Combustible, Kilometraje Ilimitado, Proteccion de Colision o Perdida (CDW/LDW) sin Franquicia, Daños a Terceros, Un Conductor Adicional, Impuestos y Sobrecargos Obligatorios     |
+|  7   | basic_protection_eu   | Protección Básica EU, Protección de Colisión con Franquicia, Protección de Robo, Impuestos e Sobrecargos Obligatorios                                                                                              |
+|  8   | super_protection      | Super Protección, Protección contra Colisión sin Deducible, Protección contra Robo, Impuestos y Cargos Obligatorios.                                                                                               |
