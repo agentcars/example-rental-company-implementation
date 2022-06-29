@@ -76,17 +76,17 @@ Se envía un JSON vía `POST`
 
 Arreglo con las tarifas solicitadas, contiene los siguientes campos:
 
-|VARIABLE       |SIGNIFICADO                  |
-|---------------|-----------------------------|
-|qualifier      |Código con tipo el tipo de tarifa enviado, puede ser RC, IT, CD|
-|code           |Código de la tarifa|
-|rate_type_id   |Código del tipo de tarifa, usar best o ver sección Tarifas|
-|payment_option |Tipo de pago, 1: Prepago, 2: POD, 3: Ambas|
-|dummy_iata     |Dummy Iata|
-|companyIata    |Company Iata|
-|rateRqmaps     |Arreglo con Rqmaps, puede venir vacío|
-|rateType       |Nombre del tipo tarifa, ver seccion Tarifas|
-|discountCodes  |Arreglo con códigos de descuento, puede venir vacío|
+|VARIABLE       |SIGNIFICADO                                                        |
+|---------------|-------------------------------------------------------------------|
+|qualifier      |Código con tipo el tipo de tarifa enviado, puede ser RC, IT, CD    |
+|code           |Código de la tarifa                                                |
+|rate_type_id   |Código del tipo de tarifa, usar best o ver sección [Tarifas](#get-selection)         |
+|payment_option |Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                         |
+|dummy_iata     |Dummy Iata                                                         |
+|companyIata    |Company Iata                                                       |
+|rateRqmaps     |Arreglo con Rqmaps, puede venir vacío                              |
+|rateType       |Nombre del tipo tarifa, ver seccion Tarifas                        |
+|discountCodes  |Arreglo con códigos de descuento, puede venir vacío                |
 
 ### Response success (status 200)
 
