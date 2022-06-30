@@ -110,7 +110,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 |pcCode           |Código de promoción                                                                  |
 |country          |País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                 |
 |source           |País de fuente, código alfa 2 ej: United States (US), Colombia (CO)                  |
-|rateType         |Código tipo de Tarifa, usar `best` o obtener de [Tarifas](rates.md)                  |
+|rateType         |Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                  |
 |paymentType      |Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino)    |
 |lat*             |Latitud de Pickup                                                                    |
 |lng*             |Longitud de Pickup                                                                   |
@@ -356,7 +356,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 |pcCode           |Código de promoción                                                                  |
 |country          |País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                 |
 |source           |País de fuente, código alfa 2 ej: United States (US), Colombia (CO)                  |
-|rateType         |Código tipo de Tarifa, usar `best` o obtener de [Tarifas](rates.md)                  |
+|rateType         |Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                  |
 |paymentType      |Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino)    |
 |lat*             |Latitud de Pickup                                                                    |
 |lng*             |Longitud de Pickup                                                                   |
@@ -505,6 +505,32 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
     }
 }
 ```
+
+| VARIABLE              | DESCRIPCIÓN                                                                             |
+|-----------------------|-----------------------------------------------------------------------------------------|
+|companyName            |  |
+|companyCode            |  |
+|rateType               |  |
+|getDataModel           | Información recibida en los parámetros de envío  |
+|sippCode               |  |
+|rateIdentifier         |  |
+|img                    |  |
+|category               |  |
+|carModel               |  |
+|doors                  |  |
+|passengers             |  |
+|bags                   |  |
+|trans                  |  |
+|air                    |  |
+|payment_option         |  |
+|km_included            |  |
+|currency               |  |
+|realBase               |  |
+|realTax                |  |
+|rateAmount             |  |
+|taxNotIncluded         |  |
+|carInfo                | Contiene la información del carro asociado por el código SIPP |
+|auxAddRateInformation  |  |
 
 ### Respuesta con error (status 500)
 
