@@ -21,9 +21,9 @@ final class AceResponseSelection
         $coreLogic['companyCode'] = $companyCode;
         $coreLogic['rateType'] = $getDataModel['rateType'] ?? '';
         $coreLogic['getDataModel'] = $getDataModel;
-        if ($getDataModel['companyCode'] == 'WH') {
+        /*if ($getDataModel['companyCode'] == 'WH') {
             $coreLogic['companyCode'] = base64_decode($getDataModel['ccrc']);
-        }
+        }*/
         $coreLogic['sippCode'] = $getDataModel['sippCode'];
         foreach ($responses as $codeResp => $response) {
             $rate_type_id = $codeResp;

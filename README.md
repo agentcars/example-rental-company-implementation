@@ -1,6 +1,7 @@
 # Ejemplo de implementación de una rentadora de autos
 
 - [Servicio Get Matrix](#servicio-get-matrix)
+- [Servicio Get Selection](#servicio-get-selection)
 
 ## Servicio Get Matrix
 
@@ -127,7 +128,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 |debug          |Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
 |environment    |Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
 
-### Response success (status 200)
+### Respuesta exitosa (status 200)
 
 ```
 [
@@ -234,7 +235,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 |rateAmount       | total de la tarifa                                                                      |
 |taxNotIncluded   | Valor de impuestos no incluidos                                                         |
 
-### Response with error (status 500)
+### Respuesta con error (status 500)
 
 ```
 {
@@ -247,17 +248,17 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 ```
 ---
 
-## Get Selection
+## Servicio Get Selection
 
-Returns all the available rates of the company with the SIPP code according to the parameters sent
+Envía la información del auto seleccionado, con las tarifas válidas
 
 ### URL
 
 - http://localhost/example-rental-company-implementation/web/companies/get-selection
 
-### Request Parameters
+### Parámetros de envío
 
-Method POST
+Se envía un JSON vía `POST`
 
 ```
 {
@@ -308,9 +309,7 @@ Method POST
     "lng": "NA",
     "latDropOff": "NA",
     "lngDropOff": "NA",
-    "sippCode": "ECAR",
-    "companyCode": "AC",
-    "ccrc": "QUM="
+    "sippCode": "ECAR"
   },
   "companyName": "Ace",
   "companyCode": "AC",
@@ -319,7 +318,64 @@ Method POST
 }
 ```
 
-### Response success (status 200)
+#### Explicación Parámetros de envío
+
+**1. Rates**
+
+Arreglo con las tarifas solicitadas, contiene los siguientes campos:
+
+|VARIABLE       |SIGNIFICADO                                                                                |
+|---------------|-------------------------------------------------------------------------------------------|
+|qualifier      |Código con tipo el tipo de tarifa enviado, puede ser RC, IT, CD                            |
+|code           |Código de la tarifa                                                                        |
+|rate_type_id   |Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"    |
+|payment_option |Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                                 |
+|dummy_iata     |Dummy Iata                                                                                 |
+|companyIata    |Company Iata                                                                               |
+|rateRqmaps     |Arreglo con Rqmaps, puede venir vacío                                                      |
+|rateType       |Nombre del tipo tarifa, ver seccion ver sección [Tarifas](#tarifas) columna "NOMBRE"       |
+|discountCodes  |Arreglo con códigos de descuento, puede venir vacío                                        |
+
+**2. Credentials**
+
+Todas las credenciales necesarias para la conección al API de la rentadora como url, id, host, password, callerCode, code, etc.
+
+**3. GetDataModel**
+
+|VARIABLE         |SIGNIFICADO                                                                          |
+|-----------------|-------------------------------------------------------------------------------------|
+|pickUpLocation   |Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.          |
+|pickUpAddress    |Nombre de la oficina de pickup (por defecto NA)                                      |
+|dropOffLocation  |Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.        |
+|dropOffAddress   |Nombre de la oficina de dropoff (por defecto NA)                                     |
+|pickUpDate       |Fecha de Pickup - Formato yyyy-mm-dd                                                 |
+|dropOffDate      |Fecha de Dropoff - Formato yyyy-mm-dd                                                |
+|pickUpHour       |Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                |
+|dropOffHour      |Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm               |
+|cdCode           |Código de descuento                                                                  |
+|pcCode           |Código de promoción                                                                  |
+|country          |País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                 |
+|source           |País de fuente, código alfa 2 ej: United States (US), Colombia (CO)                  |
+|rateType         |Código tipo de Tarifa, usar `best` o obtener de [Tarifas](rates.md)                  |
+|paymentType      |Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino)    |
+|lat*             |Latitud de Pickup                                                                    |
+|lng*             |Longitud de Pickup                                                                   |
+|latDropOff*      |Latitud de Dropoff                                                                   |
+|lngDropOff*      |Longitud de Dropoff                                                                  |
+|sippCode         |Tipo de automóvil según código SIPP                                                  |
+
+*Solo aplica obligatorio en caso de búsqueda fuera de oficinas.
+
+**4. Otros**
+
+|VARIABLE       |SIGNIFICADO                                                                                                        |
+|---------------|-------------------------------------------------------------------------------------------------------------------|
+|companyName    |Nombre de la empresa que alquila el vehículo                                                                       |
+|companyCode    |Código de la empresa que alquila el vehículo                                                                       |
+|debug          |Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
+|environment    |Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
+
+### Respuesta exitosa (status 200)
 
 ```
 {
@@ -450,7 +506,7 @@ Method POST
 }
 ```
 
-### Response with error (status 500)
+### Respuesta con error (status 500)
 
 ```
 {
@@ -461,6 +517,7 @@ Method POST
     "type": "yii\\web\\HttpException"
 }
 ```
+---
 
 ## Confirmation
 
