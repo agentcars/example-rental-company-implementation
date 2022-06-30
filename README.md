@@ -232,7 +232,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 |currency         | Moneda de la tarifa, ej: USD, COP, EUR...                                               |
 |realBase         | Esta es la base comisionable, el valor sobre el que comisionan                          |
 |realTax          | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables           |
-|rateAmount       | total de la tarifa                                                                      |
+|rateAmount       | Total de la tarifa                                                                      |
 |taxNotIncluded   | Valor de impuestos no incluidos                                                         |
 
 ### Respuesta con error (status 500)
@@ -408,7 +408,6 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "sippCode": "ECAR",
         "rateIdentifier": "RGZNET",
         "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
-        "category": "Others",
         "carModel": "Toyota Yaris",
         "doors": 4,
         "passengers": 4,
@@ -416,7 +415,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "trans": "Automatic",
         "air": "Yes",
         "payment_option": 1,
-        "km_included": "Mile",
+        "km_included": "Unlimited Mile",
         "currency": "USD",
         "realBase": 253.96,
         "realTax": 142.27,
@@ -427,14 +426,13 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
                 "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
                 "carModel": "Toyota Yaris",
                 "sippCode": "ECAR",
-                "km_included": "Mile",
+                "km_included": "Unlimited Mile",
                 "companyName": "Ace",
                 "doors": 4,
                 "passengers": 4,
                 "bags": 2,
                 "air_conditioner": "Yes",
                 "transmission": "Automatic",
-                "categoryName": "Others",
                 "companyCode": "AC",
                 "shuttleInfo": ""
             }
@@ -470,7 +468,6 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "sippCode": "ECAR",
         "rateIdentifier": "RGZNET",
         "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
-        "category": "Others",
         "carModel": "Toyota Yaris",
         "doors": 4,
         "passengers": 4,
@@ -478,7 +475,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "trans": "Automatic",
         "air": "Yes",
         "payment_option": 1,
-        "km_included": "Mile",
+        "km_included": "Unlimited Mile",
         "currency": "USD",
         "realBase": 624.4,
         "realTax": 228.1,
@@ -489,14 +486,13 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
                 "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
                 "carModel": "Toyota Yaris",
                 "sippCode": "ECAR",
-                "km_included": "Mile",
+                "km_included": "Unlimited Mile",
                 "companyName": "Ace",
                 "doors": 4,
                 "passengers": 4,
                 "bags": 2,
                 "air_conditioner": "Yes",
                 "transmission": "Automatic",
-                "categoryName": "Others",
                 "companyCode": "AC",
                 "shuttleInfo": ""
             }
@@ -506,31 +502,30 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 }
 ```
 
-| VARIABLE              | DESCRIPCIÓN                                                                             |
-|-----------------------|-----------------------------------------------------------------------------------------|
-|companyName            |  |
-|companyCode            |  |
-|rateType               |  |
-|getDataModel           | Información recibida en los parámetros de envío  |
-|sippCode               |  |
-|rateIdentifier         |  |
-|img                    |  |
-|category               |  |
-|carModel               |  |
-|doors                  |  |
-|passengers             |  |
-|bags                   |  |
-|trans                  |  |
-|air                    |  |
-|payment_option         |  |
-|km_included            |  |
-|currency               |  |
-|realBase               |  |
-|realTax                |  |
-|rateAmount             |  |
-|taxNotIncluded         |  |
-|carInfo                | Contiene la información del carro asociado por el código SIPP |
-|auxAddRateInformation  |  |
+| VARIABLE              | DESCRIPCIÓN                                                                                                               |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
+|companyName            | Nombre de la empresa que alquila el vehículo                                                                              |
+|companyCode            | Código de la empresa que alquila el vehículo                                                                              |
+|rateType               | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                                                       |
+|getDataModel           | Información recibida en los parámetros de envío                                                                           |
+|sippCode               | Tipo de automóvil según código SIPP                                                                                       |
+|rateIdentifier         | Código/Identificador de la tarifa                                                                                         |
+|img                    | Imagen del carro                                                                                                          |
+|carModel               | Modelo del carro                                                                                                          |
+|doors                  | Número de puertas                                                                                                         |
+|passengers             | Número de pasajeros                                                                                                       |
+|bags                   | Número de maletas                                                                                                         |
+|trans                  | Tipo de transmisión del carro, valores posibles `Automatic` y `Manual`                                                    |
+|air                    | Si tiene o no aire acondicionado, valores posibles `Yes` y `No`                                                           |
+|payment_option         | Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                                                                |
+|km_included            | Kilometraje/millaje de la tarifa                                                                                          |
+|currency               | Moneda de la tarifa, ej: USD, COP, EUR...                                                                                 |
+|realBase               | Esta es la base comisionable, el valor sobre el que comisionan                                                            |
+|realTax                | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables                                             |
+|rateAmount             | Total de la tarifa                                                                                                        |
+|taxNotIncluded         | Valor de impuestos no incluidos                                                                                           |
+|carInfo                | Contiene la información del carro asociado por el código SIPP                                                             |
+|auxAddRateInformation  | Si es necesario llamar a otro servicio cuandos e selecciona una de las tarifas se envia `false`, de lo contrario `true`   |
 
 ### Respuesta con error (status 500)
 

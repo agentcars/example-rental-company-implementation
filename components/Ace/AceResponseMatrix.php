@@ -79,7 +79,6 @@ final class AceResponseMatrix
                         }
                     }
                     $km_included = '';
-                    $DistUnitName = 'Km';
                     $isUnlimited = false;
                     foreach ($reservationRate->VehAvailCore->RentalRate->RateDistance->attributes() as $attribute => $value) {
                         $value = (string)$value;

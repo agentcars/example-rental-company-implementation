@@ -103,7 +103,6 @@ final class AceResponseSelection
                 }
             }
             $coreLogic['img'] = 'https://www.acerentacar.com/CarPics/' . $reservationRate->VehAvailCore->Vehicle->PictureURL;
-            $coreLogic['category'] = isset($sippCodesWithCompanies[$companyCode][$coreLogic['sippCode']]) ? $sippCodesWithCompanies[$companyCode][$coreLogic['sippCode']]['categoryName'] : 'Others';
             //Car Info
             foreach ($reservationRate->VehAvailCore->Vehicle->VehMakeModel->attributes() as $attribute => $value) {
                 if ($attribute === 'Name') {
@@ -138,7 +137,6 @@ final class AceResponseSelection
                 }
             }
             $km_included = '';
-            $DistUnitName = 'Km';
             $isUnlimited = false;
             foreach ($reservationRate->VehAvailCore->RentalRate->RateDistance->attributes() as $attribute => $value) {
                 $value = (string)$value;
@@ -148,17 +146,12 @@ final class AceResponseSelection
                 } else if ($attribute === 'Quantity' && !$isUnlimited) {
                     $km_included = $value;
                 } else if ($attribute === 'DistUnitName') {
-                    $DistUnitName = $value;
                     $km_included .= ' ' . $value;
                 } else if ($attribute === 'VehiclePeriodUnitName' && !$isUnlimited) {
                     $km_included .= '/' . $value;
                 }
             }
-            if ($isUnlimited) {
-                $coreLogic['km_included'] = $DistUnitName;
-            } else {
-                $coreLogic['km_included'] = $km_included;
-            }
+            $coreLogic['km_included'] = $km_included;
             $coreLogic['currency'] = $TotalChargeAttr['CurrencyCode'] ?? 'USD';
             $coreLogic['realBase'] = (float)$TotalChargeAttr['RateTotalAmount'];
             $coreLogic['realTax'] = (float)number_format($TotalChargeAttr['EstimatedTotalAmount'] - $TotalChargeAttr['RateTotalAmount'], 2, '.', '');
@@ -176,7 +169,6 @@ final class AceResponseSelection
                     'bags' => $coreLogic['bags'],
                     'air_conditioner' => $coreLogic['air'],
                     'transmission' => $coreLogic['trans'],
-                    'categoryName' => $coreLogic['category'],
                     'companyCode' => $coreLogic['companyCode'],
                     'shuttleInfo' => !empty($shuttleInfo) ? $shuttleInfo : '',
                 ]
