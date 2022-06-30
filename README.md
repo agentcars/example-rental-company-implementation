@@ -1,4 +1,6 @@
-#Ejemplo de implementación de una rentadora de autos
+# Ejemplo de implementación de una rentadora de autos
+
+- [Servicio Get Matrix](#servicio-get-matrix)
 
 ## Servicio Get Matrix
 
@@ -55,7 +57,6 @@ Se envía un JSON vía `POST`
     "cdCode": "NA",
     "pcCode": "NA",
     "country": "US",
-    "sippCode": null,
     "source": "CO",
     "rateType": "best",
     "lat": "NA",
@@ -88,6 +89,44 @@ Arreglo con las tarifas solicitadas, contiene los siguientes campos:
 |rateType       |Nombre del tipo tarifa, ver seccion ver sección [Tarifas](#tarifas) columna "NOMBRE"       |
 |discountCodes  |Arreglo con códigos de descuento, puede venir vacío                                        |
 
+**2. Credentials**
+
+Todas las credenciales necesarias para la conección al API de la rentadora como url, id, host, password, callerCode, code, etc.
+
+**3. GetDataModel**
+
+|VARIABLE         |SIGNIFICADO                                                                          |
+|-----------------|-------------------------------------------------------------------------------------|
+|pickUpLocation   |Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.          |
+|pickUpAddress    |Nombre de la oficina de pickup (por defecto NA)                                      |
+|dropOffLocation  |Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.        |
+|dropOffAddress   |Nombre de la oficina de dropoff (por defecto NA)                                     |
+|pickUpDate       |Fecha de Pickup - Formato yyyy-mm-dd                                                 |
+|dropOffDate      |Fecha de Dropoff - Formato yyyy-mm-dd                                                |
+|pickUpHour       |Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                |
+|dropOffHour      |Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm               |
+|cdCode           |Código de descuento                                                                  |
+|pcCode           |Código de promoción                                                                  |
+|country          |País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                 |
+|source           |País de fuente, código alfa 2 ej: United States (US), Colombia (CO)                  |
+|rateType         |Código tipo de Tarifa, usar `best` o obtener de [Tarifas](rates.md)                  |
+|paymentType      |Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino)    |
+|lat*             |Latitud de Pickup                                                                    |
+|lng*             |Longitud de Pickup                                                                   |
+|latDropOff*      |Latitud de Dropoff                                                                   |
+|lngDropOff*      |Longitud de Dropoff                                                                  |
+
+*Solo aplica obligatorio en caso de búsqueda fuera de oficinas.
+
+**4. Otros**
+
+|VARIABLE       |SIGNIFICADO                                                                                                        |
+|---------------|-------------------------------------------------------------------------------------------------------------------|
+|companyName    |Nombre de la empresa que alquila el vehículo                                                                       |
+|companyCode    |Código de la empresa que alquila el vehículo                                                                       |
+|debug          |Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
+|environment    |Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
+
 ### Response success (status 200)
 
 ```
@@ -110,8 +149,7 @@ Arreglo con las tarifas solicitadas, contiene los siguientes campos:
         "realBase": 245.21,
         "realTax": 140.25,
         "rateAmount": 385.46,
-        "taxNotIncluded": 0,
-        "ccrc": "QUM="
+        "taxNotIncluded": 0
     },
     {
         "companyName": "Ace",
@@ -131,8 +169,7 @@ Arreglo con las tarifas solicitadas, contiene los siguientes campos:
         "realBase": 253.96,
         "realTax": 142.27,
         "rateAmount": 396.23,
-        "taxNotIncluded": 0,
-        "ccrc": "QUM="
+        "taxNotIncluded": 0
     },
     ...
     {
@@ -153,8 +190,7 @@ Arreglo con las tarifas solicitadas, contiene los siguientes campos:
         "realBase": 624.4,
         "realTax": 228.1,
         "rateAmount": 852.5,
-        "taxNotIncluded": 0,
-        "ccrc": "QUM="
+        "taxNotIncluded": 0
     },
     {
         "companyName": "Ace",
@@ -174,11 +210,29 @@ Arreglo con las tarifas solicitadas, contiene los siguientes campos:
         "realBase": 630,
         "realTax": 229.39,
         "rateAmount": 859.39,
-        "taxNotIncluded": 0,
-        "ccrc": "QUM="
+        "taxNotIncluded": 0
     },
 ]
 ```
+
+| VARIABLE        | DESCRIPCIÓN                                                                             |
+|-----------------|-----------------------------------------------------------------------------------------|
+|rateType         | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA" |
+|air              | Si tiene o no aire acondicionado, valores posibles `Yes` y `No`                         |
+|trans            | Tipo de transmisión del carro, valores posibles `Automatic` y `Manual`                  |
+|passengers       | Número de pasajeros                                                                     |
+|bags             | Número de maletas                                                                       |
+|sippCode         | Tipo de automóvil según código SIPP                                                     |
+|doors            | Número de puertas                                                                       |
+|img              | Imagen del carro                                                                        |
+|carModel         | Modelo del carro                                                                        |
+|km_included      | Kilometraje/millaje de la tarifa                                                        |
+|payment_option   | Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                              |
+|currency         | Moneda de la tarifa, ej: USD, COP, EUR...                                               |
+|realBase         | Esta es la base comisionable, el valor sobre el que comisionan                          |
+|realTax          | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables           |
+|rateAmount       | total de la tarifa                                                                      |
+|taxNotIncluded   | Valor de impuestos no incluidos                                                         |
 
 ### Response with error (status 500)
 
@@ -191,6 +245,7 @@ Arreglo con las tarifas solicitadas, contiene los siguientes campos:
     "type": "yii\\web\\HttpException"
 }
 ```
+---
 
 ## Get Selection
 
