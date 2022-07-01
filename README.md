@@ -2,6 +2,7 @@
 
 - [Servicio Get Matrix](#servicio-get-matrix)
 - [Servicio Get Selection](#servicio-get-selection)
+- [Servicio Confirmation](#servicio-confirmation)
 
 ## Servicio Get Matrix
 
@@ -540,9 +541,9 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 ```
 ---
 
-## Confirmation
+## Servicio Confirmation
 
-Returns information of the confirmation
+Devuelve la confirmación de la rentadora
 
 ### URL
 
@@ -550,7 +551,7 @@ Returns information of the confirmation
 
 ### Request Parameters
 
-Method POST
+Se envía un JSON vía `POST`
 
 ```
 {
@@ -560,9 +561,9 @@ Method POST
     "host": HOST
   },
   "reservation": {
-    "first_name": "Name",
+    "first_name": "Albert",
     "last_name": "Test",
-    "email": "nametest@gmail.com",
+    "email": "alberttest123@gmail.com",
     "location_pickup": "MIAT01",
     "location_dropoff": "MIAT01",
     "pickup_date": "2022-07-18",
@@ -573,73 +574,21 @@ Method POST
       "cbs": {
         "value": 0
       },
-      "csi": {
-        "value": 0
-      },
       "cst": {
-        "value": 0
-      },
-      "dvd": {
         "value": 0
       },
       "gps": {
         "value": "0"
       },
-      "pax": {
-        "value": "4"
-      },
       "sky": {
         "value": "0"
-      },
-      "bags": {
-        "value": "2"
-      },
-      "doors": {
-        "value": "4"
-      },
-      "rateInfo": {
-        "id": "1",
-        "name": "Just Car",
-        "alias": "Just Car",
-        "order": "0",
-        "inclusions": {
-          "mileage": {
-            "icon": "icon icon-unlimited-miles",
-            "alias": "Mileage",
-            "limit": "Unlimited Miles",
-            "description": "Includes these kilometers/miles."
-          },
-          "surcharges": {
-            "icon": "icon icon-tax",
-            "alias": "Tax",
-            "description": "Includes all the mandatory taxes and surcharges to make your trip easier."
-          }
-        },
-        "description": "Basic Rate with Mandatory Taxes and Fees"
-      },
-      "satelite": {
-        "value": 0
-      },
-      "air_conditioner": {
-        "value": "Yes"
       }
     },
     "additional_information": {
-      "cid": "",
-      "hash": "12345678901234567890123456789012",
       "Amount": "409.17",
-      "is_net": 1,
-      "source": "CO",
-      "uniqid": "9876543210987",
-      "referrer": "http://localhost/cars-yii2/frontend/web/es/site/reservation/?companyCode=AC&sippCode=ECAR&pickUpLocation=MIA&dropOffLocation=MIA&pickUpDate=2022-07-18&dropOffDate=2022-07-25&pickUpHour=1200&dropOffHour=1200&ccrc=QUM%3D&rateType=1&pickUpAddress=NA&dropOffAddress=NA&country=US&source=CO&cdCode=NA&pcCode=NA&tp=1",
-      "session_id": "19734651937857946132851973",
       "ReferenceID": "69138842466",
-      "shuttleInfo": "On Terminal",
       "CurrencyCode": "USD",
-      "ReferenceType": "16",
-      "newRefundPolicy": true,
-      "shuttleDescription": [],
-      "destination_country": "US"
+      "ReferenceType": "16"
     },
     "rate_type_id": "1",
     "sipp_code": "ECAR",
@@ -650,7 +599,41 @@ Method POST
 }
 ```
 
-### Response success (status 200)
+#### Explicación Parámetros de envío
+
+**1. Credentials**
+
+Todas las credenciales necesarias para la conección al API de la rentadora como url, id, host, password, callerCode, code, etc.
+
+**2. Reservation**
+
+Arreglo con la información de la reserva, contiene los siguientes campos:
+
+|VARIABLE               |SIGNIFICADO                                                                                                                                                                                                                |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|first_name             | Nombre del cliente                                                                                                                                                                                                        |
+|last_name              | Apellidos del cliente                                                                                                                                                                                                     |
+|email                  | Email del cliente                                                                                                                                                                                                         |
+|location_pickup        | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.                                                                                                                                               |
+|location_dropoff       | Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.                                                                                                                                             |
+|pickup_date            | Fecha de Pickup - Formato yyyy-mm-dd                                                                                                                                                                                      |
+|dropoff_date           | Fecha de Dropoff - Formato yyyy-mm-dd                                                                                                                                                                                     |
+|pickup_hour            | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                                                                                                     |
+|dropoff_hour           | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                                                                                                    |
+|additionals            | Arreglo con los equipos especiales solicitados por el cliente, donde 0 es que no solicito, de lo contrario regresa el numero de los solicitados, mas informacion en la sección [Equipos Especiales](#equipos-especiales)  |
+|additional_information | Arreglo con datos necesarios para la solicitud, entre los cuales estan Amount, CurrencyCode, ReferenceID, ReferenceType                                                                                                   |
+|rate_type_id           | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"                                                                                                                                   |
+|sipp_code              | Tipo de automóvil según código SIPP                                                                                                                                                                                       |
+|company_code           | Código de la empresa que alquila el vehículo                                                                                                                                                                              |
+
+**3. Otros**
+
+|VARIABLE       |SIGNIFICADO                                                                                                        |
+|---------------|-------------------------------------------------------------------------------------------------------------------|
+|debug          |Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
+|environment    |Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
+
+### Respuesta exitosa (status 200)
 
 ```
 {
@@ -660,7 +643,13 @@ Method POST
 }
 ```
 
-### Response with error (status 500)
+|VARIABLE                   |SIGNIFICADO                                                |
+|---------------------------|-----------------------------------------------------------|
+|rental_confirmation_code   | Código de confirmación de la reserva, con la rentadora    |
+|amount_confirmed           | Valor de la reserva confirmado por la rentadora           |
+|currency_confirmed         | Moneda de la reserva confirmado por la rentadora          |
+
+### Respuesta con error (status 500)
 
 ```
 {
@@ -671,6 +660,7 @@ Method POST
     "type": "yii\\web\\HttpException"
 }
 ```
+---
 
 ## My Reservation
 
@@ -1510,6 +1500,7 @@ Method POST
 ```
 
 ## Tarifas
+
 |TARIFA|NOMBRE                 |DESCRIPCIÓN                                                                                                                                                                                                         |
 |------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |  1   | just_car              | Sólo Carro, Tarifa Básica con Kilometraje Ilimitado, Impuestos y Sobrecargos Obligatorios                                                                                                                          |
@@ -1520,3 +1511,12 @@ Method POST
 |  6   | all_inclusive         | Todo Incluido, GPS, Un Tanque de Combustible, Kilometraje Ilimitado, Proteccion de Colision o Perdida (CDW/LDW) sin Franquicia, Daños a Terceros, Un Conductor Adicional, Impuestos y Sobrecargos Obligatorios     |
 |  7   | basic_protection_eu   | Protección Básica EU, Protección de Colisión con Franquicia, Protección de Robo, Impuestos e Sobrecargos Obligatorios                                                                                              |
 |  8   | super_protection      | Super Protección, Protección contra Colisión sin Deducible, Protección contra Robo, Impuestos y Cargos Obligatorios.                                                                                               |
+
+## Equipos Especiales
+
+|VARIABLE   | DESCRIPCIÓN                                                                                |
+|-----------|--------------------------------------------------------------------------------------------|
+| cbs       | Child booster seat, asiento para niños 2-5 años                                            |
+| cst       | Child toddler seat, asiento para niños 0-2 años                                            |
+| gps       | GPS, SOLO si en la tarifa no se incluye (no todos los vehiculos tienen esta opcion valida) |
+| sky       | Sky Racks, SOLO para los lugares validos                                                   |
