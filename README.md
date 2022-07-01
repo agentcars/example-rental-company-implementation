@@ -1009,7 +1009,7 @@ Respuesta de la rentadora en formato JSON
 ```
 ---
 
-## Cancel
+## Servicio Cancel
 
 Servicio para solicitar la cancelacion de una reserva
 
