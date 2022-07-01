@@ -4,6 +4,7 @@
 - [Servicio Get Selection](#servicio-get-selection)
 - [Servicio Confirmation](#servicio-confirmation)
 - [Servicio My Reservation](#servicio-my-reservation)
+- [Servicio Cancel](#servicio-cancel)
 
 ## Servicio Get Matrix
 
@@ -621,7 +622,7 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 |dropoff_date           | Fecha de Dropoff - Formato yyyy-mm-dd                                                                                                                                                                                     |
 |pickup_hour            | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                                                                                                     |
 |dropoff_hour           | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                                                                                                    |
-|additionals            | Arreglo con los equipos especiales solicitados por el cliente, donde 0 es que no solicito, de lo contrario regresa el numero de los solicitados, mas informacion en la sección [Equipos Especiales](#equipos-especiales)  |
+|additionals            | Arreglo con los equipos especiales solicitados por el cliente, donde 0 es que no solicito, de lo contrario regresa el numero de los solicitados, mas información en la sección [Equipos Especiales](#equipos-especiales)  |
 |additional_information | Arreglo con datos necesarios para la solicitud, entre los cuales estan Amount, CurrencyCode, ReferenceID, ReferenceType                                                                                                   |
 |rate_type_id           | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"                                                                                                                                   |
 |sipp_code              | Tipo de automóvil según código SIPP                                                                                                                                                                                       |
@@ -1010,7 +1011,7 @@ Respuesta de la rentadora en formato JSON
 
 ## Cancel
 
-Cancel reservation
+Servicio para solicitar la cancelacion de una reserva
 
 ### URL
 
@@ -1034,9 +1035,24 @@ Se envía un JSON vía `POST`
 }
 ```
 
+#### Explicación Parámetros de envío
+
+**1. Credentials**
+
+Todas las credenciales necesarias para la conección al API de la rentadora como url, id, host, password, callerCode, code, etc.
+
+**2. Otros**
+
+|VARIABLE           | SIGNIFICADO                                                                                                        |
+|-------------------|--------------------------------------------------------------------------------------------------------------------|
+|lastName           | Apellidos del cliente                                                                                              |
+|confirmationCode   | Código de confirmación de la reserva, con la rentadora                                                             |
+|debug              | Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
+|environment        | Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
+
 ### Respuesta exitosa (status 200)
 
-Response of the rental service
+Respuesta de la rentadora en formato JSON en caso de que si fue cancelada, de lo contrario devolver `Respuesta con error (status 500)` con el mensaje de la razón por la cual no se pudo hacer
 
 ```
 {
