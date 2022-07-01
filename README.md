@@ -3,6 +3,7 @@
 - [Servicio Get Matrix](#servicio-get-matrix)
 - [Servicio Get Selection](#servicio-get-selection)
 - [Servicio Confirmation](#servicio-confirmation)
+- [Servicio My Reservation](#servicio-my-reservation)
 
 ## Servicio Get Matrix
 
@@ -549,7 +550,7 @@ Devuelve la confirmación de la rentadora
 
 - http://localhost/example-rental-company-implementation/web/companies/confirmation
 
-### Request Parameters
+### Parámetros de envío
 
 Se envía un JSON vía `POST`
 
@@ -662,17 +663,17 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 ```
 ---
 
-## My Reservation
+## Servicio My Reservation
 
-Returns information of the reservation
+Consulta los datos de una reserva
 
 ### URL
 
 - http://localhost/example-rental-company-implementation/web/companies/my-reservation
 
-### Request Parameters
+### Parámetros de envío
 
-Method POST
+Se envía un JSON vía `POST`
 
 ```
 {
@@ -688,9 +689,24 @@ Method POST
 }
 ```
 
-### Response success (status 200)
+#### Explicación Parámetros de envío
 
-Response of the rental service
+**1. Credentials**
+
+Todas las credenciales necesarias para la conección al API de la rentadora como url, id, host, password, callerCode, code, etc.
+
+**2. Otros**
+
+|VARIABLE           | SIGNIFICADO                                                                                                        |
+|-------------------|--------------------------------------------------------------------------------------------------------------------|
+|lastName           | Apellidos del cliente                                                                                              |
+|confirmationCode   | Código de confirmación de la reserva, con la rentadora                                                             |
+|debug              | Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
+|environment        | Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
+
+### Respuesta exitosa (status 200)
+
+Respuesta de la rentadora en formato JSON
 
 ```
 {
@@ -979,7 +995,7 @@ Response of the rental service
 }
 ```
 
-### Response with error (status 500)
+### Respuesta con error (status 500)
 
 ```
 {
@@ -990,6 +1006,7 @@ Response of the rental service
     "type": "yii\\web\\HttpException"
 }
 ```
+---
 
 ## Cancel
 
@@ -999,9 +1016,9 @@ Cancel reservation
 
 - http://localhost/example-rental-company-implementation/web/companies/cancel
 
-### Request Parameters
+### Parámetros de envío
 
-Method POST
+Se envía un JSON vía `POST`
 
 ```
 {
@@ -1017,7 +1034,7 @@ Method POST
 }
 ```
 
-### Response success (status 200)
+### Respuesta exitosa (status 200)
 
 Response of the rental service
 
@@ -1313,7 +1330,7 @@ Response of the rental service
 }
 ```
 
-### Response with error (status 500)
+### Respuesta con error (status 500)
 
 ```
 {
@@ -1333,9 +1350,9 @@ Returns Offices information
 
 - http://localhost/example-rental-company-implementation/web/companies/get-offices
 
-### Request Parameters
+### Parámetros de envío
 
-Method POST
+Se envía un JSON vía `POST`
 
 ```
 {
@@ -1352,7 +1369,7 @@ Method POST
 }
 ```
 
-### Response success (status 200)
+### Respuesta exitosa (status 200)
 
 ```
 [
@@ -1487,7 +1504,7 @@ Method POST
 ]
 ```
 
-### Response with error (status 500)
+### Respuesta con error (status 500)
 
 ```
 {
