@@ -1408,7 +1408,6 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 [
     {
         "office_code": "ABQT01",
-        "update_office": 1,
         "company_name": "Ace",
         "company_code": "AC",
         "status": 1,
@@ -1426,8 +1425,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
             "Name": "Albuquerque International Sunport",
             "CodeContext": "AC",
             "AssocAirportLocList": "ABQ",
-            "phone": "505-437-5809",
-            "updateDate": "2022-06-23 16:06:46"
+            "phone": "505-437-5809"
         },
         "schedule": {
             "1": [
@@ -1479,7 +1477,6 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
     ...
     {
         "office_code": "AGHC01",
-        "update_office": 1,
         "company_name": "Ace",
         "company_code": "AC",
         "status": 1,
@@ -1496,8 +1493,7 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
             "Code": "AGHC01",
             "Name": "Ängelholm Hedin Bil",
             "CodeContext": "AC",
-            "phone": "0046 0431-169 19",
-            "updateDate": "2022-06-23 16:06:46"
+            "phone": "0046 0431-169 19"
         },
         "schedule": {
             "1": [
@@ -1537,24 +1533,23 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 ]
 ```
 
-|VARIABLE               | SIGNIFICADO                                               |
-|-----------------------|-----------------------------------------------------------|
-|office_code            | Text          |
-|update_office          | Text          |
-|company_name           | Text          |
-|company_code           | Text          |
-|status                 | Text          |
-|lat                    | Text          |
-|lng                    | Text          |
-|zip_code               | Text          |
-|city_name              | Text          |
-|state                  | Text          |
-|country_code           | Text          |
-|franchise_code         | Text          |
-|additional_information | Text          |
-|schedule               | Text          |
-|shuttle_info           | Text          |
-|iata                   | Text          |
+|VARIABLE               | SIGNIFICADO                                                                                                                                       |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+|office_code            | Código `IATA` de oficina de 6 letras, ej: MIAE08, MIAC72                                                                                          |
+|company_name           | Nombre de la empresa que alquila el vehículo                                                                                                      |
+|company_code           | Código de la empresa que alquila el vehículo                                                                                                      |
+|status                 | Estado de la oficina, `1` si es una oficina activa, de lo contrario `0`                                                                           |
+|lat                    | Latitud de la oficina                                                                                                                             |
+|lng                    | Longitud de la oficina                                                                                                                            |
+|zip_code               | Código postal                                                                                                                                     |
+|city_name              | Nombre de la ciudad                                                                                                                               |
+|state                  | Código `IATA` del Estado donde se encuentra la oficina de 2 letras                                                                                |
+|country_code           | País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                                                                              |
+|franchise_code         | Código de la oficina devuelto por la rentadora                                                                                                    |
+|additional_information | Arreglo con información adicional, como AtAirport, phone, etc.                                                                                    |
+|schedule               | El horario contiene un arreglo de días (iniciando el lunes con código 1 finalizando el domingo con código 7) y sus respectivas horas de apertura. |
+|shuttle_info           | Recogida para oficinas en el aeropuerto, 1: En terminal, 2: Servicio de transporte (shuttle), 3: Meet and Greet                                   |
+|iata                   | Código `IATA` del aeropuerto para oficinas en el aeropuerto                                                                                       |
 
 ### Respuesta con error (status 500)
 

@@ -72,7 +72,6 @@ class AceResponseOffices
                     $latLng[1] = $latLngAce['lng'] ?? null;
                     $office_code = $Code;
                     $locationList['office_code'] = $office_code;
-                    $locationList['update_office'] = 1;
                     $locationList['company_name'] = $companyName;
                     $locationList['company_code'] = $companyCode;
 
@@ -103,7 +102,6 @@ class AceResponseOffices
                             }
                         }
                     }
-                    $locationDetailAttr['updateDate'] = date('Y-m-d H:i:s');
                     $locationList['status'] = 1;
                     $locationList['address'] = $address;
                     $locationList['lat'] = $latLng[0] ?? '';
@@ -480,30 +478,30 @@ class AceResponseOffices
     /**
      * @param $location
      *  1	Terminal
-    2	Shuttle on airport
-    3	Shuttle off airport
-    4	Railway station
-    5	Hotel
-    6	Car dealer
-    7	City center/downtown
-    8	East of city center
-    9	South of city center
-    10	West of city center
-    11	North of city center
-    12	Port/ferry
-    13	Near resort
-    14	Airport
-    15	Counter in terminal, shuttle to car
-    16	Shuttle to counter and car
-    17	Counter in terminal, car company shuttle to car off airport grounds
-    18	Counter in terminal, airport shuttle to car on airport grounds
-    19	Counter in terminal, airport shuttle to car off airport grounds
-    20	Car company shuttle to counter, car off airport grounds
-    21	Airport shuttle to counter, car on airport grounds
-    22	Airport shuttle to counter, car off airport grounds
-    23	Multiple shuttles to counter, car on airport grounds
-    24	Multiple shuttles to counter, car off airport grounds
-    25	Phone for car company pick-up
+        2	Shuttle on airport
+        3	Shuttle off airport
+        4	Railway station
+        5	Hotel
+        6	Car dealer
+        7	City center/downtown
+        8	East of city center
+        9	South of city center
+        10	West of city center
+        11	North of city center
+        12	Port/ferry
+        13	Near resort
+        14	Airport
+        15	Counter in terminal, shuttle to car
+        16	Shuttle to counter and car
+        17	Counter in terminal, car company shuttle to car off airport grounds
+        18	Counter in terminal, airport shuttle to car on airport grounds
+        19	Counter in terminal, airport shuttle to car off airport grounds
+        20	Car company shuttle to counter, car off airport grounds
+        21	Airport shuttle to counter, car on airport grounds
+        22	Airport shuttle to counter, car off airport grounds
+        23	Multiple shuttles to counter, car on airport grounds
+        24	Multiple shuttles to counter, car off airport grounds
+        25	Phone for car company pick-up
      * @return string
      */
     public static function getShuttleOrTerminalByCounterLocation($location) {
