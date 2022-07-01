@@ -5,6 +5,7 @@
 - [Servicio Confirmation](#servicio-confirmation)
 - [Servicio My Reservation](#servicio-my-reservation)
 - [Servicio Cancel](#servicio-cancel)
+- [Servicio Get Offices](#servicio-get-offices)
 
 ## Servicio Get Matrix
 
@@ -1011,7 +1012,7 @@ Respuesta de la rentadora en formato JSON
 
 ## Servicio Cancel
 
-Servicio para solicitar la cancelacion de una reserva
+Servicio para solicitar la cancelación de una reserva
 
 ### URL
 
@@ -1358,9 +1359,9 @@ Respuesta de la rentadora en formato JSON en caso de que si fue cancelada, de lo
 }
 ```
 
-## Get Offices
+## Servicio Get Offices
 
-Returns Offices information
+Servicio que busca las oficinas disponibles de la rentadora
 
 ### URL
 
@@ -1384,6 +1385,22 @@ Se envía un JSON vía `POST`
   "environment": "Test"
 }
 ```
+
+#### Explicación Parámetros de envío
+
+**1. Credentials**
+
+Todas las credenciales necesarias para la conección al API de la rentadora como url, id, host, password, callerCode, code, etc.
+
+**2. Otros**
+
+|VARIABLE           | SIGNIFICADO                                                                                                        |
+|-------------------|--------------------------------------------------------------------------------------------------------------------|
+|countryCode        | País, código alfa 2 ej: United States (US), Colombia (CO)                                                          |
+|companyName        | Nombre de la empresa que alquila el vehículo                                                                       |
+|companyCode        | Código de la empresa que alquila el vehículo                                                                       |
+|debug              | Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
+|environment        | Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
 
 ### Respuesta exitosa (status 200)
 
@@ -1520,6 +1537,25 @@ Se envía un JSON vía `POST`
 ]
 ```
 
+|VARIABLE               | SIGNIFICADO                                               |
+|-----------------------|-----------------------------------------------------------|
+|office_code            | Text          |
+|update_office          | Text          |
+|company_name           | Text          |
+|company_code           | Text          |
+|status                 | Text          |
+|lat                    | Text          |
+|lng                    | Text          |
+|zip_code               | Text          |
+|city_name              | Text          |
+|state                  | Text          |
+|country_code           | Text          |
+|franchise_code         | Text          |
+|additional_information | Text          |
+|schedule               | Text          |
+|shuttle_info           | Text          |
+|iata                   | Text          |
+
 ### Respuesta con error (status 500)
 
 ```
@@ -1531,6 +1567,7 @@ Se envía un JSON vía `POST`
     "type": "yii\\web\\HttpException"
 }
 ```
+---
 
 ## Tarifas
 
