@@ -129,24 +129,26 @@ final class AceResponseMatrix
                         $result['error'] = 'Not Rate Qualifier in Rates';
                         break;
                     }
-                    foreach ($reservationRate->VehAvailCore->Fees->Fee as $VehicleCharge) {
-                        $IncludedInEstTotalInd = 'false';
-                        foreach ($VehicleCharge->attributes() as $attribute => $value) {
-                            if ($attribute === 'Amount') {
-                                $Amount = (float)$value;
-                            } else if ($attribute === 'IncludedInRate') {
-                                $IncludedInRate = (string)$value;
-                            } else if ($attribute === 'Purpose') {
-                                $Purpose = (string)$value;
-                            } else if ($attribute === 'IncludedInEstTotalInd') {
-                                $IncludedInEstTotalInd = (string)$value;
+                    if (isset($reservationRate->VehAvailCore->Fees->Fee)) {
+                        foreach ($reservationRate->VehAvailCore->Fees->Fee as $VehicleCharge) {
+                            $IncludedInEstTotalInd = 'false';
+                            foreach ($VehicleCharge->attributes() as $attribute => $value) {
+                                if ($attribute === 'Amount') {
+                                    $Amount = (float)$value;
+                                } else if ($attribute === 'IncludedInRate') {
+                                    $IncludedInRate = (string)$value;
+                                } else if ($attribute === 'Purpose') {
+                                    $Purpose = (string)$value;
+                                } else if ($attribute === 'IncludedInEstTotalInd') {
+                                    $IncludedInEstTotalInd = (string)$value;
+                                }
                             }
-                        }
-                        if($Purpose === '77') {//one way
-                            $oneway = $Amount;
-                            $coreLogic['oneWayAmount'] = $Amount;
-                            if ($IncludedInEstTotalInd === 'true') {
-                                $coreLogic['includeOneWay'] = true;
+                            if ($Purpose === '77') {//one way
+                                $oneway = $Amount;
+                                $coreLogic['oneWayAmount'] = $Amount;
+                                if ($IncludedInEstTotalInd === 'true') {
+                                    $coreLogic['includeOneWay'] = true;
+                                }
                             }
                         }
                     }
