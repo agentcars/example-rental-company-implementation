@@ -75,30 +75,32 @@ final class AceResponseSelection
             $taxNotIncluded = 0;
             $basicDetail = [];
             $oneway = 0;
-            foreach ($reservationRate->VehAvailCore->Fees->Fee as $Fee) {
-                $IncludedInEstTotalInd = 'false';
-                foreach ($Fee->attributes() as $attribute => $value) {
-                    if ($attribute === 'Amount') {
-                        $Amount = (float)$value;
-                    } else if ($attribute === 'IncludedInRate') {
-                        $IncludedInRate = (string)$value;
-                    } else if ($attribute === 'Description') {
-                        $Description = (string)$value;
-                    } else if ($attribute === 'Purpose') {
-                        $Purpose = (string)$value;
-                    } else if ($attribute === 'IncludedInEstTotalInd') {
-                        $IncludedInEstTotalInd = (string)$value;
+            if (isset($reservationRate->VehAvailCore->Fees->Fee)) {
+                foreach ($reservationRate->VehAvailCore->Fees->Fee as $Fee) {
+                    $IncludedInEstTotalInd = 'false';
+                    foreach ($Fee->attributes() as $attribute => $value) {
+                        if ($attribute === 'Amount') {
+                            $Amount = (float)$value;
+                        } else if ($attribute === 'IncludedInRate') {
+                            $IncludedInRate = (string)$value;
+                        } else if ($attribute === 'Description') {
+                            $Description = (string)$value;
+                        } else if ($attribute === 'Purpose') {
+                            $Purpose = (string)$value;
+                        } else if ($attribute === 'IncludedInEstTotalInd') {
+                            $IncludedInEstTotalInd = (string)$value;
+                        }
                     }
-                }
-                $basicDetail[] = [
-                    'amount' => $Amount,
-                    'comment' => $Description,
-                ];
-                if($Purpose === '2') {//one way
-                    $oneway = $Amount;
-                    $coreLogic['oneWayAmount'] = $Amount;
-                    if ($IncludedInEstTotalInd === 'true') {
-                        $coreLogic['includeOneWay'] = true;
+                    $basicDetail[] = [
+                        'amount' => $Amount,
+                        'comment' => $Description,
+                    ];
+                    if ($Purpose === '2') {//one way
+                        $oneway = $Amount;
+                        $coreLogic['oneWayAmount'] = $Amount;
+                        if ($IncludedInEstTotalInd === 'true') {
+                            $coreLogic['includeOneWay'] = true;
+                        }
                     }
                 }
             }
