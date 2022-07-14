@@ -187,6 +187,22 @@ final class AceResponseSelection
             if (!empty($discountCode)) {
                 $coreLogic['auxAmadeusNumbers']['NumberCD'] = $discountCode;
             }
+            //Rate Information
+            $PaymentRuleAttr = [];
+            if ($reservationRate->VehAvailInfo->PaymentRules->PaymentRule) {
+                foreach ($reservationRate->VehAvailInfo->PaymentRules->PaymentRule as $PaymentRule) {
+                    foreach ($PaymentRule->attributes() as $attribute => $value) {
+                        $PaymentRuleAttr[$attribute] = (string)$value;
+                    }
+                }
+            }
+            $coreLogic['rateInformation']['VendorRateID'] = $RateQualifierAttr['PromotionCode'];
+            $coreLogic['rateInformation']['ReferenceType'] = $Reference['Type'];
+            $coreLogic['rateInformation']['ReferenceID'] = $Reference['ID'];
+            $coreLogic['rateInformation']['Amount'] = $PaymentRuleAttr['Amount'] ?? '';
+            $coreLogic['rateInformation']['CurrencyCode'] = $PaymentRuleAttr['CurrencyCode'] ?? '';
+            $coreLogic['rateInformation']['detail'] = $basicDetail;
+
             $result[$codeResp] = $coreLogic;
         }
         return $result;

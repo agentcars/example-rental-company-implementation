@@ -297,9 +297,9 @@ Se envía un JSON vía `POST`
   },
   "getDataModel": {
     "pickUpLocation": "MIAT01",
-    "pickUpAddress": "NA",
+    "pickUpAddress": "Aeropuerto Intl de Miami, MIA, Florida, Estados Unidos",
     "dropOffLocation": "MIAT01",
-    "dropOffAddress": "NA",
+    "dropOffAddress": "Aeropuerto Intl de Miami, MIA, Florida, Estados Unidos",
     "pickUpDate": "2022-07-18",
     "dropOffDate": "2022-07-25",
     "pickUpHour": "1200",
@@ -441,7 +441,47 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
                 "shuttleInfo": ""
             }
         },
-        "auxAddRateInformation": true
+        "auxAddRateInformation": true,
+        "auxAmadeusNumbers": {
+            "NumberCD": "TESTCODE"
+        },
+        "rateInformation": {
+            "VendorRateID": "RGZNET",
+            "ReferenceType": "16",
+            "ReferenceID": "70049432228",
+            "Amount": "396.23",
+            "CurrencyCode": "USD",
+            "detail": [
+                {
+                    "amount": 6.04,
+                    "comment": "Airport Access Fee"
+                },
+                {
+                    "amount": 20.4,
+                    "comment": "CFC Fee"
+                },
+                {
+                    "amount": 8,
+                    "comment": "Energy Recovery Fee"
+                },
+                {
+                    "amount": 2.18,
+                    "comment": "Miami Privilege Fee"
+                },
+                {
+                    "amount": 8.2,
+                    "comment": "State Surcharge"
+                },
+                {
+                    "amount": 7.96,
+                    "comment": "Vehicle Licensing Fee"
+                },
+                {
+                    "amount": 7.5,
+                    "comment": "Sales Tax"
+                }
+            ]
+        }
     },
     "3": {
         "companyName": "Ace",
@@ -501,35 +541,77 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
                 "shuttleInfo": ""
             }
         },
-        "auxAddRateInformation": true
+        "auxAddRateInformation": true,
+        "auxAmadeusNumbers": {
+            "NumberCD": "TESTCODE"
+        },
+        "rateInformation": {
+            "VendorRateID": "RGZNET",
+            "ReferenceType": "16",
+            "ReferenceID": "70049432229",
+            "Amount": "852.5",
+            "CurrencyCode": "USD",
+            "detail": [
+                {
+                    "amount": 6.04,
+                    "comment": "Airport Access Fee"
+                },
+                {
+                    "amount": 20.4,
+                    "comment": "CFC Fee"
+                },
+                {
+                    "amount": 8,
+                    "comment": "Energy Recovery Fee"
+                },
+                {
+                    "amount": 2.18,
+                    "comment": "Miami Privilege Fee"
+                },
+                {
+                    "amount": 8.2,
+                    "comment": "State Surcharge"
+                },
+                {
+                    "amount": 7.96,
+                    "comment": "Vehicle Licensing Fee"
+                },
+                {
+                    "amount": 7.5,
+                    "comment": "Sales Tax"
+                }
+            ]
+        }
     }
 }
 ```
 
-| VARIABLE              | DESCRIPCIÓN                                                                                                               |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
-|companyName            | Nombre de la empresa que alquila el vehículo                                                                              |
-|companyCode            | Código de la empresa que alquila el vehículo                                                                              |
-|rateType               | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                                                       |
-|getDataModel           | Información recibida en los parámetros de envío                                                                           |
-|sippCode               | Tipo de automóvil según código SIPP                                                                                       |
-|rateIdentifier         | Código/Identificador de la tarifa                                                                                         |
-|img                    | Imagen del carro                                                                                                          |
-|carModel               | Modelo del carro                                                                                                          |
-|doors                  | Número de puertas                                                                                                         |
-|passengers             | Número de pasajeros                                                                                                       |
-|bags                   | Número de maletas                                                                                                         |
-|trans                  | Tipo de transmisión del carro, valores posibles `Automatic` y `Manual`                                                    |
-|air                    | Si tiene o no aire acondicionado, valores posibles `Yes` y `No`                                                           |
-|payment_option         | Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                                                                |
-|km_included            | Kilometraje/millaje de la tarifa                                                                                          |
-|currency               | Moneda de la tarifa, ej: USD, COP, EUR...                                                                                 |
-|realBase               | Esta es la base comisionable, el valor sobre el que comisionan                                                            |
-|realTax                | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables                                             |
-|rateAmount             | Total de la tarifa                                                                                                        |
-|taxNotIncluded         | Valor de impuestos no incluidos                                                                                           |
-|carInfo                | Contiene la información del carro asociado por el código SIPP                                                             |
-|auxAddRateInformation  | Si es necesario llamar a otro servicio cuandos e selecciona una de las tarifas se envia `false`, de lo contrario `true`   |
+| VARIABLE              | DESCRIPCIÓN                                                                                                                                                                               |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|companyName            | Nombre de la empresa que alquila el vehículo                                                                                                                                              |
+|companyCode            | Código de la empresa que alquila el vehículo                                                                                                                                              |
+|rateType               | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                                                                                                                       |
+|getDataModel           | Información recibida en los parámetros de envío                                                                                                                                           |
+|sippCode               | Tipo de automóvil según código SIPP                                                                                                                                                       |
+|rateIdentifier         | Código/Identificador de la tarifa                                                                                                                                                         |
+|img                    | Imagen del carro                                                                                                                                                                          |
+|carModel               | Modelo del carro                                                                                                                                                                          |
+|doors                  | Número de puertas                                                                                                                                                                         |
+|passengers             | Número de pasajeros                                                                                                                                                                       |
+|bags                   | Número de maletas                                                                                                                                                                         |
+|trans                  | Tipo de transmisión del carro, valores posibles `Automatic` y `Manual`                                                                                                                    |
+|air                    | Si tiene o no aire acondicionado, valores posibles `Yes` y `No`                                                                                                                           |
+|payment_option         | Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                                                                                                                                |
+|km_included            | Kilometraje/millaje de la tarifa                                                                                                                                                          |
+|currency               | Moneda de la tarifa, ej: USD, COP, EUR...                                                                                                                                                 |
+|realBase               | Esta es la base comisionable, el valor sobre el que comisionan                                                                                                                            |
+|realTax                | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables                                                                                                             |
+|rateAmount             | Total de la tarifa                                                                                                                                                                        |
+|taxNotIncluded         | Valor de impuestos no incluidos                                                                                                                                                           |
+|carInfo                | Contiene la información del carro asociado por el código SIPP                                                                                                                             |
+|auxAddRateInformation  | Si es necesario llamar a otro servicio cuandos e selecciona una de las tarifas se envia `false`, de lo contrario `true`                                                                   |
+|auxAmadeusNumbers      | Si es enviado discountCodes, devolver ese código como NumberCD , si no, no devolver este nodo                                                                                             |
+|rateInformation        | Arreglo con datos necesarios de la tarifa, entre los cuales estan detail (un arreglo con descripción y valor de los fees), VendorRateID, Amount, CurrencyCode, ReferenceID, ReferenceType |
 
 ### Respuesta con error (status 500)
 
@@ -588,6 +670,7 @@ Se envía un JSON vía `POST`
       }
     },
     "additional_information": {
+      "VendorRateID": "RGZNET",
       "Amount": "409.17",
       "ReferenceID": "69138842466",
       "CurrencyCode": "USD",
@@ -624,7 +707,7 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 |pickup_hour            | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                                                                                                     |
 |dropoff_hour           | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                                                                                                    |
 |additionals            | Arreglo con los equipos especiales solicitados por el cliente, donde 0 es que no solicito, de lo contrario regresa el numero de los solicitados, mas información en la sección [Equipos Especiales](#equipos-especiales)  |
-|additional_information | Arreglo con datos necesarios para la solicitud, entre los cuales estan Amount, CurrencyCode, ReferenceID, ReferenceType                                                                                                   |
+|additional_information | Arreglo con datos necesarios para la solicitud, entre los cuales estan VendorRateID, Amount, CurrencyCode, ReferenceID, ReferenceType                                                                                     |
 |rate_type_id           | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"                                                                                                                                   |
 |sipp_code              | Tipo de automóvil según código SIPP                                                                                                                                                                                       |
 |company_code           | Código de la empresa que alquila el vehículo                                                                                                                                                                              |
