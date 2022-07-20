@@ -130,6 +130,9 @@ class Ace
             $response = $resp;
             break;
         }
+        if (isset($response->soapBody->OTA_VehCancelRS->Errors->Error)) {
+            return ['error' => (string)$response->soapBody->OTA_VehCancelRS->Errors->Error];
+        }
         return $response;
     }
 

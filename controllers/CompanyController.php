@@ -155,6 +155,9 @@ class CompanyController extends ActiveController
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }
+        if (isset($response['error'])) {
+            throw new HttpException(500, $response['error']);
+        }
         return $response;
     }
 
