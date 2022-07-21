@@ -18,6 +18,17 @@ class AceResponseOffices
         $body = isset($response->soapBody->OTA_VehLocSearchRS->Success) ? $response->soapBody->OTA_VehLocSearchRS : false;
         if ($body) {
             foreach ($body->VehMatchedLocs->VehMatchedLoc as $VehMatchedLoc) {
+                $countryCodeOTA = null;
+                if (isset($VehMatchedLoc->LocationDetail->Address->CountryName)) {
+                    foreach ($VehMatchedLoc->LocationDetail->Address->CountryName->attributes() as $attribute => $value) {
+                        if ($attribute === 'Code') {
+                            $countryCodeOTA = substr((string)$value, 0, 2);
+                        }
+                    }
+                }
+                if ($countryCode !== $countryCodeOTA) {
+                    continue;
+                }
                 $locationDetailAttr = [];
                 foreach ($VehMatchedLoc->LocationDetail->attributes() as $attribute => $value) {
                     $locationDetailAttr[$attribute] = (string)$value;
