@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  #PHP Service
+  aceApp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php:8.1-fpm
+    container_name: aceApp
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: aceApp
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - aceApp-network
+
+  #Nginx Service
+  ace-webserver:
+    image: nginx:alpine
+    container_name: aceWebserver
+    depends_on:
+      - aceApp
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "88:80"
+    #      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - aceApp-network
+
+#Docker Networks
+networks:
+  aceApp-network:
+    driver: bridge

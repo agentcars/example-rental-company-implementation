@@ -1,5 +1,8 @@
 <?php
 
+use yii\web\JsonResponseFormatter;
+use yii\rest\UrlRule;
+use yii\web\UrlManager;
 use yii\web\Response;
 
 return [
@@ -14,14 +17,17 @@ return [
     ],
     'components' => [
         'urlManager' => [
+            'class' => UrlManager::class,
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'site/index',
                 [
-                    'class' => 'yii\rest\UrlRule',
+                    'class' => UrlRule::class,
                     'controller' => 'company',
                     'extraPatterns' => [
+                        'GET get-matrix' => 'get-matrix',
                         'POST get-matrix' => 'get-matrix',
                         'OPTIONS get-matrix' => 'options',
                         'POST get-selection' => 'get-selection',
@@ -41,7 +47,7 @@ return [
         'response' => [
             'formatters' => [
                 Response::FORMAT_JSON => [
-                    'class' => 'yii\web\JsonResponseFormatter',
+                    'class' => JsonResponseFormatter::class,
                     'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
                     'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
                 ],
