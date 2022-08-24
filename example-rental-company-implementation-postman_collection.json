@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "ce84e785-4818-45b7-9626-7c4248e57049",
+		"name": "Example Rental Company Implementation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1520976"
+	},
+	"item": [
+		{
+			"name": "GetMatrix",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"rates\": [\n    {\n      \"qualifier\": \"RC\",\n      \"code\": \"RGZNET\",\n      \"rate_type_id\": \"1\",\n      \"payment_option\": \"1\",\n      \"dummy_iata\": \"\",\n      \"companyIata\": \"12345678\",\n      \"rateRqmaps\": [],\n      \"rateType\": \"just_car\",\n      \"discountCodes\": []\n    },\n    {\n      \"qualifier\": \"RC\",\n      \"code\": \"RGZNET\",\n      \"rate_type_id\": \"3\",\n      \"payment_option\": \"1\",\n      \"dummy_iata\": \"\",\n      \"companyIata\": \"12345678\",\n      \"rateRqmaps\": [],\n      \"rateType\": \"full_protection\",\n      \"discountCodes\": []\n    }\n  ],\n  \"credentials\": {\n    \"url\": \"URL\",\n    \"id\": \"ID\",\n    \"host\": \"HOST\"\n  },\n  \"getDataModel\": {\n    \"pickUpLocation\": \"MIAT01\",\n    \"pickUpAddress\": \"NA\",\n    \"dropOffLocation\": \"MIAT01\",\n    \"dropOffAddress\": \"NA\",\n    \"pickUpDate\": \"2022-09-18\",\n    \"dropOffDate\": \"2022-09-25\",\n    \"pickUpHour\": \"1200\",\n    \"dropOffHour\": \"1200\",\n    \"cdCode\": \"NA\",\n    \"pcCode\": \"NA\",\n    \"country\": \"US\",\n    \"source\": \"CO\",\n    \"rateType\": \"best\",\n    \"lat\": \"NA\",\n    \"lng\": \"NA\",\n    \"latDropOff\": \"NA\",\n    \"lngDropOff\": \"NA\"\n  },\n  \"companyName\": \"Ace\",\n  \"companyCode\": \"AC\",\n  \"debug\": false,\n  \"environment\": \"Production\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:92/companies/get-matrix",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "92",
+					"path": [
+						"companies",
+						"get-matrix"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSelection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"rates\": [\n    {\n      \"qualifier\": \"RC\",\n      \"code\": \"RGZNET\",\n      \"rate_type_id\": 1,\n      \"payment_option\": 1,\n      \"dummy_iata\": \"\",\n      \"companyIata\": \"12345678\",\n      \"rateRqmaps\": [],\n      \"rateType\": \"just_car\",\n      \"discountCodes\": []\n    },\n    {\n      \"qualifier\": \"RC\",\n      \"code\": \"RGZNET\",\n      \"rate_type_id\": 2,\n      \"payment_option\": 1,\n      \"dummy_iata\": \"\",\n      \"companyIata\": \"12345678\",\n      \"rateRqmaps\": [],\n      \"rateType\": \"basic_protection\",\n      \"discountCodes\": []\n    },\n    {\n      \"qualifier\": \"RC\",\n      \"code\": \"RGZNET\",\n      \"rate_type_id\": 3,\n      \"payment_option\": 1,\n      \"dummy_iata\": \"\",\n      \"companyIata\": \"12345678\",\n      \"rateRqmaps\": [],\n      \"rateType\": \"full_protection\",\n      \"discountCodes\": []\n    }\n  ],\n  \"credentials\": {\n    \"url\": \"URL\",\n    \"id\": \"ID\",\n    \"host\": \"HOST\"\n  },\n  \"getDataModel\": {\n    \"pickUpLocation\": \"MIAT01\",\n    \"pickUpAddress\": \"Aeropuerto Intl de Miami, MIA, Florida, Estados Unidos\",\n    \"dropOffLocation\": \"MIAT01\",\n    \"dropOffAddress\": \"Aeropuerto Intl de Miami, MIA, Florida, Estados Unidos\",\n    \"pickUpDate\": \"2022-09-18\",\n    \"dropOffDate\": \"2022-09-25\",\n    \"pickUpHour\": \"1200\",\n    \"dropOffHour\": \"1200\",\n    \"cdCode\": \"NA\",\n    \"pcCode\": \"NA\",\n    \"country\": \"US\",\n    \"sippCode\": \"ECAR\",\n    \"source\": \"CO\",\n    \"rateType\": \"1\",\n    \"lat\": \"NA\",\n    \"lng\": \"NA\",\n    \"latDropOff\": \"NA\",\n    \"lngDropOff\": \"NA\"\n  },\n  \"companyName\": \"ACE\",\n  \"companyCode\": \"AC\",\n  \"debug\": false,\n  \"environment\": \"Production\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:92/companies/get-selection",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "92",
+					"path": [
+						"companies",
+						"get-selection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirmation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"credentials\": {\n    \"url\": \"URL\",\n    \"id\": \"ID\",\n    \"host\": \"HOST\"\n  },\n  \"reservation\": {\n    \"first_name\": \"Albert\",\n    \"last_name\": \"Test\",\n    \"email\": \"alberttest123@gmail.com\",\n    \"location_pickup\": \"MIAT01\",\n    \"location_dropoff\": \"MIAT01\",\n    \"pickup_date\": \"2022-07-18\",\n    \"dropoff_date\": \"2022-07-25\",\n    \"pickup_hour\": \"1200\",\n    \"dropoff_hour\": \"1200\",\n    \"additionals\": {\n      \"cbs\": {\n        \"value\": 0\n      },\n      \"cst\": {\n        \"value\": 0\n      },\n      \"gps\": {\n        \"value\": \"0\"\n      },\n      \"sky\": {\n        \"value\": \"0\"\n      }\n    },\n    \"additional_information\": {\n      \"VendorRateID\": \"RGZNET\",\n      \"Amount\": \"409.17\",\n      \"ReferenceID\": \"69138842466\",\n      \"CurrencyCode\": \"USD\",\n      \"ReferenceType\": \"16\"\n    },\n    \"rate_type_id\": \"1\",\n    \"sipp_code\": \"ECAR\",\n    \"company_code\": \"AC\"\n  },\n  \"debug\": false,\n  \"environment\": \"Production\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:92/companies/confirmation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "92",
+					"path": [
+						"companies",
+						"confirmation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MyReservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"credentials\": {\n    \"url\": \"URL\",\n    \"id\": \"ID\",\n    \"host\": \"HOST\"\n  },\n  \"lastName\": \"Test\",\n  \"confirmationCode\": \"TESTCODE12991104\",\n  \"debug\": false,\n  \"environment\": \"Production\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:92/companies/my-reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "92",
+					"path": [
+						"companies",
+						"my-reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"credentials\": {\n    \"url\": \"URL\",\n    \"id\": \"ID\",\n    \"host\": \"HOST\"\n  },\n  \"lastName\": \"Test\",\n  \"confirmationCode\": \"TESTCODE12991104\",\n  \"debug\": false,\n  \"environment\": \"Production\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:92/companies/cancel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "92",
+					"path": [
+						"companies",
+						"cancel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOffices",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"credentials\": {\n    \"url\": \"URL\",\n    \"id\": \"ID\",\n    \"host\": \"HOST\"\n  },\n  \"countryCode\": \"US\",\n  \"companyName\": \"Ace\",\n  \"companyCode\": \"AC\",\n  \"debug\": false,\n  \"environment\": \"Production\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:92/companies/get-offices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "92",
+					"path": [
+						"companies",
+						"get-offices"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

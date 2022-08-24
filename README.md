@@ -1668,3 +1668,8 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 | cst       | Child toddler seat, asiento para niños 0-2 años                                            |
 | gps       | GPS, SOLO si en la tarifa no se incluye (no todos los vehiculos tienen esta opcion valida) |
 | sky       | Sky Racks, SOLO para los lugares validos                                                   |
+
+## Postman
+
+* Descargue demo en postman [aqui](example-rental-company-implementation-postman_collection.json).
+
