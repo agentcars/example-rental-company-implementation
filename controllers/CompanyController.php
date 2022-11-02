@@ -5,6 +5,7 @@ namespace micro\controllers;
 use micro\components\Ace\Ace;
 use micro\components\Ace\AceResponseConfirmation;
 use micro\components\Ace\AceResponseMatrix;
+use micro\components\Ace\AceResponseMyReservation;
 use micro\components\Ace\AceResponseOffices;
 use micro\components\Ace\AceResponseSelection;
 use yii\filters\ContentNegotiator;
@@ -117,7 +118,7 @@ class CompanyController extends ActiveController
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }
-        $result = AceResponseConfirmation::processResponse($response);
+        $result = AceResponseConfirmation::processResponse($response, $postParams['reservation']);
         if (isset($result['error'])) {
             throw new HttpException(500, $result['error']);
         }
@@ -134,9 +135,16 @@ class CompanyController extends ActiveController
         }
         $postParams = \Yii::$app->request->post();
         $debug = $postParams['debug'] ?? false;
-        $response = Ace::getMyReservationResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment'], $debug);
+        $response = Ace::getMyReservationResult($postParams['last_name'], $postParams['rental_confirmation_code'], $postParams['credentials'], $postParams['environment'], $debug);
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
+        }
+        if (isset($postParams['raw_response']) && !$postParams['raw_response']) {
+            $result = AceResponseMyReservation::processResponse($response);
+            if (isset($result['error'])) {
+                throw new HttpException(500, $result['error']);
+            }
+            $response = $result;
         }
         return $response;
     }
@@ -151,7 +159,7 @@ class CompanyController extends ActiveController
         }
         $postParams = \Yii::$app->request->post();
         $debug = $postParams['debug'] ?? false;
-        $response = Ace::getCancelResult($postParams['lastName'], $postParams['confirmationCode'], $postParams['credentials'], $postParams['environment'], $debug);
+        $response = Ace::getCancelResult($postParams['last_name'], $postParams['rental_confirmation_code'], $postParams['credentials'], $postParams['environment'], $debug);
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }

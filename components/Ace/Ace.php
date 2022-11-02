@@ -133,7 +133,7 @@ class Ace
         if (isset($response->soapBody->OTA_VehCancelRS->Errors->Error)) {
             return ['error' => (string)$response->soapBody->OTA_VehCancelRS->Errors->Error];
         }
-        return $response;
+        return ['success'=> 'RESERVATION_CANCELLED'];
     }
 
     /**

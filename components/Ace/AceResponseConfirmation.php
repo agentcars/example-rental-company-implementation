@@ -7,9 +7,10 @@ final class AceResponseConfirmation
     /**
      * Process Response
      * @param $response
+     * @param $reservation
      * @return array
      */
-    public static function processResponse($response): array
+    public static function processResponse($response, $reservation): array
     {
         $result = [];
         if (isset($response->soapBody->OTA_VehResRS->Success)) {
@@ -25,6 +26,12 @@ final class AceResponseConfirmation
                     }
                     if ($attribute === 'CurrencyCode') {
                         $result['currency_confirmed'] = (string)$value;
+                    }
+                }
+                $result['status'] = 'Active';
+                if ($reservation) {
+                    foreach ($reservation as $attribute => $value) {
+                        $result[$attribute] = $value;
                     }
                 }
             }

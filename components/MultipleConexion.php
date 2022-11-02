@@ -145,9 +145,9 @@ class MultipleConexion extends Component
         foreach ($requests as $type => $request) {
             if (isset($responses[$type])) {
                 $service = $services[$type];
-                $request = str_replace('XML-Request=', '<?xml version="1.0"?>', $request);//por EP/KD
-                file_put_contents($file . "Request-$type-$service.xml", print_r($request, true));
-                file_put_contents($file . "Response-$type-$service.xml", print_r($responses[$type], true));
+                $date = date('YmdHis');
+                file_put_contents($file . "Request-$type-$service-$date.xml", print_r($request, true));
+                file_put_contents($file . "Response-$type-$service-$date.xml", print_r($responses[$type], true));
             }
         }
     }
