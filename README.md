@@ -75,7 +75,9 @@ Se envía un JSON vía `POST`
     "lat": "NA",
     "lng": "NA",
     "latDropOff": "NA",
-    "lngDropOff": "NA"
+    "lngDropOff": "NA",
+    "pickUpFranchiseCode": "291",
+    "dropOffFranchiseCode": "291"
   },
   "companyName": "Ace",
   "companyCode": "AC",
@@ -108,26 +110,28 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 
 **3. GetDataModel**
 
-| VARIABLE        | SIGNIFICADO                                                                       |
-|-----------------|-----------------------------------------------------------------------------------|
-| pickUpLocation  | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.       |
-| pickUpAddress   | Nombre de la oficina de pickup (por defecto NA)                                   |
-| dropOffLocation | Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.     |
-| dropOffAddress  | Nombre de la oficina de dropoff (por defecto NA)                                  |
-| pickUpDate      | Fecha de Pickup - Formato yyyy-mm-dd                                              |
-| dropOffDate     | Fecha de Dropoff - Formato yyyy-mm-dd                                             |
-| pickUpHour      | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm             |
-| dropOffHour     | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm            |
-| cdCode          | Código de descuento                                                               |
-| pcCode          | Código de promoción                                                               |
-| country         | País de oficina, código alfa 2 ej: United States (US), Colombia (CO)              |
-| source          | País de fuente, código alfa 2 ej: United States (US), Colombia (CO)               |
-| rateType        | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)               |
-| paymentType     | Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino) |
-| lat*            | Latitud de Pickup                                                                 |
-| lng*            | Longitud de Pickup                                                                |
-| latDropOff*     | Latitud de Dropoff                                                                |
-| lngDropOff*     | Longitud de Dropoff                                                               |
+| VARIABLE             | SIGNIFICADO                                                                                                                                |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| pickUpLocation       | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.                                                                |
+| pickUpAddress        | Nombre de la oficina de pickup (por defecto NA)                                                                                            |
+| pickUpFranchiseCode  | Código de la oficina de pickup dado por la rentadora. Para búsquedas fuera de aeropuerto se pueden enviar varios separados por coma `(,)`  |
+| dropOffLocation      | Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.                                                              |
+| dropOffAddress       | Nombre de la oficina de dropoff (por defecto NA)                                                                                           |
+| dropOffFranchiseCode | Código de la oficina de dropoff dado por la rentadora. Para búsquedas fuera de aeropuerto se pueden enviar varios separados por coma `(,)` |
+| pickUpDate           | Fecha de Pickup - Formato yyyy-mm-dd                                                                                                       |
+| dropOffDate          | Fecha de Dropoff - Formato yyyy-mm-dd                                                                                                      |
+| pickUpHour           | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                      |
+| dropOffHour          | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                     |
+| cdCode               | Código de descuento                                                                                                                        |
+| pcCode               | Código de promoción                                                                                                                        |
+| country              | País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                                                                       |
+| source               | País de fuente, código alfa 2 ej: United States (US), Colombia (CO)                                                                        |
+| rateType             | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                                                                        |
+| paymentType          | Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino)                                                          |
+| lat*                 | Latitud de Pickup                                                                                                                          |
+| lng*                 | Longitud de Pickup                                                                                                                         |
+| latDropOff*          | Latitud de Dropoff                                                                                                                         |
+| lngDropOff*          | Longitud de Dropoff                                                                                                                        |
 
 *Solo aplica obligatorio en caso de búsqueda fuera de oficinas.
 
@@ -162,7 +166,9 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "realBase": 245.21,
         "realTax": 140.25,
         "rateAmount": 385.46,
-        "taxNotIncluded": 0
+        "taxNotIncluded": 0,
+        "pickUpLocation": "MIAT01",
+        "pickUpFranchiseCode": "291"
     },
     {
         "companyName": "Ace",
@@ -182,7 +188,9 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "realBase": 253.96,
         "realTax": 142.27,
         "rateAmount": 396.23,
-        "taxNotIncluded": 0
+        "taxNotIncluded": 0,
+        "pickUpLocation": "MIAT01",
+        "pickUpFranchiseCode": "291"
     },
     ...
     {
@@ -203,7 +211,9 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "realBase": 624.4,
         "realTax": 228.1,
         "rateAmount": 852.5,
-        "taxNotIncluded": 0
+        "taxNotIncluded": 0,
+        "pickUpLocation": "MIAT01",
+        "pickUpFranchiseCode": "291"
     },
     {
         "companyName": "Ace",
@@ -223,29 +233,33 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "realBase": 630,
         "realTax": 229.39,
         "rateAmount": 859.39,
-        "taxNotIncluded": 0
+        "taxNotIncluded": 0,
+        "pickUpLocation": "MIAT01",
+        "pickUpFranchiseCode": "291"
     },
 ]
 ```
 
-| VARIABLE       | DESCRIPCIÓN                                                                             |
-|----------------|-----------------------------------------------------------------------------------------|
-| rateType       | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA" |
-| air            | Si tiene o no aire acondicionado, valores posibles `Yes` y `No`                         |
-| trans          | Tipo de transmisión del carro, valores posibles `Automatic` y `Manual`                  |
-| passengers     | Número de pasajeros                                                                     |
-| bags           | Número de maletas                                                                       |
-| sippCode       | Tipo de automóvil según código SIPP                                                     |
-| doors          | Número de puertas                                                                       |
-| img            | Imagen del carro                                                                        |
-| carModel       | Modelo del carro                                                                        |
-| km_included    | Kilometraje/millaje de la tarifa                                                        |
-| payment_option | Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                              |
-| currency       | Moneda de la tarifa, ej: USD, COP, EUR...                                               |
-| realBase       | Esta es la base comisionable, el valor sobre el que comisionan                          |
-| realTax        | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables           |
-| rateAmount     | Total de la tarifa                                                                      |
-| taxNotIncluded | Valor de impuestos no incluidos                                                         |
+| VARIABLE            | DESCRIPCIÓN                                                                                                                               |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| rateType            | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"                                                   |
+| air                 | Si tiene o no aire acondicionado, valores posibles `Yes` y `No`                                                                           |
+| trans               | Tipo de transmisión del carro, valores posibles `Automatic` y `Manual`                                                                    |
+| passengers          | Número de pasajeros                                                                                                                       |
+| bags                | Número de maletas                                                                                                                         |
+| sippCode            | Tipo de automóvil según código SIPP                                                                                                       |
+| doors               | Número de puertas                                                                                                                         |
+| img                 | Imagen del carro                                                                                                                          |
+| carModel            | Modelo del carro                                                                                                                          |
+| km_included         | Kilometraje/millaje de la tarifa                                                                                                          |
+| payment_option      | Tipo de pago, 1: Prepago, 2: POD, 3: Ambas                                                                                                |
+| currency            | Moneda de la tarifa, ej: USD, COP, EUR...                                                                                                 |
+| realBase            | Esta es la base comisionable, el valor sobre el que comisionan                                                                            |
+| realTax             | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables                                                             |
+| rateAmount          | Total de la tarifa                                                                                                                        |
+| taxNotIncluded      | Valor de impuestos no incluidos                                                                                                           |
+| pickUpLocation      | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.                                                               |
+| pickUpFranchiseCode | Código de la oficina de pickup dado por la rentadora. Para búsquedas fuera de aeropuerto se pueden enviar varios separados por coma `(,)` |
 
 ### Respuesta con error (status 500)
 
@@ -321,7 +335,9 @@ Se envía un JSON vía `POST`
     "lng": "NA",
     "latDropOff": "NA",
     "lngDropOff": "NA",
-    "sippCode": "ECAR"
+    "sippCode": "ECAR",
+    "pickUpFranchiseCode": "291",
+    "dropOffFranchiseCode": "291"
   },
   "companyName": "Ace",
   "companyCode": "AC",
@@ -354,27 +370,29 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 
 **3. GetDataModel**
 
-| VARIABLE        | SIGNIFICADO                                                                       |
-|-----------------|-----------------------------------------------------------------------------------|
-| pickUpLocation  | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.       |
-| pickUpAddress   | Nombre de la oficina de pickup (por defecto NA)                                   |
-| dropOffLocation | Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.     |
-| dropOffAddress  | Nombre de la oficina de dropoff (por defecto NA)                                  |
-| pickUpDate      | Fecha de Pickup - Formato yyyy-mm-dd                                              |
-| dropOffDate     | Fecha de Dropoff - Formato yyyy-mm-dd                                             |
-| pickUpHour      | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm             |
-| dropOffHour     | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm            |
-| cdCode          | Código de descuento                                                               |
-| pcCode          | Código de promoción                                                               |
-| country         | País de oficina, código alfa 2 ej: United States (US), Colombia (CO)              |
-| source          | País de fuente, código alfa 2 ej: United States (US), Colombia (CO)               |
-| rateType        | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)               |
-| paymentType     | Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino) |
-| lat*            | Latitud de Pickup                                                                 |
-| lng*            | Longitud de Pickup                                                                |
-| latDropOff*     | Latitud de Dropoff                                                                |
-| lngDropOff*     | Longitud de Dropoff                                                               |
-| sippCode        | Tipo de automóvil según código SIPP                                               |
+| VARIABLE             | SIGNIFICADO                                                                                                                                |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| pickUpLocation       | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.                                                                |
+| pickUpAddress        | Nombre de la oficina de pickup (por defecto NA)                                                                                            |
+| pickUpFranchiseCode  | Código de la oficina de pickup dado por la rentadora. Para búsquedas fuera de aeropuerto se pueden enviar varios separados por coma `(,)`  |
+| dropOffLocation      | Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.                                                              |
+| dropOffAddress       | Nombre de la oficina de dropoff (por defecto NA)                                                                                           |
+| dropOffFranchiseCode | Código de la oficina de dropoff dado por la rentadora. Para búsquedas fuera de aeropuerto se pueden enviar varios separados por coma `(,)` |
+| pickUpDate           | Fecha de Pickup - Formato yyyy-mm-dd                                                                                                       |
+| dropOffDate          | Fecha de Dropoff - Formato yyyy-mm-dd                                                                                                      |
+| pickUpHour           | Hora de Pickup - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                      |
+| dropOffHour          | Hora de Dropoff - Formato militar ej: 0800 -> 8:00 am, 1600 -> 04:00pm                                                                     |
+| cdCode               | Código de descuento                                                                                                                        |
+| pcCode               | Código de promoción                                                                                                                        |
+| country              | País de oficina, código alfa 2 ej: United States (US), Colombia (CO)                                                                       |
+| source               | País de fuente, código alfa 2 ej: United States (US), Colombia (CO)                                                                        |
+| rateType             | Código tipo de Tarifa, usar `best` o obtener de [Tarifas](#tarifas)                                                                        |
+| paymentType          | Tipo de pago de los resultados mostrados (ppd: Pagar Ahora, pod: Pago en Destino)                                                          |
+| lat*                 | Latitud de Pickup                                                                                                                          |
+| lng*                 | Longitud de Pickup                                                                                                                         |
+| latDropOff*          | Latitud de Dropoff                                                                                                                         |
+| lngDropOff*          | Longitud de Dropoff                                                                                                                        |
+| sippCode             | Tipo de automóvil según código SIPP                                                                                                        |
 
 *Solo aplica obligatorio en caso de búsqueda fuera de oficinas.
 
@@ -433,6 +451,8 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "realTax": 142.27,
         "rateAmount": 396.23,
         "taxNotIncluded": 0,
+        "pickUpLocation": "MIAT01",
+        "pickUpFranchiseCode": "291",
         "carInfo": {
             "ECAR": {
                 "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
@@ -533,6 +553,8 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
         "realTax": 228.1,
         "rateAmount": 852.5,
         "taxNotIncluded": 0,
+        "pickUpLocation": "MIAT01",
+        "pickUpFranchiseCode": "291",
         "carInfo": {
             "ECAR": {
                 "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
@@ -616,6 +638,8 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 | realTax               | Estos son los impuestos que realmente tiene la tarifa, y no son comisionables                                                                                                             |
 | rateAmount            | Total de la tarifa                                                                                                                                                                        |
 | taxNotIncluded        | Valor de impuestos no incluidos                                                                                                                                                           |
+| pickUpLocation        | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.                                                                                                               |
+| pickUpFranchiseCode   | Código de la oficina de pickup dado por la rentadora. Para búsquedas fuera de aeropuerto se pueden enviar varios separados por coma `(,)`                                                 |
 | carInfo               | Contiene la información del carro asociado por el código SIPP                                                                                                                             |
 | auxAddRateInformation | Si es necesario llamar a otro servicio cuandos e selecciona una de las tarifas se envia `false`, de lo contrario `true`                                                                   |
 | auxAmadeusNumbers     | Si es enviado discountCodes, devolver ese código como NumberCD , si no, no devolver este nodo                                                                                             |

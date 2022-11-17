@@ -161,6 +161,8 @@ final class AceResponseMatrix
                     $coreLogic['realTax'] = (float)number_format($TotalChargeAttr['EstimatedTotalAmount'] - $TotalChargeAttr['RateTotalAmount'], 2, '.', '');
                     $coreLogic['rateAmount'] = (float)($TotalChargeAttr['EstimatedTotalAmount'] ?? 0);
                     $coreLogic['taxNotIncluded'] = $taxNotIncluded;
+                    $coreLogic['pickUpLocation'] = $getDataModel['pickUpLocation'] === 'City' ? $getDataModel['pickUpFranchiseCode'] : $getDataModel['pickUpLocation'];
+                    $coreLogic['pickUpFranchiseCode'] = $getDataModel['pickUpFranchiseCode'];
                     //result
                     $result[] = $coreLogic;
                 }

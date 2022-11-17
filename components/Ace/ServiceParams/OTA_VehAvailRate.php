@@ -38,8 +38,10 @@ class OTA_VehAvailRate
         $OTAConexion->setVersion($version);
         $OTAConexion->setTarget($Target);
         $OTAConexion->setRateCategory($RateCategory);
-        $OTAConexion->setPickUpLocation($getDataModel['pickUpLocation']);
-        $OTAConexion->setReturnLocation($getDataModel['dropOffLocation']);
+        $pickUpLocation = $getDataModel['pickUpLocation'] === 'City' ? $getDataModel['pickUpFranchiseCode'] : $getDataModel['pickUpLocation'];
+        $dropOffLocation = ($getDataModel['dropOffLocation'] === 'City' || $getDataModel['dropOffLocation'] === 'City2') ? $getDataModel['dropOffFranchiseCode'] : $getDataModel['dropOffLocation'];
+        $OTAConexion->setPickUpLocation($pickUpLocation);
+        $OTAConexion->setReturnLocation($dropOffLocation);
         //$OTAConexion->setEnvelope($Envelope);
         $OTAConexion->setEntryRateType('Ace');
         return $OTAConexion->OTA_VehAvailRate($getDataModel, $rates);
