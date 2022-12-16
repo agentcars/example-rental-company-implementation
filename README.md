@@ -4,7 +4,7 @@
 
 A continuación la documentacion para la implementacion de las nuevas integraciones con las diferentes rentadoras. 
 
-***Es importante crear una carpeta donde se puedan guardar los request y response (XMLs o JSONs) de los llamados de cada servicio.***
+***Es importante hacer uso del SDK de AWS para guardar en un bucket s3 los request y response (XMLs o JSONs) de los llamados de cada servicio. Las credenciales se deben definir en un archivo .env. Link del SDK [aquí](https://aws.amazon.com/es/developer/tools/).***
 
 Los servicios a implementar son los siguientes:
 
