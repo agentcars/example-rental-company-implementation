@@ -678,6 +678,7 @@ Se envía un JSON vía `POST`
     "host": HOST
   },
   "reservation": {
+    "id": 1,
     "first_name": "Albert",
     "last_name": "Test",
     "email": "alberttest123@gmail.com",
@@ -710,7 +711,8 @@ Se envía un JSON vía `POST`
     },
     "rate_type_id": "1",
     "sipp_code": "ECAR",
-    "company_code": "AC"
+    "company_code": "AC",
+    "payment_option": 1
   },
   "debug": false,
   "environment": "Test"
@@ -729,6 +731,7 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 
 | VARIABLE               | SIGNIFICADO                                                                                                                                                                                                              |
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                     | ID de la reserva                                                                                                                                                                                                         |
 | first_name             | Nombre del cliente                                                                                                                                                                                                       |
 | last_name              | Apellidos del cliente                                                                                                                                                                                                    |
 | email                  | Email del cliente                                                                                                                                                                                                        |
@@ -743,6 +746,7 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 | rate_type_id           | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"                                                                                                                                  |
 | sipp_code              | Tipo de automóvil según código SIPP                                                                                                                                                                                      |
 | company_code           | Código de la empresa que alquila el vehículo                                                                                                                                                                             |
+| payment_option         | Opción de pago de la tarifa ('1'=>'Prepago','2'=>'Pago en destino','3'=>'Prepago y pago en destino')                                                                                                                     |
 
 **3. Otros**
 
