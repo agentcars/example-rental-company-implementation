@@ -746,7 +746,7 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 | rate_type_id           | Código del tipo de tarifa, usar best o ver sección [Tarifas](#tarifas) columna "TARIFA"                                                                                                                                  |
 | sipp_code              | Tipo de automóvil según código SIPP                                                                                                                                                                                      |
 | company_code           | Código de la empresa que alquila el vehículo                                                                                                                                                                             |
-| payment_option         | Opción de pago de la tarifa ('1'=>'Prepago','2'=>'Pago en destino','3'=>'Prepago y pago en destino')                                                                                                                     |
+| payment_option         | Opción de pago de la tarifa ('1'=>'Prepago', '2'=>'Pago en destino', '3'=>'Prepago y pago en destino')                                                                                                                   |
 
 **3. Otros**
 
