@@ -40,6 +40,8 @@ return [
                         'OPTIONS cancel' => 'options',
                         'POST get-offices' => 'get-offices',
                         'OPTIONS get-offices' => 'options',
+                        'POST get-terms' => 'get-terms',
+                        'OPTIONS get-terms' => 'options',
                     ]
                 ],
             ],

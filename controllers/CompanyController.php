@@ -4,6 +4,7 @@ namespace micro\controllers;
 
 use micro\components\Ace\Ace;
 use micro\components\Ace\AceResponseConfirmation;
+use micro\components\Ace\AceResponseGetTerms;
 use micro\components\Ace\AceResponseMatrix;
 use micro\components\Ace\AceResponseMyReservation;
 use micro\components\Ace\AceResponseOffices;
@@ -184,6 +185,27 @@ class CompanyController extends ActiveController
             throw new HttpException(500, 'Empty response');
         }
         $result = AceResponseOffices::processResponse($response, $postParams['countryCode'], $postParams['companyName'], $postParams['companyCode']);
+        if (isset($result['error'])) {
+            throw new HttpException(500, $result['error']);
+        }
+        return $result;
+    }
+
+    /**
+     * @throws HttpException
+     */
+    public function actionGetTerms()
+    {
+        if (!\Yii::$app->request->post()) {
+            throw new HttpException(500, 'Parameters not found');
+        }
+        $postParams = \Yii::$app->request->post();
+        $debug = $postParams['debug'] ?? false;
+        $response = Ace::getTermsResult($postParams['locationCode'], $postParams['credentials'], $postParams['environment'], $debug);
+        if (empty($response)) {
+            throw new HttpException(500, 'Empty response');
+        }
+        $result = AceResponseGetTerms::processResponse($response);
         if (isset($result['error'])) {
             throw new HttpException(500, $result['error']);
         }

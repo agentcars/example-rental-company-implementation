@@ -158,4 +158,27 @@ class Ace
         }
         return $response;
     }
+
+    /**
+     * Get Terms Result
+     * @param $locationCode
+     * @param $credentials
+     * @param $environment
+     * @param $debug
+     * @return array|mixed
+     */
+    public static function getTermsResult($locationCode, $credentials, $environment, $debug)
+    {
+        $response = [];
+        $aceConexion = new AceConexion();
+        $aceConexion->setCredentials($credentials['url'], $credentials['id'], $credentials['host'], $environment);
+        $request = $aceConexion->OTA_VehLocDetail($locationCode);
+        $options['ppdAC'] = $aceConexion->getOptions('VehLocDetail');
+        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], '', $debug, $options);
+        foreach ($responses as $resp) {
+            $response = $resp;
+            break;
+        }
+        return $response;
+    }
 }
