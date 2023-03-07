@@ -25,7 +25,7 @@ class MultipleConexion extends Component
      * @param bool $secondIntent
      * @return array
      */
-    public static function sendMultipleRequests($urls, $requests, $services, $service = self::SERVICE_SELECTION, $debug = false, $options = [], $secondIntent = false)
+    public static function sendMultipleRequests($urls, $requests, $services, $service = self::SERVICE_SELECTION, $debug = false, $options = [], $secondIntent = false, $reservationId = 0)
     {
         $result = [];
         $curly = [];
@@ -125,6 +125,13 @@ class MultipleConexion extends Component
         //Print XMLs
         if ($debug) {
             self::printResponse($requests, $responses, $services);
+        }
+        if($service === self::SERVICE_CONFIRMATION){
+            foreach ($requests as $type => $request) {
+                if (isset($responses[$type])) {
+                    ReservationSaveXML::saveConfirmationXML($request, $responses[$type], $reservationId);
+                }
+            }
         }
         $curly = null; //clean memory dont delete
         $c = null; //clean memory dont delete

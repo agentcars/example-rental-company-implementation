@@ -74,7 +74,7 @@ class Ace
         $request = $aceConexion->OTA_VehRes($reservation);
         $options['ppdAC'] = $aceConexion->getOptions('VehRes');
         if (!empty($request)) {
-            $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CONFIRMATION, $debug, $options);
+            $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CONFIRMATION, $debug, $options,false, $reservation['id'] ?? 0);
         } else {
             $responses = [];
         }
