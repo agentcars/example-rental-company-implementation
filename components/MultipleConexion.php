@@ -7,12 +7,14 @@ use Exception;
 use SimpleXMLElement;
 use Yii;
 use yii\base\Component;
+use yii\web\HttpException;
 
 class MultipleConexion extends Component
 {
     public const SERVICE_MATRIX = 'matrix';
     public const SERVICE_SELECTION = 'selection';
     public const SERVICE_CONFIRMATION = 'confirmation';
+    public const SERVICE_CANCEL = 'cancel';
 
     /**
      * Sends multiples request
@@ -23,7 +25,9 @@ class MultipleConexion extends Component
      * @param bool $debug
      * @param array $options
      * @param bool $secondIntent
+     * @param int $reservationId
      * @return array
+     * @throws HttpException
      */
     public static function sendMultipleRequests($urls, $requests, $services, $service = self::SERVICE_SELECTION, $debug = false, $options = [], $secondIntent = false, $reservationId = 0)
     {
@@ -126,10 +130,17 @@ class MultipleConexion extends Component
         if ($debug) {
             self::printResponse($requests, $responses, $services);
         }
-        if($service === self::SERVICE_CONFIRMATION){
+        if ($service === self::SERVICE_CONFIRMATION) {
             foreach ($requests as $type => $request) {
                 if (isset($responses[$type])) {
                     ReservationSaveXML::saveConfirmationXML($request, $responses[$type], $reservationId);
+                }
+            }
+        }
+        if ($service === self::SERVICE_CANCEL) {
+            foreach ($requests as $type => $request) {
+                if (isset($responses[$type])) {
+                    ReservationSaveXML::saveCancelXML($request, $responses[$type], $reservationId);
                 }
             }
         }

@@ -1240,6 +1240,7 @@ Se envía un JSON vía `POST`
     "id": ID,
     "host": HOST
   },
+  "id": 1,
   "last_name": "Test",
   "rental_confirmation_code": "TESTCODE12991104",
   "debug": false,
@@ -1255,12 +1256,13 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 
 **2. Otros**
 
-| VARIABLE                 | SIGNIFICADO                                                                                                        |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------|
-| last_name                | Apellidos del cliente                                                                                              |
-| rental_confirmation_code | Código de confirmación de la reserva, con la rentadora                                                             |
-| debug                    | Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false`  |
-| environment              | Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                                |
+| VARIABLE                 | SIGNIFICADO                                                                                                       |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------|
+| id                       | ID de la reserva                                                                                                  |
+| last_name                | Apellidos del cliente                                                                                             |
+| rental_confirmation_code | Código de confirmación de la reserva, con la rentadora                                                            |
+| debug                    | Si se quiere generar los archivos request y response del servicio en la carpeta "files", valores `true` o `false` |
+| environment              | Entorno en que se esta llamando el servicio, valores posibles `Test` o `Production`                               |
 
 ### Respuesta exitosa (status 200)
 

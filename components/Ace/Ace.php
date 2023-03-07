@@ -118,14 +118,14 @@ class Ace
      * @param $debug
      * @return array|mixed
      */
-    public static function getCancelResult($lastName, $confirmationCode, $credentials, $environment, $debug)
+    public static function getCancelResult($lastName, $confirmationCode, $id, $credentials, $environment, $debug)
     {
         $response = [];
         $aceConexion = new AceConexion();
         $aceConexion->setCredentials($credentials['url'], $credentials['id'], $credentials['host'], $environment);
         $request = $aceConexion->OTA_VehCancel($lastName, $confirmationCode);
         $options['ppdAC'] = $aceConexion->getOptions('VehCancel');
-        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], '', $debug, $options);
+        $responses = MultipleConexion::sendMultipleRequests($request['urls'], $request['requests'], $request['services'], MultipleConexion::SERVICE_CANCEL, $debug, $options,false, $id);
         foreach ($responses as $resp) {
             $response = $resp;
             break;

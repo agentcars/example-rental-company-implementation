@@ -160,7 +160,7 @@ class CompanyController extends ActiveController
         }
         $postParams = \Yii::$app->request->post();
         $debug = $postParams['debug'] ?? false;
-        $response = Ace::getCancelResult($postParams['last_name'], $postParams['rental_confirmation_code'], $postParams['credentials'], $postParams['environment'], $debug);
+        $response = Ace::getCancelResult($postParams['last_name'], $postParams['rental_confirmation_code'], $postParams['id'], $postParams['credentials'], $postParams['environment'], $debug);
         if (empty($response)) {
             throw new HttpException(500, 'Empty response');
         }
