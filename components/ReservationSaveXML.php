@@ -30,7 +30,6 @@ final class ReservationSaveXML
             file_put_contents($path . "$reservationID-Confirmation-Response.xml", print_r($response, true));
             $file = new FileObject();
             //Guardado en el bucket S3 de xml
-            $bucket_xml = FileObject::BUCKET_XML;
             $file->uploadObject( $reservationID."-Confirmation-Request.xml");
             $file->uploadObject( $reservationID."-Confirmation-Response.xml");
         } catch (\Exception $exception) {
@@ -57,7 +56,6 @@ final class ReservationSaveXML
             file_put_contents($path . "$reservationID-Cancel-Response.xml", print_r($response, true));
             $file = new FileObject();
             //Guardado en el bucket S3 de xml
-            $bucket_xml = FileObject::BUCKET_XML;
             $file->uploadObject($reservationID."-Cancel-Request.xml");
             $file->uploadObject($reservationID."-Cancel-Response.xml");
         } catch (\Exception $exception) {

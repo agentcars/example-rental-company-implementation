@@ -205,7 +205,7 @@ final class AceResponseSelection
             $coreLogic['rateInformation']['CurrencyCode'] = $PaymentRuleAttr['CurrencyCode'] ?? '';
             $coreLogic['rateInformation']['detail'] = $basicDetail;
 
-            $result[$codeResp] = $coreLogic;
+            $result[] = $coreLogic;
         }
         return $result;
     }

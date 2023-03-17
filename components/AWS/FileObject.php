@@ -5,21 +5,10 @@ namespace micro\components\AWS;
 use Aws\Exception\AwsException;
 use Aws\S3\S3Client;
 use Yii;
-use yii\helpers\VarDumper;
 use yii\web\HttpException;
 
 class FileObject
 {
-    public const BUCKET_REGION = 'us-west-2';
-    public const BUCKET_XML = 'confirmationsxml';
-    private const CREDENTIALS = [
-        'credentials' => [
-            "key" => "AKIAZNSJHO2KVD5AHEN6",
-            "secret" => "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",
-            "bucket" => "rentingtestsdk"],
-        "region" => "us-east-1",
-    ];
-
     /**
      * Upload Object
      * @param $object
@@ -28,9 +17,12 @@ class FileObject
      */
     public function uploadObject($object)
     {
-        $params = self::CREDENTIALS;
-        $credentials = $params['credentials'];
-        $region = self::BUCKET_REGION;
+        $credentials = [
+            "key" => $_ENV['S3_KEY'],
+            "secret" => $_ENV['S3_SECRET_KEY'],
+            "bucket" => $_ENV['S3_BUCKET']
+        ];
+        $region = $_ENV['S3_REGION'];
         //Create an S3Client
         $s3client = new S3Client([
             'version' => 'latest',
@@ -39,10 +31,10 @@ class FileObject
         ]);
         $basePath = Yii::$app->basePath;
         $path = '/files/' . $object;
-        $bucket_path = 'archivos/' . $object;
+        $bucket_path = $object;
         try {
             $result = $s3client->putObject([
-                'Bucket' => self::BUCKET_XML,
+                'Bucket' => $_ENV['S3_BUCKET'],
                 'Key' => $bucket_path,
                 'Body' => fopen($basePath . $path, 'rb+')
             ]);

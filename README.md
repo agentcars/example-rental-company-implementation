@@ -408,212 +408,212 @@ Todas las credenciales necesarias para la conección al API de la rentadora como
 ### Respuesta exitosa (status 200)
 
 ```
-{
-    "1": {
-        "companyName": "Ace",
-        "companyCode": "AC",
-        "rateType": 1,
-        "getDataModel": {
-            "pickUpLocation": "MIAT01",
-            "pickUpAddress": "NA",
-            "dropOffLocation": "MIAT01",
-            "dropOffAddress": "NA",
-            "pickUpDate": "2022-07-18",
-            "dropOffDate": "2022-07-25",
-            "pickUpHour": "1200",
-            "dropOffHour": "1200",
-            "cdCode": "NA",
-            "pcCode": "NA",
-            "country": "US",
-            "source": "CO",
-            "rateType": "best",
-            "lat": "NA",
-            "lng": "NA",
-            "latDropOff": "NA",
-            "lngDropOff": "NA",
-            "sippCode": "ECAR",
-            "companyCode": "AC",
-            "ccrc": "QUM="
-        },
-        "sippCode": "ECAR",
-        "rateIdentifier": "RGZNET",
-        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
-        "carModel": "Toyota Yaris",
-        "doors": 4,
-        "passengers": 4,
-        "bags": 2,
-        "trans": "Automatic",
-        "air": "Yes",
-        "payment_option": 1,
-        "km_included": "Unlimited Mile",
-        "currency": "USD",
-        "realBase": 253.96,
-        "realTax": 142.27,
-        "rateAmount": 396.23,
-        "taxNotIncluded": 0,
-        "pickUpLocation": "MIAT01",
-        "pickUpFranchiseCode": "291",
-        "carInfo": {
-            "ECAR": {
-                "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
-                "carModel": "Toyota Yaris",
-                "sippCode": "ECAR",
-                "km_included": "Unlimited Mile",
-                "companyName": "Ace",
-                "doors": 4,
-                "passengers": 4,
-                "bags": 2,
-                "air_conditioner": "Yes",
-                "transmission": "Automatic",
-                "companyCode": "AC",
-                "shuttleInfo": ""
-            }
-        },
-        "auxAddRateInformation": true,
-        "auxAmadeusNumbers": {
-            "NumberCD": "TESTCODE"
-        },
-        "rateInformation": {
-            "VendorRateID": "RGZNET",
-            "ReferenceType": "16",
-            "ReferenceID": "70049432228",
-            "Amount": "396.23",
-            "CurrencyCode": "USD",
-            "detail": [
-                {
-                    "amount": 6.04,
-                    "comment": "Airport Access Fee"
-                },
-                {
-                    "amount": 20.4,
-                    "comment": "CFC Fee"
-                },
-                {
-                    "amount": 8,
-                    "comment": "Energy Recovery Fee"
-                },
-                {
-                    "amount": 2.18,
-                    "comment": "Miami Privilege Fee"
-                },
-                {
-                    "amount": 8.2,
-                    "comment": "State Surcharge"
-                },
-                {
-                    "amount": 7.96,
-                    "comment": "Vehicle Licensing Fee"
-                },
-                {
-                    "amount": 7.5,
-                    "comment": "Sales Tax"
-                }
-            ]
-        }
+[
+  {
+    "companyName": "Ace",
+    "companyCode": "AC",
+    "rateType": 1,
+    "getDataModel": {
+      "pickUpLocation": "MIAT01",
+      "pickUpAddress": "NA",
+      "dropOffLocation": "MIAT01",
+      "dropOffAddress": "NA",
+      "pickUpDate": "2022-07-18",
+      "dropOffDate": "2022-07-25",
+      "pickUpHour": "1200",
+      "dropOffHour": "1200",
+      "cdCode": "NA",
+      "pcCode": "NA",
+      "country": "US",
+      "source": "CO",
+      "rateType": "best",
+      "lat": "NA",
+      "lng": "NA",
+      "latDropOff": "NA",
+      "lngDropOff": "NA",
+      "sippCode": "ECAR",
+      "companyCode": "AC",
+      "ccrc": "QUM="
     },
-    "3": {
-        "companyName": "Ace",
-        "companyCode": "AC",
-        "rateType": 3,
-        "getDataModel": {
-            "pickUpLocation": "MIAT01",
-            "pickUpAddress": "NA",
-            "dropOffLocation": "MIAT01",
-            "dropOffAddress": "NA",
-            "pickUpDate": "2022-07-18",
-            "dropOffDate": "2022-07-25",
-            "pickUpHour": "1200",
-            "dropOffHour": "1200",
-            "cdCode": "NA",
-            "pcCode": "NA",
-            "country": "US",
-            "source": "CO",
-            "rateType": "best",
-            "lat": "NA",
-            "lng": "NA",
-            "latDropOff": "NA",
-            "lngDropOff": "NA",
-            "sippCode": "ECAR",
-            "companyCode": "AC",
-            "ccrc": "QUM="
-        },
-        "sippCode": "ECAR",
-        "rateIdentifier": "RGZNET",
+    "sippCode": "ECAR",
+    "rateIdentifier": "RGZNET",
+    "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+    "carModel": "Toyota Yaris",
+    "doors": 4,
+    "passengers": 4,
+    "bags": 2,
+    "trans": "Automatic",
+    "air": "Yes",
+    "payment_option": 1,
+    "km_included": "Unlimited Mile",
+    "currency": "USD",
+    "realBase": 253.96,
+    "realTax": 142.27,
+    "rateAmount": 396.23,
+    "taxNotIncluded": 0,
+    "pickUpLocation": "MIAT01",
+    "pickUpFranchiseCode": "291",
+    "carInfo": {
+      "ECAR": {
         "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
         "carModel": "Toyota Yaris",
+        "sippCode": "ECAR",
+        "km_included": "Unlimited Mile",
+        "companyName": "Ace",
         "doors": 4,
         "passengers": 4,
         "bags": 2,
-        "trans": "Automatic",
-        "air": "Yes",
-        "payment_option": 1,
-        "km_included": "Unlimited Mile",
-        "currency": "USD",
-        "realBase": 624.4,
-        "realTax": 228.1,
-        "rateAmount": 852.5,
-        "taxNotIncluded": 0,
-        "pickUpLocation": "MIAT01",
-        "pickUpFranchiseCode": "291",
-        "carInfo": {
-            "ECAR": {
-                "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
-                "carModel": "Toyota Yaris",
-                "sippCode": "ECAR",
-                "km_included": "Unlimited Mile",
-                "companyName": "Ace",
-                "doors": 4,
-                "passengers": 4,
-                "bags": 2,
-                "air_conditioner": "Yes",
-                "transmission": "Automatic",
-                "companyCode": "AC",
-                "shuttleInfo": ""
-            }
+        "air_conditioner": "Yes",
+        "transmission": "Automatic",
+        "companyCode": "AC",
+        "shuttleInfo": ""
+      }
+    },
+    "auxAddRateInformation": true,
+    "auxAmadeusNumbers": {
+      "NumberCD": "TESTCODE"
+    },
+    "rateInformation": {
+      "VendorRateID": "RGZNET",
+      "ReferenceType": "16",
+      "ReferenceID": "70049432228",
+      "Amount": "396.23",
+      "CurrencyCode": "USD",
+      "detail": [
+        {
+          "amount": 6.04,
+          "comment": "Airport Access Fee"
         },
-        "auxAddRateInformation": true,
-        "auxAmadeusNumbers": {
-            "NumberCD": "TESTCODE"
+        {
+          "amount": 20.4,
+          "comment": "CFC Fee"
         },
-        "rateInformation": {
-            "VendorRateID": "RGZNET",
-            "ReferenceType": "16",
-            "ReferenceID": "70049432229",
-            "Amount": "852.5",
-            "CurrencyCode": "USD",
-            "detail": [
-                {
-                    "amount": 6.04,
-                    "comment": "Airport Access Fee"
-                },
-                {
-                    "amount": 20.4,
-                    "comment": "CFC Fee"
-                },
-                {
-                    "amount": 8,
-                    "comment": "Energy Recovery Fee"
-                },
-                {
-                    "amount": 2.18,
-                    "comment": "Miami Privilege Fee"
-                },
-                {
-                    "amount": 8.2,
-                    "comment": "State Surcharge"
-                },
-                {
-                    "amount": 7.96,
-                    "comment": "Vehicle Licensing Fee"
-                },
-                {
-                    "amount": 7.5,
-                    "comment": "Sales Tax"
-                }
-            ]
+        {
+          "amount": 8,
+          "comment": "Energy Recovery Fee"
+        },
+        {
+          "amount": 2.18,
+          "comment": "Miami Privilege Fee"
+        },
+        {
+          "amount": 8.2,
+          "comment": "State Surcharge"
+        },
+        {
+          "amount": 7.96,
+          "comment": "Vehicle Licensing Fee"
+        },
+        {
+          "amount": 7.5,
+          "comment": "Sales Tax"
         }
+      ]
     }
-}
+  },
+  {
+    "companyName": "Ace",
+    "companyCode": "AC",
+    "rateType": 3,
+    "getDataModel": {
+      "pickUpLocation": "MIAT01",
+      "pickUpAddress": "NA",
+      "dropOffLocation": "MIAT01",
+      "dropOffAddress": "NA",
+      "pickUpDate": "2022-07-18",
+      "dropOffDate": "2022-07-25",
+      "pickUpHour": "1200",
+      "dropOffHour": "1200",
+      "cdCode": "NA",
+      "pcCode": "NA",
+      "country": "US",
+      "source": "CO",
+      "rateType": "best",
+      "lat": "NA",
+      "lng": "NA",
+      "latDropOff": "NA",
+      "lngDropOff": "NA",
+      "sippCode": "ECAR",
+      "companyCode": "AC",
+      "ccrc": "QUM="
+    },
+    "sippCode": "ECAR",
+    "rateIdentifier": "RGZNET",
+    "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+    "carModel": "Toyota Yaris",
+    "doors": 4,
+    "passengers": 4,
+    "bags": 2,
+    "trans": "Automatic",
+    "air": "Yes",
+    "payment_option": 1,
+    "km_included": "Unlimited Mile",
+    "currency": "USD",
+    "realBase": 624.4,
+    "realTax": 228.1,
+    "rateAmount": 852.5,
+    "taxNotIncluded": 0,
+    "pickUpLocation": "MIAT01",
+    "pickUpFranchiseCode": "291",
+    "carInfo": {
+      "ECAR": {
+        "img": "https://www.acerentacar.com/CarPics/Toyota Yaris.png",
+        "carModel": "Toyota Yaris",
+        "sippCode": "ECAR",
+        "km_included": "Unlimited Mile",
+        "companyName": "Ace",
+        "doors": 4,
+        "passengers": 4,
+        "bags": 2,
+        "air_conditioner": "Yes",
+        "transmission": "Automatic",
+        "companyCode": "AC",
+        "shuttleInfo": ""
+      }
+    },
+    "auxAddRateInformation": true,
+    "auxAmadeusNumbers": {
+      "NumberCD": "TESTCODE"
+    },
+    "rateInformation": {
+      "VendorRateID": "RGZNET",
+      "ReferenceType": "16",
+      "ReferenceID": "70049432229",
+      "Amount": "852.5",
+      "CurrencyCode": "USD",
+      "detail": [
+        {
+          "amount": 6.04,
+          "comment": "Airport Access Fee"
+        },
+        {
+          "amount": 20.4,
+          "comment": "CFC Fee"
+        },
+        {
+          "amount": 8,
+          "comment": "Energy Recovery Fee"
+        },
+        {
+          "amount": 2.18,
+          "comment": "Miami Privilege Fee"
+        },
+        {
+          "amount": 8.2,
+          "comment": "State Surcharge"
+        },
+        {
+          "amount": 7.96,
+          "comment": "Vehicle Licensing Fee"
+        },
+        {
+          "amount": 7.5,
+          "comment": "Sales Tax"
+        }
+      ]
+    }
+  }
+]
 ```
 
 | VARIABLE              | DESCRIPCIÓN                                                                                                                                                                               |
@@ -682,6 +682,7 @@ Se envía un JSON vía `POST`
     "first_name": "Albert",
     "last_name": "Test",
     "email": "alberttest123@gmail.com",
+    "telephone": "CO-3161234567",
     "location_pickup": "MIAT01",
     "location_dropoff": "MIAT01",
     "pickup_date": "2022-07-18",
@@ -735,6 +736,7 @@ Arreglo con la información de la reserva, contiene los siguientes campos:
 | first_name             | Nombre del cliente                                                                                                                                                                                                       |
 | last_name              | Apellidos del cliente                                                                                                                                                                                                    |
 | email                  | Email del cliente                                                                                                                                                                                                        |
+| telephone              | Teléfono del cliente                                                                                                                                                                                                     |
 | location_pickup        | Ciudad de Pickup - Basado en código `IATA` de oficina/aeropuerto de pickup.                                                                                                                                              |
 | location_dropoff       | Ciudad de Dropoff - Basado en código `IATA` de oficina/aeropuerto de dropoff.                                                                                                                                            |
 | pickup_date            | Fecha de Pickup - Formato yyyy-mm-dd                                                                                                                                                                                     |
