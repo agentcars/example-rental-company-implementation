@@ -2,7 +2,8 @@
     "require": {
         "php": "^8.1",
         "yiisoft/yii2": "~2.0.45",
-        "aws/aws-sdk-php": "^3.261"
+        "aws/aws-sdk-php": "^3.261",
+        "vlucas/phpdotenv": "^5.5"
     }
     ,
     "require-dev": {

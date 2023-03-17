@@ -50,4 +50,7 @@ OAuth.log
 #vscode files
 .vscode/*
 
+#.env
+.env
+
 images
