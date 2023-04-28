@@ -50,7 +50,7 @@ return [
             'formatters' => [
                 Response::FORMAT_JSON => [
                     'class' => JsonResponseFormatter::class,
-                    'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+                    'prettyPrint' => true, // use "pretty" output in debug mode
                     'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
                 ],
             ],

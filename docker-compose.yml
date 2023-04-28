@@ -5,7 +5,7 @@ services:
   aceApp:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: DockerfileOld
     image: php:8.1-fpm
     container_name: aceApp
     restart: unless-stopped
